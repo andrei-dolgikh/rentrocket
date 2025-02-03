@@ -1,0 +1,6 @@
+rentrocket-backend/node_modules
+rentrocket-backend/dist
+rentrocket-frontend/node_modules
+rentrocket-frontend/.next
+/rentrocket-backend/uploads
+.env

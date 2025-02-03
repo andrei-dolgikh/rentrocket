@@ -1,0 +1,146 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+enum Roles {
+  user
+  admin
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  DELETED
+  NEW
+}
+
+model User {
+  id String @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  login String @unique
+  name String @unique
+  password String
+
+  roles Roles[]  
+
+  flatsLogs FlatHistory[]
+
+  FlatsInRent Flat[] @relation("renters")
+  FlatsInManagement Flat[] @relation("managers")
+  FlatsInOwnership Flat[] @relation("owners")
+  CreatedFlats Flat[]
+
+
+  @@map("users")
+}
+
+
+model Flat {
+  id String @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  name String // название 
+  description String // описание 
+  status Status @default(ACTIVE)// отображать ли в каталоге
+
+  price Int // цена
+
+  viewsCount Int @map("views_count") // кол-во просмотров
+  commentsCount Int @map("comments_count") // кол-во опубликованных комментариев
+  usersCount Int @map("users_count") // количество юзеров 
+  recommended Boolean @default(false) // премиум клиент
+
+  rating Float // оценка пользователей
+
+  order Int // 
+
+  managers User[] @relation("managers")
+  renters User[] @relation("renters")
+  owners User[] @relation("owners")
+  creator User @relation(fields: [creatorId], references: [id])
+  creatorId String @map("creator_id")
+
+
+  tags Tag[]  // набор тегов
+
+  // превью фото квартиры
+  iconUrl String? @map("icon_url")
+
+  logs FlatHistory[]
+
+  @@map("flats")
+}
+
+model FlatHistory {
+  id String @id @default(cuid())
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  changes Json 
+
+  author User @relation(fields: [authorId], references: [id])
+  authorId String @map("author_id")  //  связь с автором ресурса
+
+  flat Flat @relation(fields: [flatId], references: [id])
+  flatId String @map("flat_id")  //  связь с ресурс
+
+}
+
+model Visit {
+  id        String   @id @default(cuid())
+  timestamp DateTime @default(now())
+  endpoint  String
+  method    String
+  params    Json    
+}
+
+model Tag {
+  id String @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  flats Flat[]
+
+  name String // название тега
+  order Int // порядковый номер
+
+
+  @@map("tags")
+}
+
+model DashboardStats {
+  id        String   @id @default(uuid())
+  timestamp DateTime
+  comments  Int
+  views     Int
+}
+
+model DashboardLinksStats {
+  id          String   @id @default(uuid())
+  timestamp   DateTime
+  flatId  String
+  available   Boolean  @default(true)
+}
+
+model DashboardCategoriesStats {
+  id          String   @id @default(uuid())
+  timestamp   DateTime
+  flatCategoryId  String
+  comments  Int
+  views     Int
+  online    Int
+  offline   Int
+
+}
+
