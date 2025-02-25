@@ -3,7 +3,9 @@ import type { Metadata } from 'next'
 import { AdminViewsStatBox } from '@/components/admin-layout/dashboard/AdminViewsStatBox'
 import { AdminCommentsStatBox } from '@/components/admin-layout/dashboard/AdminCommentsStatBox'
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
-import { DashboardFlatsList } from '@/app/admin/dashboard/DashboardFlatsList'
+import { DashboardFlatsList } from '../../../app/[lang]/admin/dashboard/DashboardFlatsList'
+import { getDictionary } from '../dictionaries'
+import { Header } from '@/components/header/Header'
 
 
 export const metadata: Metadata = {
@@ -11,9 +13,22 @@ export const metadata: Metadata = {
 	...NO_INDEX_PAGE
 }
 
-  export default function MySpacePage() {
+
+	export default async function MySpacePage({
+		params,
+	  }: {
+		params: Promise<{ lang: 'en' | 'ru' }>
+	  }) {
+
+		const lang = (await params).lang
+		const dict = await getDictionary(lang) 
+
 	return (
-		<div className='flex flex-col text-white'>
+			<>
+			<Header dictionary={dict} lang={lang}/>
+		<div className='grid min-h-screen max-w-[1000px] mx-[30px]  lg:mx-auto lg:px-[30px]'>
+
+		{/* <div className='flex flex-col text-white'> */}
 			{/* <div className='flex flex-col lg:flex-row  items-center lg:justify-between'>
 				<div className='w-[500px] my-3'>
 					<AdminViewsStatBox header={true} chartName="Просмотры" />
@@ -24,5 +39,6 @@ export const metadata: Metadata = {
 			</div> */}
 			<DashboardFlatsList />
 		</div>
+		</>
 	)
 }

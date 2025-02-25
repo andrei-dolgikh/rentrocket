@@ -1,3 +1,4 @@
+'use client'
 import axios, { type CreateAxiosDefaults } from 'axios'
 import { toast } from 'sonner'
 import { errorCatch } from './error'

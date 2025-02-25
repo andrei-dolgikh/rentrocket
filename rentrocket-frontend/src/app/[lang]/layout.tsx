@@ -4,7 +4,6 @@ import { Toaster } from 'sonner'
 import { SITE_NAME } from '@/constants/seo.constants'
 import './globals.scss'
 import { Providers } from './providers'
-import { Header } from '@/components/header/Header'
 import { Footer } from '@/components/footer/Footer'
 import { AuthProvider } from './authContext';
 import {NextUIProvider} from "@nextui-org/react";
@@ -35,7 +34,6 @@ export default function RootLayout({
 			<NextUIProvider>
 				<Providers>
 				<AuthProvider>
-					<Header/>
 					{children}
 					<Toaster
 						theme='dark'
