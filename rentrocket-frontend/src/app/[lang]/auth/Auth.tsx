@@ -10,7 +10,7 @@ import { IAuthForm } from '@/types/auth.types'
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { Input } from '@nextui-org/react';
 import { authService } from '@/services/auth.service'
-import { AuthContext } from '../../app/authContext';
+import { AuthContext } from '../authContext';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { Button } from "@nextui-org/button";
 import Link from 'next/link'

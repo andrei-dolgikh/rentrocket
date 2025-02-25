@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { Flat } from '../Flat'
-import { useFlat } from '@/app/admin/flats/hooks/useFlat';
+import { useFlat } from '../../admin/flats/hooks/useFlat';
 import Loader from '@/components/ui/Loader'
 import { useEffect } from 'react';
 import { Card } from '@nextui-org/react';

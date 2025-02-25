@@ -8,7 +8,7 @@ import { Roles } from '@/types/user.types'
 import { RIGHTMENU } from '@/components/menu/menu.data'
 import { useContext, useEffect } from 'react';
 import { useProfile } from '@/hooks/useProfile'
-import { AuthContext } from '../../app/authContext';
+import { AuthContext } from '../../app/[lang]/authContext';
 
 export function Header() {
 	const { data, isLoading } = useProfile();

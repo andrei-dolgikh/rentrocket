@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { useContext } from 'react'
 import { authService } from '@/services/auth.service'
-import { AuthContext } from '../../../app/authContext';
+import { AuthContext } from '../../../app/[lang]/authContext';
 
 export function LogoutButton() {
 	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
