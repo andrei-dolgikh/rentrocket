@@ -1,17 +1,8 @@
 // 'use client'
 import { MainLayout } from '@/components/ui/main/MainLayout'
 // import { useEffect } from 'react'
-import { getDictionary } from './dictionaries'
-import { Header } from '@/components/header/Header'
 
-export default async function Home({
-	params,
-  }: {
-	params: Promise<{ lang: 'en' | 'ru' }>
-  }) {
-
-	const lang = (await params).lang
-	const dict = await getDictionary(lang) 
+export default async function Home(){
 
 	// useEffect(() => {
 	//   const handlePopState = () => {
@@ -27,12 +18,9 @@ export default async function Home({
 
 	return (
 		<>
-		<Header dictionary={dict} lang={lang}/>
-
 		<div className="mx-[30px] max-w-[1000px] lg:mx-auto lg:px-[30px]">
 			
 			
-			{dict.header.about}
 			<MainLayout />
 		</div>
 		</>

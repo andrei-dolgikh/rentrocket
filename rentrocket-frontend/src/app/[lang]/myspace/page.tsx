@@ -4,8 +4,6 @@ import { AdminViewsStatBox } from '@/components/admin-layout/dashboard/AdminView
 import { AdminCommentsStatBox } from '@/components/admin-layout/dashboard/AdminCommentsStatBox'
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
 import { DashboardFlatsList } from '../../../app/[lang]/admin/dashboard/DashboardFlatsList'
-import { getDictionary } from '../dictionaries'
-import { Header } from '@/components/header/Header'
 
 
 export const metadata: Metadata = {
@@ -14,18 +12,10 @@ export const metadata: Metadata = {
 }
 
 
-	export default async function MySpacePage({
-		params,
-	  }: {
-		params: Promise<{ lang: 'en' | 'ru' }>
-	  }) {
-
-		const lang = (await params).lang
-		const dict = await getDictionary(lang) 
+	export default async function MySpacePage(){
 
 	return (
 			<>
-			<Header dictionary={dict} lang={lang}/>
 		<div className='grid min-h-screen max-w-[1000px] mx-[30px]  lg:mx-auto lg:px-[30px]'>
 
 		{/* <div className='flex flex-col text-white'> */}

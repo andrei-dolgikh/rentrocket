@@ -7,6 +7,8 @@ import { Providers } from './providers'
 import { Footer } from '@/components/footer/Footer'
 import { AuthProvider } from './authContext';
 import {NextUIProvider} from "@nextui-org/react";
+import {Header} from "@/components/header/Header";
+import { getDictionary } from './dictionaries'
 
 
 
@@ -21,11 +23,14 @@ export const metadata: Metadata = {
 
 
 
-export default function RootLayout({
-	children
+export default async function RootLayout({
+	children,
+	params: { lang },
 }: Readonly<{
 	children: React.ReactNode
+	params: { lang: "en" | "ru" }
 }>) {
+	const dictionary = await getDictionary(lang)
 
 
 	return (
@@ -34,6 +39,7 @@ export default function RootLayout({
 			<NextUIProvider>
 				<Providers>
 				<AuthProvider>
+					<Header dictionary={dictionary} lang={lang} />
 					{children}
 					<Toaster
 						theme='dark'

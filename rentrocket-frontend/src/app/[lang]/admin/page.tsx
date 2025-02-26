@@ -11,8 +11,11 @@ export const metadata: Metadata = {
 	...NO_INDEX_PAGE
 }
 
-  export default function DashboardPage() {
+	
+	export default async function DashboardPage(){
 	return (
+		<>
+		
 		<div className='flex flex-col text-white'>
 			{/* <div className='flex flex-col lg:flex-row  items-center lg:justify-between'>
 				<div className='w-[500px] my-3'>
@@ -23,6 +26,6 @@ export const metadata: Metadata = {
 				</div>
 			</div> */}
 			<DashboardFlatsList />
-		</div>
+		</div></>
 	)
 }

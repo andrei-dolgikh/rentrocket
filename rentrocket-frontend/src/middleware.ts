@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
 	// Редирект на английскую версию, если язык не указан
 	if (!lang || !['en', 'ru'].includes(lang)) {  
-		return NextResponse.redirect(new URL(`/en${pathname}`, url))
+		return NextResponse.redirect(new URL(`/en`, url))
 	}
 
 	// Остальная логика остается без изменений
