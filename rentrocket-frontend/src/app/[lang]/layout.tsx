@@ -32,7 +32,6 @@ export default async function RootLayout({
 }>) {
 	const dictionary = await getDictionary(lang)
 
-
 	return (
 		<html lang='ru' className="">
 			<body style={{ fontFamily: '"Avenir Next", sans-serif' }} className="" >

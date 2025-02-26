@@ -15,7 +15,7 @@ export function Header({ dictionary, lang }: { dictionary: any, lang: any }) {
 			<div className='max-w-[1200px] mx-auto px-[30px]'>
 				<div className='flex py-[10px] justify-between items-center'>
 					<div>
-						<Link href={lang + '/'} className='text-white font-bold'>
+						<Link href={createLocalizedUrl(lang, URLS_PAGES.HOME)} className='text-white font-bold'>
 							RENT PULT
 						</Link>
 					</div>
@@ -41,21 +41,21 @@ export function Header({ dictionary, lang }: { dictionary: any, lang: any }) {
 
 
 					<div className='hidden md:flex md:items-center md:gap-6'>
-						<Link href={lang + URLS_PAGES.HOME} className=''>
+						<Link  href={createLocalizedUrl(lang, URLS_PAGES.INFO)} locale={lang} className=''>
 							<div className={`py-[5px] cursor-pointer`}>
 								<div className='flex flex-col lg:pl-[30px]'>
 									<div className="mt-[5px]">{dictionary.header.about}</div>
 								</div>
 							</div>
 						</Link>
-						<Link href={lang + URLS_PAGES.ADMIN_TAGS} className=''>
+						<Link href={createLocalizedUrl(lang, URLS_PAGES.ADMIN_TAGS)} className=''>
 							<div className={`py-[5px] cursor-pointer`}>
 								<div className='flex flex-col lg:pl-[30px]'>
 									<div className="mt-[5px]">{dictionary.header.DUmap}</div>
 								</div>
 							</div>
 						</Link>
-						<Link href={lang + URLS_PAGES.AUTH} className=''>
+						<Link href={createLocalizedUrl(lang, URLS_PAGES.AUTH)} className=''>
 							<div className={`py-[5px] cursor-pointer`}>
 								<div className='flex flex-col lg:pl-[30px]'>
 									<div className="mt-[5px]">{dictionary.header.dictionary}</div>
@@ -65,7 +65,7 @@ export function Header({ dictionary, lang }: { dictionary: any, lang: any }) {
 
 						{isAuthenticated && !isLoading && (
 
-							<Link href={lang + URLS_PAGES.MYSPACE_FLATS} className=''>
+							<Link href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_FLATS)} className=''>
 								<div className={`py-[5px] cursor-pointer`}>
 									<div className='flex flex-col lg:pl-[30px]'>
 										<div className="mt-[5px]">{dictionary.header.flats}</div>
@@ -79,7 +79,7 @@ export function Header({ dictionary, lang }: { dictionary: any, lang: any }) {
 					<div className='hidden md:flex md:items-center md:gap-6'>
 						{!isAuthenticated && !isLoading && (
 
-							<Link href={lang + URLS_PAGES.AUTH} className=''>
+							<Link href={URLS_PAGES.AUTH} className=''>
 								<div className={`py-[5px] cursor-pointer`}>
 									<div className='flex flex-col lg:pl-[30px]'>
 										<div className="mt-[5px]">{dictionary.header.login}</div>
@@ -95,3 +95,15 @@ export function Header({ dictionary, lang }: { dictionary: any, lang: any }) {
 		</header>
 	)
 }
+
+function createLocalizedUrl(lang: string, path: string): string {
+	// Убираем начальный слеш, если он есть
+	const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+	
+	// Проверяем, начинается ли путь с кода языка
+	if (cleanPath.startsWith(lang + '/') || cleanPath === lang) {
+	  return '/' + cleanPath;
+	}
+	
+	return `/${lang}/${cleanPath}`;
+  }
