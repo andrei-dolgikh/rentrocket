@@ -15,35 +15,27 @@ export function DashboardFlatsList() {
 
   const columns = [
     {
-      key: "dashboardMarket:name",
-      label: "Название",
+      key: "flatsDashboard:name",
+      label: "Название квартиры",
     },
     {
-      key: "dashboardMarket:views",
+      key: "flatsDashboard:views",
       label: "Просмотры",
     },
     {
-      key: "dashboardMarket:reviews",
+      key: "flatsDashboard:reviews",
       label: "Отзывы",
     },
     {
-      key: "dashboardMarket:rate",
-      label: "Общая оценка",
-    },
-    {
-      key: "dashboardMarket:updatedAt",
+      key: "flatsDashboard:updatedAt",
       label: "Информация обновлена",
     },
     {
-      key: "dashboardMarket:parserFlag",
-      label: "Парсер",
-    },
-    {
-      key: "dashboardMarket:recommendedFlag",
+      key: "flatsDashboard:recommendedFlag",
       label: "Рекомендовано",
     },
     {
-      key: "dashboardMarket:actions",
+      key: "flatsDashboard:actions",
       label: "",
     },
   ];
@@ -51,13 +43,11 @@ export function DashboardFlatsList() {
   function getFlatData(flat: IFlatResponse) {
     return {
       "key": flat.id,
-      "dashboardMarket:name": flat.name,
-      "dashboardMarket:views": flat.viewsCount,
-      "dashboardMarket:reviews": flat.commentsCount,
-      "dashboardMarket:rate": flat.rating,
-      "dashboardMarket:updatedAt": getFormattedDate(flat.updatedAt),
-      "dashboardMarket:parserFlag": false,
-      "dashboardMarket:recommendedFlag": flat.recommended ? <span className='text-[#30D158]'>Да</span> : <span className='text-[#999999]'>Нет</span>,
+      "flatsDashboard:name": flat.name,
+      "flatsDashboard:views": flat.viewsCount,
+      "flatsDashboard:reviews": flat.commentsCount,
+      "flatsDashboard:updatedAt": getFormattedDate(flat.updatedAt),
+      "flatsDashboard:recommendedFlag": flat.recommended ? <span className='text-[#30D158]'>Да</span> : <span className='text-[#999999]'>Нет</span>,
     }
   }
 

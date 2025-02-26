@@ -5,7 +5,7 @@ import { useProfile } from '@/hooks/useProfile'
 import { AuthContext } from '../../app/[lang]/authContext';
 import { URLS_PAGES } from '@/config/pages-url.config'
 
-export function Header( { dictionary, lang }: { dictionary: any, lang: any } ) {
+export function Header({ dictionary, lang }: { dictionary: any, lang: any }) {
 	const { data, isLoading } = useProfile();
 	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 	const userRoles = data?.user?.roles || []; // Получаем роли пользователя
@@ -62,16 +62,31 @@ export function Header( { dictionary, lang }: { dictionary: any, lang: any } ) {
 								</div>
 							</div>
 						</Link>
+
+						{isAuthenticated && !isLoading && (
+
+							<Link href={lang + URLS_PAGES.MYSPACE_FLATS} className=''>
+								<div className={`py-[5px] cursor-pointer`}>
+									<div className='flex flex-col lg:pl-[30px]'>
+										<div className="mt-[5px]">{dictionary.header.flats}</div>
+									</div>
+								</div>
+							</Link>
+						)}
 					</div>
 
+
 					<div className='hidden md:flex md:items-center md:gap-6'>
-						<Link href={lang + URLS_PAGES.AUTH} className=''>
-							<div className={`py-[5px] cursor-pointer`}>
-								<div className='flex flex-col lg:pl-[30px]'>
-									<div className="mt-[5px]">{dictionary.header.login}</div>
+						{!isAuthenticated && !isLoading && (
+
+							<Link href={lang + URLS_PAGES.AUTH} className=''>
+								<div className={`py-[5px] cursor-pointer`}>
+									<div className='flex flex-col lg:pl-[30px]'>
+										<div className="mt-[5px]">{dictionary.header.login}</div>
+									</div>
 								</div>
-							</div>
-						</Link>
+							</Link>
+						)}
 					</div>
 
 

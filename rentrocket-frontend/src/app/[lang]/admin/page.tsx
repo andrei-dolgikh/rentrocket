@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { AdminViewsStatBox } from '@/components/admin-layout/dashboard/AdminViewsStatBox'
 import { AdminCommentsStatBox } from '@/components/admin-layout/dashboard/AdminCommentsStatBox'
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
-import { DashboardFlatsList } from '@/app/admin/dashboard/DashboardFlatsList'
+import { DashboardFlatsList } from '../../..//app/[lang]/admin/dashboard/DashboardFlatsList'
 
 
 export const metadata: Metadata = {
