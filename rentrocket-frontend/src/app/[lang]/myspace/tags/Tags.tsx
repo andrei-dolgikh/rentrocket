@@ -11,9 +11,8 @@ import { URLS_PAGES } from '@/config/pages-url.config';
 
 
 const crumbs = [
-  { active: false, name: "Квартиры", url: URLS_PAGES.ADMIN_FLATS }, 
-  // { active: false, name: "Новости", url: URLS_PAGES.ADMIN_NEWS },
-  { active: true, name: "Теги", url: URLS_PAGES.ADMIN_TAGS },
+  { active: false, name: "Квартиры", url: URLS_PAGES.MYSPACE_FLATS }, 
+  { active: true, name: "Теги", url: URLS_PAGES.MYSPACE_TAGS },
 ]
 
 const useTagsData = (): { data: { name: string }[], isTagsLoading: boolean } => {

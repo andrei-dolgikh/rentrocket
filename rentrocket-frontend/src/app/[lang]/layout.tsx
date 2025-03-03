@@ -9,9 +9,7 @@ import { AuthProvider } from './authContext';
 import {NextUIProvider} from "@nextui-org/react";
 import {Header} from "@/components/header/Header";
 import { getDictionary } from './dictionaries'
-
-
-
+import { LanguageProvider } from './languageContext';
 
 export const metadata: Metadata = {
 	title: {
@@ -33,13 +31,16 @@ export default async function RootLayout({
 	const dictionary = await getDictionary(lang)
 
 	return (
-		<html lang='ru' className="">
+		<html lang={lang} className="">
 			<body style={{ fontFamily: '"Avenir Next", sans-serif' }} className="" >
 			<NextUIProvider>
 				<Providers>
+				<LanguageProvider lang={lang} dictionary={dictionary}>
 				<AuthProvider>
-					<Header dictionary={dictionary} lang={lang} />
+					<Header/>
+					<div className="mx-[30px] max-w-[1000px] lg:mx-auto lg:px-[30px]">
 					{children}
+					</div>
 					<Toaster
 						theme='dark'
 						position='bottom-right'
@@ -47,6 +48,7 @@ export default async function RootLayout({
 					/>
 					<Footer />
 					</AuthProvider>
+				</LanguageProvider>
 				</Providers>
 			</NextUIProvider>
 			</body>

@@ -1,14 +1,14 @@
 'use client'
 import { Button } from "@nextui-org/button";
 import { IFlatCreateRequest } from '@/types/flat.types'
-import { useCreateFlat } from '@/app/admin/flats/hooks/useCreateFlat'
+import { useCreateFlat } from '../../../admin/flats/hooks/useCreateFlat'
 import { Input, Textarea } from "@nextui-org/input";
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs'
 import { Checkbox, CheckboxGroup } from '@nextui-org/react'
 import { Card, CardBody } from '@nextui-org/react'
 import { useState, useCallback, useRef, FormEvent, ChangeEvent, useEffect } from 'react'
 import { TagPanel } from '@/components/ui/tag/TagPanel'
-import { useTags } from '@/app/admin/tags/hooks/useTags'
+import { useTags } from '../../../admin/tags/hooks/useTags'
 import { ITag } from '@/types/tag.types'
 import { FlatImageUploader } from '@/components/ui/flat/FlatImageUploader'
 

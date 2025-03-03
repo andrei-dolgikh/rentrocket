@@ -1,5 +1,5 @@
 'use client'
-import { useFlats } from '@/app/admin/flats/hooks/useFlats'
+import { useFlats } from '../../admin/flats/hooks/useFlats'
 import { IFlatResponse } from '@/types/flat.types'
 import { DashboardTable } from '@/components/ui/table/DashboardTable'
 import { format } from 'date-fns';

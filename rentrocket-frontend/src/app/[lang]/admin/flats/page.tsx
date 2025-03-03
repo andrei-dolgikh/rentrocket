@@ -7,10 +7,11 @@ import { useFlats } from './hooks/useFlats'
 
 export default function FlatPage() {
 	const {flats} = useFlats();
+	
 	return (
 		<div>
 			
-			<Link href={'/admin/flats/new'}>
+			<Link href={`/admin/flats/new`}>
                             <div className={`text-[22px] lg:text-[26px] mt-5 text-black`}>
                                Создать квартиру
                             </div>

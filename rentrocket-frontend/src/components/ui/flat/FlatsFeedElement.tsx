@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Chip } from "@nextui-org/chip";
 import { CheckCircle } from 'lucide-react';
 import { getColor } from '@/components/ui/tag/TagChip'
-import { AvailLabel } from '../availability/AvailLabel'
+import { useLanguage } from '../../../app/[lang]/languageContext';
 import { IFlatResponse } from '../../../types/flat.types'
 import useImage from '@/hooks/useImage';
 import DOMPurify from 'dompurify';
@@ -23,8 +23,9 @@ export function FlatsFeedElement({
     showCheckbox?: boolean,
     onCheckboxChange?: (id: string, checked: boolean) => void
 }) {
-    const flatLinkClient = `/flat/${flat.id}`
-    const flatLinkAdmin = `/admin/flats/${flat.id}`
+	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
+    const flatLinkClient = `${lang}/flat/${flat.id}`
+    const flatLinkAdmin = `${lang}/admin/flats/${flat.id}`
     const flatDescriptionCut = flat.description?.length ? flat.description?.length > 250 ? flat.description?.slice(0, 247) + '...' : flat.description : ''
 
 

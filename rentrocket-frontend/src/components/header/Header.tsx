@@ -4,11 +4,14 @@ import { useContext } from 'react';
 import { useProfile } from '@/hooks/useProfile'
 import { AuthContext } from '../../app/[lang]/authContext';
 import { URLS_PAGES } from '@/config/pages-url.config'
+import { createLocalizedUrl } from '../../utils/utils'
+import { useLanguage } from '../../app/[lang]/languageContext';
 
-export function Header({ dictionary, lang }: { dictionary: any, lang: any }) {
+export function Header() {
 	const { data, isLoading } = useProfile();
 	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 	const userRoles = data?.user?.roles || []; // Получаем роли пользователя
+	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 
 	return (
 		<header className='bg-brandGray'>
@@ -48,7 +51,7 @@ export function Header({ dictionary, lang }: { dictionary: any, lang: any }) {
 								</div>
 							</div>
 						</Link>
-						<Link href={createLocalizedUrl(lang, URLS_PAGES.ADMIN_TAGS)} className=''>
+						<Link href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_TAGS)} className=''>
 							<div className={`py-[5px] cursor-pointer`}>
 								<div className='flex flex-col lg:pl-[30px]'>
 									<div className="mt-[5px]">{dictionary.header.DUmap}</div>
@@ -79,7 +82,7 @@ export function Header({ dictionary, lang }: { dictionary: any, lang: any }) {
 					<div className='hidden md:flex md:items-center md:gap-6'>
 						{!isAuthenticated && !isLoading && (
 
-							<Link href={URLS_PAGES.AUTH} className=''>
+							<Link href={createLocalizedUrl(lang, URLS_PAGES.AUTH)} className=''>
 								<div className={`py-[5px] cursor-pointer`}>
 									<div className='flex flex-col lg:pl-[30px]'>
 										<div className="mt-[5px]">{dictionary.header.login}</div>
@@ -96,14 +99,3 @@ export function Header({ dictionary, lang }: { dictionary: any, lang: any }) {
 	)
 }
 
-function createLocalizedUrl(lang: string, path: string): string {
-	// Убираем начальный слеш, если он есть
-	const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-	
-	// Проверяем, начинается ли путь с кода языка
-	if (cleanPath.startsWith(lang + '/') || cleanPath === lang) {
-	  return '/' + cleanPath;
-	}
-	
-	return `/${lang}/${cleanPath}`;
-  }
