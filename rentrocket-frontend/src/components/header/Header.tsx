@@ -44,7 +44,7 @@ export function Header() {
 
 
 					<div className='hidden md:flex md:items-center md:gap-6'>
-						<Link  href={createLocalizedUrl(lang, URLS_PAGES.INFO)} locale={lang} className=''>
+						<Link  href={createLocalizedUrl(lang, URLS_PAGES.INFO)} className=''>
 							<div className={`py-[5px] cursor-pointer`}>
 								<div className='flex flex-col lg:pl-[30px]'>
 									<div className="mt-[5px]">{dictionary.header.about}</div>
@@ -89,6 +89,18 @@ export function Header() {
 									</div>
 								</div>
 							</Link>
+						)}
+						{isAuthenticated && !isLoading && (
+							<>
+							<div>{data?.user?.name}</div>
+							<Link href={createLocalizedUrl(lang, URLS_PAGES.AUTH)} className=''>
+								<div className={`py-[5px] cursor-pointer`}>
+									<div className='flex flex-col lg:pl-[30px]'>
+										<div className="mt-[5px]">{dictionary.header.exit}</div>
+									</div>
+								</div>
+							</Link>
+							</>
 						)}
 					</div>
 
