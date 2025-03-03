@@ -5,6 +5,7 @@ import Loader from '@/components/ui/Loader'
 import { useState, useContext } from 'react'
 import { FormEvent } from 'react'
 import { toast } from 'sonner'
+import { useLanguage } from '../../../app/[lang]/languageContext';
 // import { Button } from '@/components/ui/buttons/Button'
 import { IAuthForm } from '@/types/auth.types'
 import { URLS_PAGES } from '@/config/pages-url.config'
@@ -16,6 +17,7 @@ import { Button } from "@nextui-org/button";
 import Link from 'next/link'
 
 export function Auth() {
+	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 	const { setIsAuthenticated } = useContext(AuthContext);
 	const [formData, setFormData] = useState({
 		login: '',
@@ -35,7 +37,7 @@ export function Auth() {
 		onSuccess() {
 			toast.success('Успешный вход!')
 			setIsAuthenticated(true);
-			router.push(URLS_PAGES.MYSPACE)
+			router.push(lang + URLS_PAGES.MYSPACE)
 		},
 		onError() {
 			toast.error('Failed login!')

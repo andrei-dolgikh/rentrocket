@@ -103,7 +103,7 @@ export function FlatsFeedElement({
                     <span>{flat.price} руб</span>
                     <Link href={flatLinkAdmin} className='cursor-pointer'>
                         <div className='lg-max:hidden flex flex-row  text-black text-[10px] lg:text-[15px]'>
-                        Редактировать
+                        {dictionary.main.edit}
                         </div>
                     </Link>
                 </div>
