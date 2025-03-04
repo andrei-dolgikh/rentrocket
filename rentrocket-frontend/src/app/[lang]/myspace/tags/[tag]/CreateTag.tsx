@@ -5,9 +5,14 @@ import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs';
 import { Button } from '@/components/ui/buttons/Button';
 import { TypeTagForm } from '@/types/tag.types';
 import { useCreateTag } from '../hooks/useCreateTag';
+import { useLanguage } from '../../../languageContext';
+import { createLocalizedUrl } from '../../../../../utils/utils'
+import { URLS_PAGES } from '@/config/pages-url.config';
 
 export function CreateTag() {
-    const { createTag, isCreatePending } = useCreateTag();
+	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
+    const returnUrl = createLocalizedUrl(lang, URLS_PAGES.MYSPACE_TAGS);
+    const { createTag, isCreatePending } = useCreateTag(returnUrl);
 
     async function onCreateSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -24,8 +29,8 @@ export function CreateTag() {
     }
 
     const crumbs = [
-        { active: false, name: 'Теги', url: '/admin/tags' }, 
-        { active: true, name: "Создание тега", url: '' }
+        { active: false, name: 'Теги', url: createLocalizedUrl(lang, URLS_PAGES.MYSPACE_TAGS) }, 
+        { active: true, name: "Создание тега", url: createLocalizedUrl(lang, URLS_PAGES.HOME) }
     ];
 
     return (

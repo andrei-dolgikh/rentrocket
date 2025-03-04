@@ -8,12 +8,9 @@ import { TagsTable } from '@/components/ui/table/TagsTable'
 import { useState } from 'react';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs'
 import { URLS_PAGES } from '@/config/pages-url.config';
+import { useLanguage } from '../../languageContext';
+import { createLocalizedUrl } from '../../../../utils/utils'
 
-
-const crumbs = [
-  { active: false, name: "Квартиры", url: URLS_PAGES.MYSPACE_FLATS }, 
-  { active: true, name: "Теги", url: URLS_PAGES.MYSPACE_TAGS },
-]
 
 const useTagsData = (): { data: { name: string }[], isTagsLoading: boolean } => {
   const { tags, setTags, isTagsLoading } = useTags()
@@ -45,6 +42,13 @@ const columns = [
 export function Tags() {
   const { data, isTagsLoading } = useTagsData()
   const [searchInput, setSearchInput] = useState('');
+	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
+
+  const crumbs = [
+    { active: false, name: "Квартиры", url: createLocalizedUrl(lang, URLS_PAGES.MYSPACE_FLATS) }, 
+    { active: true, name: "Теги", url: createLocalizedUrl(lang, URLS_PAGES.MYSPACE_TAGS) },
+  ]
+  
 
   const filteredData = data.filter((tag) =>
     tag.name.toLowerCase().includes(searchInput.toLowerCase())
@@ -59,7 +63,7 @@ export function Tags() {
       <Breadcrumbs crumbs={crumbs} />
       <span className='text-[#999999] text-[14px] ml-2 mr-2'>Всего {filteredData.length}</span>
         <div className='flex items-center gap-5'>
-          <Link href={'/admin/tags/create'}>
+          <Link href={createLocalizedUrl(lang, '/admin/tags/create')}>
             <Button 
               color="primary"
               >

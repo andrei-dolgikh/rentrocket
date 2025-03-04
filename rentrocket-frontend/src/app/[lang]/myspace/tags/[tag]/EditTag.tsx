@@ -6,10 +6,16 @@ import { Input } from '@nextui-org/react';
 import { TypeTagForm } from '@/types/tag.types';
 import { useUpdateTag } from '../hooks/useUpdateTag';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs';
+import { useLanguage } from '../../../languageContext';
+import { createLocalizedUrl } from '../../../../../utils/utils'
+import { URLS_PAGES } from '@/config/pages-url.config';
+
 
 export function EditTag({ tag }: { tag: string }) {
+	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
   const { targetTag, isSuccess } = useTag({ id: tag });
-  const { isPending, updateTag } = useUpdateTag();
+  const returnUrl = createLocalizedUrl(lang, URLS_PAGES.MYSPACE_TAGS);
+  const { isPending, updateTag } = useUpdateTag(returnUrl);
   const [formData, setFormData] = useState({
     name: targetTag?.name,
     order: 0

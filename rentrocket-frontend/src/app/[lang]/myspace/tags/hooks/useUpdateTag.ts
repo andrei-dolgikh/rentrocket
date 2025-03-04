@@ -5,7 +5,7 @@ import { tagService } from '@/services/tag.service'
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { useRouter } from 'next/navigation'
 
-export function useUpdateTag(key?: string) {
+export function useUpdateTag(returnUrl: string, key?: string) {
 	const queryClient = useQueryClient()
 	const router = useRouter()
 	const { mutate:updateTag, isPending } = useMutation({
@@ -18,7 +18,7 @@ export function useUpdateTag(key?: string) {
 				queryKey: ['tags']
 			})
 			toast.success('Тег обновлен!')
-			router.push(URLS_PAGES.ADMIN_TAGS)
+			router.push(returnUrl)
 		}
 	})
 

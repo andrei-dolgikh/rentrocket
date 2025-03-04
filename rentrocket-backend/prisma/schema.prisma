@@ -115,6 +115,8 @@ model Tag {
   name String // название тега
   order Int // порядковый номер
 
+  
+
 
   @@map("tags")
 }

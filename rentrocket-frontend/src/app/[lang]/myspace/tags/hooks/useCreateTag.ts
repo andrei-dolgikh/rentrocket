@@ -5,7 +5,7 @@ import { tagService } from '@/services/tag.service'
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { useRouter } from 'next/navigation'
 
-export function useCreateTag() {
+export function useCreateTag(returnUrl : string) {
 	const queryClient = useQueryClient()
 	const router = useRouter()
 
@@ -17,7 +17,7 @@ export function useCreateTag() {
 				queryKey: ['tags']
 			})
 			toast.success('Тег создан!')
-			router.push(URLS_PAGES.ADMIN_TAGS)
+			router.push(returnUrl)
 		}
 	})
 
