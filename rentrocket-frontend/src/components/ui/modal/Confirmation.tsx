@@ -19,7 +19,7 @@ export function Confirmation({
   onClose,
 }: ConfirmationProps) {
   return (
-    <Modal isOpen={isOpen} placement="center" backdrop="blur" className="max-w-md">
+    <Modal isOpen={isOpen} placement="center" backdrop="blur" className="max-w-md text-black">
       <ModalContent className="p-5">
         <ModalHeader className="flex flex-col gap-1">{actionHeader}</ModalHeader>
         <ModalBody>{children}</ModalBody>

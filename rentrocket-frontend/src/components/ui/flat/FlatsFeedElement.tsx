@@ -38,11 +38,9 @@ export function FlatsFeedElement({
       }
 
     return (
-        <div className={`flex flex-row justify-start items-center w-full 
-                ${flat.recommended ? 'border-1 border-[#30D158]' : 'border-1 border-gray'}
-            `}>
+        <div className={`flex flex-row justify-start items-center w-full border-1 border-gray`}>
             <div className='w-[111px] lg:w-[265px] h-[111px] lg:h-[265px] m-0'>
-                <Link href={flatLinkAdmin} className='cursor-pointer'>
+                <Link href={flatLinkClient} className='cursor-pointer'>
                     {flat.iconUrl &&
                         <Image
                             src={useImage(flat.iconUrl)}
@@ -73,7 +71,7 @@ export function FlatsFeedElement({
                             <div className='text-[16px] lg:text-[32px]'>{flat.name}</div>
                         </Link>
                     </div>
-                    <div className='flex flex-row'>
+                    {/* <div className='flex flex-row'>
                         <div className='m-auto'>
 
                             {flat.recommended &&
@@ -85,10 +83,7 @@ export function FlatsFeedElement({
                                 </>
                             }
                         </div>
-                        {flat.commentsCount ? (
-                            <div className='text-[12px] lg:text-[24px] h-fit items-end m-auto ml-3 xl:ml-5 min-w-[80px]'> {flat.rating} <span className='text-[#999999]'>/ 10</span></div>
-                        ) : null}
-                    </div>
+                    </div> */}
                 </div>
                 <div className='flex flex-row flex-wrap items-center gap-2'>
                     {flat?.tags?.map((tag) => (
@@ -102,7 +97,6 @@ export function FlatsFeedElement({
                     dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(flatDescriptionCut) }}></div>
                 <div className='text-[10px] lg:text-[14px] text-[#999999] flex flex-row justify-between'>
                     {/* <AvailLabel availability={flat.isAvailable ? 'online' : 'offline'} /> */}
-                    <span>{flat.price} руб</span>
                     <Link href={flatLinkAdmin} className='cursor-pointer'>
                         <div className='lg-max:hidden flex flex-row  text-black text-[10px] lg:text-[15px]'>
                         {dictionary.main.edit}

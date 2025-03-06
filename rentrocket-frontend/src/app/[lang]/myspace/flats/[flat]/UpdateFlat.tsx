@@ -34,10 +34,8 @@ export function UpdateFlat(
 		name: flat?.name,
 		order: flat?.order,
 		description: flat?.description,
-		recommended: flat?.recommended,
 		tags: flat?.tags,
 		iconUrl: flat?.iconUrl,
-		price: flat?.price
 
 	});
 
@@ -47,9 +45,7 @@ export function UpdateFlat(
 				name: flat?.name,
 				order: flat?.order,
 				description: flat?.description,
-				recommended: flat?.recommended,
 				tags: flat?.tags,
-				price: flat?.price,
 				iconUrl: flat?.iconUrl
 			})
 
@@ -65,10 +61,8 @@ export function UpdateFlat(
 			name: formData.name as string,
 			order: formData.order,
 			description: formData.description as string,
-			recommended: formData.recommended,
 			tags: formData?.tags as ITag[],
 			iconUrl: formData?.iconUrl,
-			price: formData.price
 		}
 
 		updateFlat({ id: flatId, data: userData });
@@ -91,7 +85,7 @@ export function UpdateFlat(
 
 				<div className='flex justify-between my-[30px]'>
 					<Breadcrumbs crumbs={crumbs} />
-					<Button type='submit' color="primary" className='text-[12px] ' isDisabled={formDisabled}>Сохранить материал</Button>
+					<Button type='submit' color="primary" className='text-[12px] ' isDisabled={formDisabled}>Сохранить квартиру</Button>
 				</div>
 				<div className='flex flex-col'>
 					<div className='flex flex-row justify-start gap-4'>
@@ -116,7 +110,7 @@ export function UpdateFlat(
 						className="w-[90%] xl:w-[769px] my-5"
 						name='description'
 					/>
-                    <Input
+                    {/* <Input
                         id='name'
                         className='w-[90%] xl:w-[389px]'
                         label="Стоимость"
@@ -137,7 +131,7 @@ export function UpdateFlat(
 						>
 							<span className="">Доступна для аренды</span>
 						</Checkbox>
-					</CheckboxGroup>
+					</CheckboxGroup> */}
 
 					<div className='flex flex-col xl:flex-row justify-evenly xl:justify-start my-5 '>
 						<FlatImageUploader

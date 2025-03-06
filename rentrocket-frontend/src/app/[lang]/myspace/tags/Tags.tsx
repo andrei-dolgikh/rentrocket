@@ -61,7 +61,6 @@ export function Tags() {
     <div className='text-black'>
       <div className='flex justify-between items-center mt-3 mb-[10px]'>
       <Breadcrumbs crumbs={crumbs} />
-      <span className='text-[#999999] text-[14px] ml-2 mr-2'>Всего {filteredData.length}</span>
         <div className='flex items-center gap-5'>
           <Link href={createLocalizedUrl(lang, '/admin/tags/create')}>
             <Button 
@@ -70,11 +69,11 @@ export function Tags() {
               Добавить тег
             </Button>
           </Link>
-        <Input
-        label="Поиск"
+        <Input label="Поиск"
         placeholder="Название тега"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)} />
+        <div className='text-[#999999] text-[14px] w-[150px]'>Всего {filteredData.length}</div>
         </div>
 
       </div>

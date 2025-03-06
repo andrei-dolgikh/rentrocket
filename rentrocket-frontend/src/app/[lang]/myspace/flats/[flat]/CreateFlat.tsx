@@ -26,10 +26,8 @@ export function CreateFlat() {
         name: "",
         order: 999,
         description: "",
-        recommended: false,
         tags: [] as ITag[],
         iconUrl: "",
-        price: 0
     });
 
     async function onCreateSubmit(event: FormEvent<HTMLFormElement>) {
@@ -38,9 +36,7 @@ export function CreateFlat() {
             name: formData.name as string,
             order: formData.order,
             description: formData.description as string,
-            recommended: formData.recommended as boolean,
             tags: formData?.tags as ITag[],
-            price: formData.price,
             iconUrl: formData?.iconUrl
         }
         createFlat(userData);
@@ -91,7 +87,7 @@ export function CreateFlat() {
                         className="w-[90%] xl:w-[769px] my-5"
                         name='description'
                     />
-                    <Input
+                    {/* <Input
                         id='name'
                         className='w-[90%] xl:w-[389px]'
                         label="Стоимость"
@@ -113,7 +109,7 @@ export function CreateFlat() {
                         >
                             <span className="">Доступна для аренды</span>
                         </Checkbox>
-                    </CheckboxGroup>
+                    </CheckboxGroup> */}
 
                     <div className='flex flex-col xl:flex-row justify-evenly xl:justify-start my-5 '>
                         <FlatImageUploader
