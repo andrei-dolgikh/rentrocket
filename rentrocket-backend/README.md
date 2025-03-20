@@ -12,7 +12,7 @@ nodejs-container - здесь расположено само приложени
 ## Установка и запуск
 ### Создай .env файл в корне проекта
 ```
-DB_URL="postgresql://rentrocketadmin:xnr4nrjeez34nHSB2$32kdDk3ms@postgres:5432/onion_wiki?schema=public"
+DB_URL="postgresql://rentrocketadmin:xnr4nrjeez34nHSB2$32kdDk3ms@postgres:5432/rentrocket?schema=public"
 JWT_SECRET="bhrc3c34njrc=dc34mrkc3*$#cr4vjnXC&c3kn32llce1n"
 CAPTCHA_KEY="ES_5ea2c8b495c14adbb15abc5557dbe53a"
 DOMAIN="localhost"
