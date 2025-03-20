@@ -6,6 +6,7 @@ import { AuthContext } from '../../app/[lang]/authContext';
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { createLocalizedUrl } from '../../utils/utils'
 import { useLanguage } from '../../app/[lang]/languageContext';
+import { LogoutButton } from '../ui/buttons/LogoutButton';
 
 export function Header() {
 	const { data, isLoading } = useProfile();
@@ -93,13 +94,7 @@ export function Header() {
 						{isAuthenticated && !isLoading && (
 							<>
 							<div>{data?.user?.name}</div>
-							<Link href={createLocalizedUrl(lang, URLS_PAGES.AUTH)} className=''>
-								<div className={`py-[5px] cursor-pointer`}>
-									<div className='flex flex-col lg:pl-[30px]'>
-										<div className="mt-[5px]">{dictionary.header.exit}</div>
-									</div>
-								</div>
-							</Link>
+							<LogoutButton dictionary={dictionary}/>
 							</>
 						)}
 					</div>

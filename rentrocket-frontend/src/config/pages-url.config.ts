@@ -4,6 +4,7 @@ class URLS {
 
 	INFO = '/info'
 	AUTH = '/auth'
+	LOGOUT = '/logout'
 	MYSPACE_FLATS = `${this.myspace_zone}/flats`
 	MYSPACE_TAGS = `${this.myspace_zone}/tags`
 

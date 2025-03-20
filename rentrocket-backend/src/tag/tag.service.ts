@@ -18,9 +18,10 @@ export class TagService {
     return this.prisma.tag.findMany()
   }
 
-  async create(dto: TagDto) {
+  async create(dto: TagDto, userId: string) {
     return this.prisma.tag.create({
       data: {
+        creatorId: userId,
         ...dto
       }
     })

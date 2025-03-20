@@ -6,16 +6,13 @@ import { useRouter } from 'next/navigation'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { useContext } from 'react'
 import { authService } from '@/services/auth.service'
-import { AuthContext } from '../../../app/[lang]/LanguageContext';
+import Link from 'next/link'
+import { AuthContext } from '../../../app/[lang]/authContext';
 
-export function LogoutButton() {
+export function LogoutButton( {dictionary} : {dictionary: Record<string, any>} ) {
 	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
 	const router = useRouter()
-    const [menuVariation, setMenuVariation, isLoading] = useLocalStorage<string>({
-        key: 'menuVariation',
-        defaultValue: 'client'
-    })
 
 
 	const { mutate } = useMutation({
@@ -23,24 +20,20 @@ export function LogoutButton() {
 		mutationFn: () => authService.logout(),
         onSuccess: () => {
 			setIsAuthenticated(false);
-            // setMenuVariation('client');
             router.push('/');
 			// router.refresh()
         },
 	})
 
 	return (
-		<div className='ml-3  cursor-pointer'>
-			<button
-				className='flex'
+
+		<div className={`py-[5px] cursor-pointer`}>
+			<div className='flex flex-col lg:pl-[30px]' 
                 onClick={() => {
-                    setMenuVariation('client');
                     mutate();
-                }}
-			>
-			<LogOut size={20} /> 
-			<div className='ml-1 hidden lg:block'> Выход</div>
-			</button>
+                }}>
+				<div className="mt-[5px]">{dictionary.header.exit}</div>
+			</div>
 		</div>
 	)
 }

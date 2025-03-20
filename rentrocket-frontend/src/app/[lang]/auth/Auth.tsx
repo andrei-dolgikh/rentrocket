@@ -14,6 +14,7 @@ import { authService } from '@/services/auth.service'
 import { AuthContext } from '../authContext';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { Button } from "@nextui-org/button";
+import { createLocalizedUrl } from '../../../utils/utils'
 import Link from 'next/link'
 
 export function Auth() {
@@ -37,7 +38,7 @@ export function Auth() {
 		onSuccess() {
 			toast.success('Успешный вход!')
 			setIsAuthenticated(true);
-			router.push(lang + URLS_PAGES.MYSPACE)
+			router.push(createLocalizedUrl(lang, '/myspace'))
 		},
 		onError() {
 			toast.error('Failed login!')
@@ -95,7 +96,7 @@ export function Auth() {
 				<div className='flex flex-col gap-5 justify-center  min-w-[303px]'>
 
 					<Button
-						color={isFormValid ? "primary" : "default"}
+						color={isFormValid ? "success" : "default"}
 						radius="md"
 						size="lg"
 						className=' m-auto w-full'
@@ -103,9 +104,9 @@ export function Auth() {
 						disabled={!isFormValid}
 					>Вход</Button>
 
-					<Link href="/register" className=' text-center text-[#fff]'>
+					<Link href={createLocalizedUrl(lang, '/register')} className=' text-center text-[#fff] '>
 					<Button
-						color={"primary"}
+						color={"secondary"}
 						radius="md"
 						size="lg"
 						className=' m-auto w-full'

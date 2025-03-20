@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UsePipes, Va
 import { TagService } from "./tag.service";
 import { Auth } from "src/decorators/auth.decorator";
 import { TagDto } from "./tag.dto";
+import { CurrentUser } from 'src/decorators/user.decorator';
 import { RoleUser } from "src/decorators/roles.decorator";
 import { RolesGuard } from 'src/guards/roles.guard';
 import { UseGuards } from "@nestjs/common";
@@ -37,8 +38,8 @@ export class TagController {
   @Auth()
   @UseGuards(JwtGuard, RolesGuard)
   @RoleUser()
-  async create(@Body() dto: TagDto) {
-    return this.tagService.create(dto)
+  async create(@Body() dto: TagDto, @CurrentUser('id') userId: string) {
+    return this.tagService.create(dto, userId)
   }
 
   @UsePipes(new ValidationPipe())
