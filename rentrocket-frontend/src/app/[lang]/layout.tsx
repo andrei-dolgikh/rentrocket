@@ -10,6 +10,7 @@ import {NextUIProvider} from "@nextui-org/react";
 import {Header} from "@/components/header/Header";
 import { getDictionary } from './dictionaries'
 import { LanguageProvider } from './languageContext';
+import {HeroUIProvider} from "@heroui/react";
 
 export const metadata: Metadata = {
 	title: {
@@ -33,6 +34,7 @@ export default async function RootLayout({
 	return (
 		<html lang={lang} className="">
 			<body style={{ fontFamily: '"Avenir Next", sans-serif' }} className="" >
+				<HeroUIProvider>
 			<NextUIProvider>
 				<Providers>
 				<LanguageProvider lang={lang} dictionary={dictionary}>
@@ -51,6 +53,8 @@ export default async function RootLayout({
 				</LanguageProvider>
 				</Providers>
 			</NextUIProvider>
+				</HeroUIProvider>
+
 			</body>
 		</html>
 

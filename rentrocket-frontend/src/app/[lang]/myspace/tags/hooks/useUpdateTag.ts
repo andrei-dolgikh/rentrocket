@@ -2,7 +2,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { TypeTagForm } from '@/types/tag.types'
 import { tagService } from '@/services/tag.service'
-import { URLS_PAGES } from '@/config/pages-url.config'
 import { useRouter } from 'next/navigation'
 
 export function useUpdateTag(returnUrl: string, key?: string) {

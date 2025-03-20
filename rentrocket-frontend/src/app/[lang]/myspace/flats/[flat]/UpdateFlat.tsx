@@ -1,18 +1,15 @@
 'use client'
 import { Button } from "@nextui-org/button";
-import { useUpdateFlat } from '../../../admin/flats/hooks/useUpdateFlat'
-import { Input, Textarea } from "@nextui-org/input";
+import { useUpdateFlat } from '../../../myspace/flats/hooks/useUpdateFlat'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs'
-import { useState, useRef, FormEvent, useEffect } from 'react'
-import { useFlat } from '../../../admin/flats/hooks/useFlat'
-import { TagPanel } from '@/components/ui/tag/TagPanel'
-import { useTags } from '../../../admin/tags/hooks/useTags'
+import { useState, FormEvent, useEffect } from 'react'
+import { useFlat } from '../../../myspace/flats/hooks/useFlat'
+import { useTags } from '../../../myspace/tags/hooks/useTags'
 import { ITag } from '@/types/tag.types'
 import { IFlatUpdateRequest } from '@/types/flat.types'
-import { Checkbox, CheckboxGroup, Card, CardBody } from '@nextui-org/react'
 import Loader from '@/components/ui/Loader'
-import { FlatImageUploader } from '@/components/ui/flat/FlatImageUploader'
-
+import { FlatSettingsGeneralTab } from "@/components/ui/flat/FlatSettingsGeneralTab";
+import { Tabs, Tab } from "@heroui/react";
 
 
 
@@ -87,60 +84,15 @@ export function UpdateFlat(
 					<Breadcrumbs crumbs={crumbs} />
 					<Button type='submit' color="primary" className='text-[12px] ' isDisabled={formDisabled}>Сохранить квартиру</Button>
 				</div>
-				<div className='flex flex-col'>
-					<div className='flex flex-row justify-start gap-4'>
-						<Input
-							id='name'
-							className='w-[90%] xl:w-[389px]'
-							label="Название"
-							value={formData.name}
-							onChange={(e) => handleFormChange({ ...formData, name: e.target.value })}
-							name='name' />
-						<TagPanel
-							selectedTags={flat?.tags}
-							onTagsChange={(selectedTags) => handleFormChange({ ...formData, tags: selectedTags })}
-							tagsList={tags} />
-					</div>
-
-
-					<Textarea
-						label="Описание:"
-						value={formData.description}
-						onChange={(e) => handleFormChange({ ...formData, description: e.target.value })}
-						className="w-[90%] xl:w-[769px] my-5"
-						name='description'
-					/>
-                    {/* <Input
-                        id='name'
-                        className='w-[90%] xl:w-[389px]'
-                        label="Стоимость"
-                        value={formData.price?.toString()}
-                        onChange={(e) => handleFormChange({ ...formData, price: +e.target.value })}
-                        name='price' />
-					<CheckboxGroup
-						name='recommended'
-						orientation="horizontal"
-						className='ml-2 mt-2'
-						value={formData.recommended ? ["recommended"] : []}
-						onChange={(values) => handleFormChange({ ...formData, recommended: values.includes("recommended") })}
-					>
-						<Checkbox
-							key={"recommended"}
-							value="recommended"
-							color="success"
-						>
-							<span className="">Доступна для аренды</span>
-						</Checkbox>
-					</CheckboxGroup> */}
-
-					<div className='flex flex-col xl:flex-row justify-evenly xl:justify-start my-5 '>
-						<FlatImageUploader
-							flatId={flatId}
-							image={formData.iconUrl}
-							setImage={(image) => handleFormChange({ ...formData, iconUrl: image })}
-						/>
-					</div>
-				</div>
+				<Tabs aria-label="Dynamic tabs" >
+					<Tab key={0} title={"Основные настройки"}>
+						<FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange} flat={flat} tags={tags} tabMode={"edit"} />
+					</Tab>
+					<Tab key={1} title={"Арендаторы"}>
+					</Tab>
+					<Tab key={2} title={"Фотографии"}>
+					</Tab>
+				</Tabs>
 			</form>
 		</div>
 	)
