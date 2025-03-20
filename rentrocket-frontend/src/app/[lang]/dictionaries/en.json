@@ -1,0 +1,17 @@
+{
+    "header": {
+      "about": "About the system",
+      "DUmap": "Trusted managers map",
+      "dictionary": "Dictionary",
+      "exit": "Exit",
+      "login": "Login / Registration",
+      "flats": "Flats"
+    },
+    "main": {
+      "edit": "Edit",
+      "mainText1" : "Rent-pult - collective property management system",
+      "mainText2" : "The Rent-pult service will allow several people to manage one flat",
+      "mainText3" : ", which is often necessary when renting out an apartment. The owner will see all updates to the apartment and will be at ease knowing that everything is in order. And the tenant will see the living experience of previous tenants in this apartment, which will significantly help them in using the apartment.",
+      "mainText4" : "For each apartment in the Rent Pult system, a common information space is created between all owners, authorized representatives, and tenants of the apartment (or any other real estate object). In it, owners and tenants can see the history of rental payments, meter readings for each month, photo reports, a list of furniture and appliances in the apartment, set reminders for future events, record all the peculiarities of use, and much more."
+    }
+  }

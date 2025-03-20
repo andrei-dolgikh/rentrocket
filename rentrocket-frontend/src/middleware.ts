@@ -8,8 +8,18 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value
 	const isAuthPage = url.includes('/auth')
 
+	const pathname = request.nextUrl.pathname
+	const pathnameElements = pathname.split('/').filter(Boolean)
+	const lang = pathnameElements[0]
+
+	// Редирект на английскую версию, если язык не указан
+	if (!lang || !['en', 'ru'].includes(lang)) {  
+		return NextResponse.redirect(new URL(`/en`, url))
+	}
+
+	// Остальная логика остается без изменений
 	if (isAuthPage && refreshToken) {
-		return NextResponse.redirect(new URL(URLS_PAGES.MYSPACE, url))
+		return NextResponse.redirect(new URL(`/${lang}${URLS_PAGES.MYSPACE}`, url))
 	}
 
 	if (isAuthPage) {
@@ -17,7 +27,7 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 	}
 
 	if (!refreshToken) {
-		return NextResponse.redirect(new URL('/auth', request.url))
+		return NextResponse.redirect(new URL(`/${lang}/auth`, request.url))
 	}
 
 	return NextResponse.next()
@@ -25,11 +35,14 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
 export const config = {
 	matcher: [
-		'/myspace', 
-		'/myspace/:path*', 
-		'/profile', 
-		'/admin', 
-		'/admin/:path*',  
-		'/auth/:path*'
+		'/', 
+		'/:lang',  
+		'/:lang/myspace',
+		'/:lang/myspace/:path*',
+		'/:lang/profile',
+		'/:lang/admin',
+		'/:lang/admin/:path*',
+		'/:lang/auth/:path*'
 	]
 }
+

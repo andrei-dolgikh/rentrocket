@@ -5,7 +5,7 @@ import { EditIcon } from "./editIcon";
 import { DeleteIcon } from "./deleteIcon";
 import { Link } from "@nextui-org/react";
 import { Confirmation } from '@/components/ui/modal/Confirmation'
-import { useDeleteUser } from "@/app/admin/users/hooks/useDeleteUser";
+import { useDeleteUser } from "@/app/[lang]/admin/users/hooks/useDeleteUser";
 import { useState } from "react";
 import { TagChip } from '@/components/ui/tag/TagChip'
 

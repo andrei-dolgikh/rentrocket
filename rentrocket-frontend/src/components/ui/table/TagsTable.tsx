@@ -5,7 +5,7 @@ import { EditIcon } from "./editIcon";
 import { DeleteIcon } from "./deleteIcon";
 import { Link } from "@nextui-org/react";
 import { Confirmation } from '@/components/ui/modal/Confirmation'
-import { useDeleteTag } from "@/app/admin/tags/hooks/useDeleteTag";
+import { useDeleteTag } from "../../../app/[lang]/admin/tags/hooks/useDeleteTag";
 import { useState } from "react";
 
 

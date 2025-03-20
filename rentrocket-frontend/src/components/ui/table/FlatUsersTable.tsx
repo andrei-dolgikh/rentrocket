@@ -5,7 +5,7 @@ import { EditIcon } from "./editIcon";
 import { DeleteIcon } from "./deleteIcon";
 import { Link } from "@nextui-org/react";
 import { Confirmation } from '@/components/ui/modal/Confirmation'
-import { useDeleteUser } from "@/app/admin/users/hooks/useDeleteUser";
+import { useDeleteUser } from "@/app/[lang]/admin/users/hooks/useDeleteUser";
 import { useState } from "react";
 import { TagChip } from '@/components/ui/tag/TagChip'
 
@@ -57,38 +57,6 @@ export function FlatUsersTable({ columns, rows }: { columns: Array<any>, rows: A
           </div>
         );
 
-      case "tags:actions":
-        return (
-          <div className="relative flex items-center gap-2">
-            <Link href={`/admin/tags/${subject.id}`} className='cursor-pointer'>
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EditIcon />
-              </span>
-            </Link>
-            <Link color="danger">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <DeleteIcon />
-              </span>
-            </Link>
-          </div>
-        );
-
-      case "rules:actions":
-        return (
-          <div className="relative flex items-center gap-2">
-            <Link href={`/admin/spamfilter/${subject.id}`} className='cursor-pointer'>
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EditIcon />
-              </span>
-            </Link>
-            <Link color="danger">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <DeleteIcon />
-              </span>
-            </Link>
-          </div>
-        );
-
       default:
         return cellValue;
     }
@@ -122,7 +90,7 @@ export function FlatUsersTable({ columns, rows }: { columns: Array<any>, rows: A
             setIsDeleteUserConformationOpen(false);
           }}
         >
-          <p>Вы уверены, что хотите удалить учетную запись пользователя?</p>
+          <p>Подтвердите удаление пользователя из квартиры.</p>
         </Confirmation>
       )}
       </>

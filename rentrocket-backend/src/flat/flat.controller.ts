@@ -12,12 +12,6 @@ import { JwtGuard } from "src/guards/jwt.guard";
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { DashboardStatInterface, DashboardLinksStatsInterface } from "./flat.service";
-
-interface StatisticsResponse {
-  dashStat: DashboardStatInterface[];
-  linksStat: DashboardLinksStatsInterface[];
-}
 
 @Controller('flats')
 export class FlatController {
@@ -28,17 +22,7 @@ export class FlatController {
   async getCatalog() {
     return this.flatService.getCatalog()
   }
-
-  @Get('statistics')
-  @HttpCode(200)
-  @Auth()
-  @UseGuards(JwtGuard, RolesGuard)
-  @RoleUser()
-  async getStatistics()  : Promise<StatisticsResponse> {
-    const statistics = await this.flatService.getStatistics()
-    return statistics
-  }
-
+  
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Get(":flatId")

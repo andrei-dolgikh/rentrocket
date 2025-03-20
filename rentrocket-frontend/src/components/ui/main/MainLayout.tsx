@@ -1,7 +1,7 @@
 'use client'
 import { MainBanner } from "./MainBanner"
-import { FlatsFeed } from "../flat/FlatsFeed"
-import { useFlats } from '@/app/admin/flats/hooks/useFlats'
+// import { FlatsFeed } from "../flat/FlatsFeed"
+import { useFlats } from '../../../app/[lang]/admin/flats/hooks/useFlats'
 
 enum CardType {
     Admin = 'admin',
@@ -14,7 +14,8 @@ export function MainLayout( ) {
 	return (
 		<>
             <MainBanner />
-             <FlatsFeed flats={flats}  />
+             {/* <FlatsFeed flats={flats}  /> */}
+             
         </>
     )
 }

@@ -22,7 +22,6 @@ export  function FlatHeader({ flat }:
                 </div>
             }
             <div className='xl:mx-auto w-[70%] my-auto'>
-                <AvailLabel availability={flat.isAvailable ? 'online' : 'offline'} />
                 <div className='text-[24px] lg:text-[42px] text-white'>{flat.name}</div>
                 <div
                 //   className={`text-brandGrayLight text-[14px] lg:text-[18px] lg:w-2/3`}

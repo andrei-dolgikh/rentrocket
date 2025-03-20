@@ -10,6 +10,12 @@ const nextConfig = {
       },
     ],
   },
+  // i18n: {
+  //   // Список поддерживаемых локалей
+  //   locales: ['en', 'ru'],
+  //   // Локаль по умолчанию
+  //   defaultLocale: 'en',
+  // },
 }
 
 export default nextConfig;

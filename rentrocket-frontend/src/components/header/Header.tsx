@@ -1,26 +1,25 @@
 'use client'
-import Image from 'next/image'
 import Link from 'next/link'
-import { COLORS } from '@/constants/color.constants'
-import { MenuItem } from '@/components/menu/MenuItem'
-import { MENU } from '@/components/menu/menu.data'
-import { Roles } from '@/types/user.types'
-import { RIGHTMENU } from '@/components/menu/menu.data'
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useProfile } from '@/hooks/useProfile'
-import { AuthContext } from '../../app/authContext';
+import { AuthContext } from '../../app/[lang]/authContext';
+import { URLS_PAGES } from '@/config/pages-url.config'
+import { createLocalizedUrl } from '../../utils/utils'
+import { useLanguage } from '../../app/[lang]/languageContext';
+import { LogoutButton } from '../ui/buttons/LogoutButton';
 
 export function Header() {
 	const { data, isLoading } = useProfile();
 	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 	const userRoles = data?.user?.roles || []; // Получаем роли пользователя
+	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 
 	return (
 		<header className='bg-brandGray'>
 			<div className='max-w-[1200px] mx-auto px-[30px]'>
 				<div className='flex py-[10px] justify-between items-center'>
 					<div>
-						<Link href={'/'} className='text-white font-bold'>
+						<Link href={createLocalizedUrl(lang, URLS_PAGES.HOME)} className='text-white font-bold'>
 							RENT PULT
 						</Link>
 					</div>
@@ -46,20 +45,58 @@ export function Header() {
 
 
 					<div className='hidden md:flex md:items-center md:gap-6'>
-						{MENU.filter(
-							(item) => !item.access || item.access.some((role) => userRoles.includes(role))
-						).map((item) => (
-							<MenuItem key={item.id} item={item} />
-						))}
+						<Link  href={createLocalizedUrl(lang, URLS_PAGES.INFO)} className=''>
+							<div className={`py-[5px] cursor-pointer`}>
+								<div className='flex flex-col lg:pl-[30px]'>
+									<div className="mt-[5px]">{dictionary.header.about}</div>
+								</div>
+							</div>
+						</Link>
+						<Link href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_TAGS)} className=''>
+							<div className={`py-[5px] cursor-pointer`}>
+								<div className='flex flex-col lg:pl-[30px]'>
+									<div className="mt-[5px]">{dictionary.header.DUmap}</div>
+								</div>
+							</div>
+						</Link>
+						<Link href={createLocalizedUrl(lang, URLS_PAGES.AUTH)} className=''>
+							<div className={`py-[5px] cursor-pointer`}>
+								<div className='flex flex-col lg:pl-[30px]'>
+									<div className="mt-[5px]">{dictionary.header.dictionary}</div>
+								</div>
+							</div>
+						</Link>
+
+						{isAuthenticated && !isLoading && (
+
+							<Link href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_FLATS)} className=''>
+								<div className={`py-[5px] cursor-pointer`}>
+									<div className='flex flex-col lg:pl-[30px]'>
+										<div className="mt-[5px]">{dictionary.header.flats}</div>
+									</div>
+								</div>
+							</Link>
+						)}
 					</div>
 
-					{/* Правое меню для десктопов */}
+
 					<div className='hidden md:flex md:items-center md:gap-6'>
-						{RIGHTMENU.filter(
-							(item) => !item.access || item.access.some((role) => userRoles.includes(role))
-						).map((item) => (
-							<MenuItem key={item.id} item={item} />
-						))}
+						{!isAuthenticated && !isLoading && (
+
+							<Link href={createLocalizedUrl(lang, URLS_PAGES.AUTH)} className=''>
+								<div className={`py-[5px] cursor-pointer`}>
+									<div className='flex flex-col lg:pl-[30px]'>
+										<div className="mt-[5px]">{dictionary.header.login}</div>
+									</div>
+								</div>
+							</Link>
+						)}
+						{isAuthenticated && !isLoading && (
+							<>
+							<div>{data?.user?.name}</div>
+							<LogoutButton dictionary={dictionary}/>
+							</>
+						)}
 					</div>
 
 
@@ -68,3 +105,4 @@ export function Header() {
 		</header>
 	)
 }
+

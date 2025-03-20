@@ -33,6 +33,7 @@ model User {
   password String
 
   roles Roles[]  
+  tags Tag[]
 
   flatsLogs FlatHistory[]
 
@@ -53,16 +54,6 @@ model Flat {
 
   name String // название 
   description String // описание 
-  status Status @default(ACTIVE)// отображать ли в каталоге
-
-  price Int // цена
-
-  viewsCount Int @map("views_count") // кол-во просмотров
-  commentsCount Int @map("comments_count") // кол-во опубликованных комментариев
-  usersCount Int @map("users_count") // количество юзеров 
-  recommended Boolean @default(false) // премиум клиент
-
-  rating Float // оценка пользователей
 
   order Int // 
 
@@ -115,32 +106,10 @@ model Tag {
   name String // название тега
   order Int // порядковый номер
 
+  creator User @relation(fields: [creatorId], references: [id])
+  creatorId String @map("creator_id")
+
 
   @@map("tags")
-}
-
-model DashboardStats {
-  id        String   @id @default(uuid())
-  timestamp DateTime
-  comments  Int
-  views     Int
-}
-
-model DashboardLinksStats {
-  id          String   @id @default(uuid())
-  timestamp   DateTime
-  flatId  String
-  available   Boolean  @default(true)
-}
-
-model DashboardCategoriesStats {
-  id          String   @id @default(uuid())
-  timestamp   DateTime
-  flatCategoryId  String
-  comments  Int
-  views     Int
-  online    Int
-  offline   Int
-
 }
 
