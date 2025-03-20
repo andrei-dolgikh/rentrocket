@@ -27,7 +27,7 @@ export function FlatsFeedElement({
 	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
    
     const flatLinkClient = `${lang}/flat/${flat.id}`
-    const flatLinkAdmin =  createLocalizedUrl(lang, `/admin/flats/${flat.id}`)
+    const flatLinkAdmin =  createLocalizedUrl(lang, `/myspace/flats/${flat.id}`)
     const flatDescriptionCut = flat.description?.length ? flat.description?.length > 250 ? flat.description?.slice(0, 247) + '...' : flat.description : ''
 
 
