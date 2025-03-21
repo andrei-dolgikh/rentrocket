@@ -7,7 +7,8 @@ import { useState, FormEvent } from 'react'
 import { useTags } from '../../../admin/tags/hooks/useTags'
 import { ITag } from '@/types/tag.types'
 import { FlatSettingsGeneralTab } from "@/components/ui/flat/FlatSettingsGeneralTab";
-
+import { Tabs, Tab } from "@heroui/react";
+import { FlatSettingsPhotosTab } from "@/components/ui/flat/FlatSettingsPhotosTab";
 
 
 export function CreateFlat() {
@@ -59,10 +60,14 @@ export function CreateFlat() {
                         color="primary"
                     >Создать квартиру</Button>
                 </div>
-                {/* )} */}
-
+				<Tabs aria-label="Dynamic tabs" >
+					<Tab key={0} title={"Основные настройки"}>
                 <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange} tags={tags} tabMode={"create"} />
-               
+                </Tab>
+                    <Tab key={2} title={"Фотографии"}>
+                        <FlatSettingsPhotosTab formData={formData} handleFormChange={handleFormChange} />
+                    </Tab>
+				</Tabs>
             </form>
         </div>
     )

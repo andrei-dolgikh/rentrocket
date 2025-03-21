@@ -10,8 +10,8 @@ import { IFlatUpdateRequest } from '@/types/flat.types'
 import Loader from '@/components/ui/Loader'
 import { FlatSettingsGeneralTab } from "@/components/ui/flat/FlatSettingsGeneralTab";
 import { Tabs, Tab } from "@heroui/react";
-
-
+import { FlatSettingsPhotosTab } from "@/components/ui/flat/FlatSettingsPhotosTab";
+import { FlatSettingsRentersTab } from "@/components/ui/flat/FlatSettingsRentersTab";
 
 export function UpdateFlat(
 	{ flatId }:
@@ -89,8 +89,10 @@ export function UpdateFlat(
 						<FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange} flat={flat} tags={tags} tabMode={"edit"} />
 					</Tab>
 					<Tab key={1} title={"Арендаторы"}>
+						<FlatSettingsRentersTab />
 					</Tab>
 					<Tab key={2} title={"Фотографии"}>
+						<FlatSettingsPhotosTab formData={formData} handleFormChange={handleFormChange} />
 					</Tab>
 				</Tabs>
 			</form>
