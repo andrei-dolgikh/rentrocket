@@ -29,7 +29,7 @@ POSTGRES_DB=rentrocket
 docker-compose up --build
 ```
 
-Зайди в командную оболочку контейнера castle-backend-nodejs и экспортируй схему БД из prisma в postgres.
+Зайди в командную оболочку контейнера castle-backend-nodejs (docker exec -it 8f003d9798c8 sh) и экспортируй схему БД из prisma в postgres.
 Должен быть запущен контейнер с postgres
 ```
 npx prisma db push

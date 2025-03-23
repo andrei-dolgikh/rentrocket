@@ -101,11 +101,11 @@ export class AuthService {
 
         res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
             httpOnly: true,
-            domain: 'localhost',
+            domain: 'rentrocket.lockshield.online',
             expires: expiresIn,
             secure: true,
             // lax if production
-            sameSite: 'none'
+            sameSite: 'lax'
         })
     }
 
