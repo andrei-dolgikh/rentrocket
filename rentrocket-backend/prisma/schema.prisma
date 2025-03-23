@@ -57,6 +57,12 @@ model Flat {
 
   order Int // 
 
+  address String
+  entergroup String
+  size Int
+  chambres Int
+  
+
   managers User[] @relation("managers")
   renters User[] @relation("renters")
   owners User[] @relation("owners")

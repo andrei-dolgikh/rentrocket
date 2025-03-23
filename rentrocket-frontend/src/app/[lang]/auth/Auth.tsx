@@ -9,11 +9,11 @@ import { useLanguage } from '../../../app/[lang]/languageContext';
 // import { Button } from '@/components/ui/buttons/Button'
 import { IAuthForm } from '@/types/auth.types'
 import { URLS_PAGES } from '@/config/pages-url.config'
-import { Input } from '@nextui-org/react';
+import { Input } from "@heroui/react";
 import { authService } from '@/services/auth.service'
 import { AuthContext } from '../authContext';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import { createLocalizedUrl } from '../../../utils/utils'
 import Link from 'next/link'
 

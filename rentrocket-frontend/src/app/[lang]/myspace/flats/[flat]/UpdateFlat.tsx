@@ -1,5 +1,5 @@
 'use client'
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import { useUpdateFlat } from '../../../myspace/flats/hooks/useUpdateFlat'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs'
 import { useState, FormEvent, useEffect } from 'react'
@@ -33,6 +33,10 @@ export function UpdateFlat(
 		description: flat?.description,
 		tags: flat?.tags,
 		iconUrl: flat?.iconUrl,
+		address: flat?.address,
+		entergroup: flat?.entergroup,
+		chambres: flat?.chambres,
+		size: flat?.size,
 
 	});
 
@@ -43,7 +47,11 @@ export function UpdateFlat(
 				order: flat?.order,
 				description: flat?.description,
 				tags: flat?.tags,
-				iconUrl: flat?.iconUrl
+				iconUrl: flat?.iconUrl,
+				address: flat?.address,
+				entergroup: flat?.entergroup,
+				chambres: flat?.chambres,
+				size: flat?.size,
 			})
 
 		}
@@ -60,6 +68,10 @@ export function UpdateFlat(
 			description: formData.description as string,
 			tags: formData?.tags as ITag[],
 			iconUrl: formData?.iconUrl,
+			address: formData?.address,
+			entergroup: formData?.entergroup,
+			chambres: formData?.chambres,
+			size: formData?.size,
 		}
 
 		updateFlat({ id: flatId, data: userData });

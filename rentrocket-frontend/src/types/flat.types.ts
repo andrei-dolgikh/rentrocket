@@ -13,6 +13,10 @@ export interface IFlatResponse extends IBase {
 	iconUrl?: string
 	order: number
 	tags: ITag[]
+	address?: string
+	entergroup?: string
+	chambres?: number
+	size?: number
 	createdAt: string
 	updatedAt: string
 }
@@ -23,6 +27,10 @@ export interface IFlatCreateRequest {
 	iconUrl?: string
 	order?: number
 	tags: ITag[]
+	address?: string
+	entergroup?: string
+	chambres?: number
+	size?: number
 }
 
 export interface IFlatUpdateRequest {
@@ -31,6 +39,11 @@ export interface IFlatUpdateRequest {
 	iconUrl?: string
 	order?: number
 	tags: ITag[]
+	address?: string
+	entergroup?: string
+	chambres?: number
+	size?: number
+
 }
 
 export interface IFlatDeleteRequest extends IBase {

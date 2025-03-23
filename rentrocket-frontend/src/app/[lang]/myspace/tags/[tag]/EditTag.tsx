@@ -2,7 +2,7 @@
 import { FormEvent,useEffect,useState } from 'react'
 import { useTag } from '../hooks/useTag';
 import { Button } from '@/components/ui/buttons/Button';
-import { Input } from '@nextui-org/react';
+import { Input } from "@heroui/react";
 import { TypeTagForm } from '@/types/tag.types';
 import { useUpdateTag } from '../hooks/useUpdateTag';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs';

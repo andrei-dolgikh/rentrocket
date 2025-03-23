@@ -4,7 +4,7 @@ import "./ChartBox.css";
 import { COLORS } from "@/constants/color.constants";
 import { DeltaChartBadge } from "@/components/ui/badge/DeltaBadge";
 import { useStatistics } from '@/hooks/useStatistics';
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 
 interface ChartsBoxProps {
   chartName?: string;

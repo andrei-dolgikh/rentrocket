@@ -1,7 +1,7 @@
 'use client'
 import { useTags } from './hooks/useTags'
-import {Input} from "@nextui-org/input";
-import {Button} from "@nextui-org/button";
+import {Input} from "@heroui/input";
+import {Button} from "@heroui/button";
 import Link from 'next/link'
 import { GlobalLoader } from '@/components/header/GlobalLoader'
 import { TagsTable } from '@/components/ui/table/TagsTable'

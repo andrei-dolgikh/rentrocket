@@ -4,7 +4,7 @@ import { LogoutButton } from '@/components/ui/buttons/LogoutButton'
 import { useProfile } from '@/hooks/useProfile'
 import { roleTranslations } from '@/types/user.types'
 import Loader from '@/components/ui/Loader'
-import { Chip } from "@nextui-org/chip";
+import { Chip } from "@heroui/chip";
 import { CircleUser } from 'lucide-react'
 
 export function Profile() {

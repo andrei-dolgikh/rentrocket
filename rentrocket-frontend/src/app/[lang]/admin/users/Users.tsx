@@ -1,7 +1,7 @@
 'use client'
 import { useUsers } from './hooks/useUsers'
-import {Input} from "@nextui-org/input";
-import {Button} from "@nextui-org/button";
+import {Input} from "@heroui/input";
+import {Button} from "@heroui/button";
 import { roleTranslations } from '@/types/user.types'
 import Link from 'next/link'
 import { UsersTable } from '@/components/ui/table/UsersTable'

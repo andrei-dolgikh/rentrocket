@@ -1,6 +1,6 @@
 'use client'
 import { FlatsFeed } from '@/components/ui/flat/FlatsFeed'
-import { Link } from '@nextui-org/react'
+import { Link } from "@heroui/react"
 import { useFlats } from './hooks/useFlats'
 import { useLanguage } from '../../../../app/[lang]/languageContext';
 import { createLocalizedUrl } from '../../../../utils/utils'

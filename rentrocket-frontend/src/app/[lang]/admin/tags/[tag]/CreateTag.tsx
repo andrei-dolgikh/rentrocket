@@ -1,6 +1,6 @@
 'use client';
 import { FormEvent } from 'react'
-import { Checkbox, CheckboxGroup, Input } from '@nextui-org/react';
+import { Checkbox, CheckboxGroup, Input } from "@heroui/react";
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs';
 import { Button } from '@/components/ui/buttons/Button';
 import { TypeTagForm } from '@/types/tag.types';

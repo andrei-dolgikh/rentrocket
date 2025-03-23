@@ -1,5 +1,5 @@
 import { heroui } from '@heroui/theme'
-import { nextui } from '@nextui-org/theme'
+import { heroui } from "@heroui/theme"
 import type { Config } from 'tailwindcss'
 
 import { COLORS } from './src/constants/color.constants'
@@ -11,7 +11,7 @@ const config: Config = {
 		'./src/pages/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/app/**/*.{js,ts,jsx,tsx,mdx}',
-		'./node_modules/@nextui-org/theme/dist/components/(checkbox|chip|input|table|spacer).js',
+		"./node_modules/@heroui/theme/dist/components/(checkbox|chip|input|table|spacer).js",
 		'./node_modules/@heroui/theme/dist/components/tabs.js'
 	],
 	theme: {
@@ -472,6 +472,6 @@ const config: Config = {
 			}
 		}
 	},
-	plugins: [nextui(), heroui()]
+	plugins: [heroui(), heroui()]
 }
 export default config

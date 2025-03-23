@@ -1,11 +1,9 @@
 'use client'
 import { useUsers } from '../../../app/[lang]/myspace/flats/hooks/useUsers'
-import {Input} from "@nextui-org/input";
-import {Button} from "@nextui-org/button";
+import {Button} from "@heroui/button";
 import { roleTranslations } from '@/types/user.types'
 import Link from 'next/link'
 import { FlatUsersTable } from '@/components/ui/table/FlatUsersTable'
-import { useState } from 'react';
 import Loader from '@/components/ui/Loader'
 import { useLanguage } from '../../../app/[lang]/languageContext';
 import { createLocalizedUrl } from '../../../utils/utils'
@@ -58,12 +56,8 @@ const columns = [
 
 export function FlatRenters() {
   const { data, isLoading } = useUsersData()
-  const [searchInput, setSearchInput] = useState('');
 	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 
-  const filteredData = data.filter((user) =>
-    user.name.toLowerCase().includes(searchInput.toLowerCase())
-  );
 
 
   return isLoading ? (
@@ -79,15 +73,10 @@ export function FlatRenters() {
               Добавить арендатора
             </Button>
           </Link>
-        <Input
-        label="Поиск"
-        placeholder="Логин пользователя"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)} />
         </div>
 
       </div>
-      <FlatUsersTable columns={columns} rows={filteredData} />
+      <FlatUsersTable columns={columns} rows={data} />
     </div>
   )
 }

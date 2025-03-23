@@ -1,9 +1,9 @@
 'use client'
 import React from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import { EditIcon } from "./editIcon";
 import { DeleteIcon } from "./deleteIcon";
-import { Link } from "@nextui-org/react";
+import { Link } from "@heroui/react";
 import { Confirmation } from '@/components/ui/modal/Confirmation'
 import { useDeleteTag } from "../../../app/[lang]/admin/tags/hooks/useDeleteTag";
 import { useState } from "react";

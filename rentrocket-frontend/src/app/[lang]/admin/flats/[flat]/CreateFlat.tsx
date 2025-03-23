@@ -1,11 +1,11 @@
 'use client'
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import { IFlatCreateRequest } from '@/types/flat.types'
 import { useCreateFlat } from '../../../admin/flats/hooks/useCreateFlat'
-import { Input, Textarea } from "@nextui-org/input";
+import { Input, Textarea } from "@heroui/input";
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs'
-import { Checkbox, CheckboxGroup } from '@nextui-org/react'
-import { Card, CardBody } from '@nextui-org/react'
+import { Checkbox, CheckboxGroup } from "@heroui/react"
+import { Card, CardBody } from "@heroui/react"
 import { useState, useCallback, useRef, FormEvent, ChangeEvent, useEffect } from 'react'
 import { TagPanel } from '@/components/ui/tag/TagPanel'
 import { useTags } from '../../../admin/tags/hooks/useTags'

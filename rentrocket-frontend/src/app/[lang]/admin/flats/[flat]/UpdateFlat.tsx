@@ -1,7 +1,7 @@
 'use client'
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import { useUpdateFlat } from '../../../admin/flats/hooks/useUpdateFlat'
-import { Input, Textarea } from "@nextui-org/input";
+import { Input, Textarea } from "@heroui/input";
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs'
 import { useState, useRef, FormEvent, useEffect } from 'react'
 import { useFlat } from '../../../admin/flats/hooks/useFlat'
@@ -9,7 +9,7 @@ import { TagPanel } from '@/components/ui/tag/TagPanel'
 import { useTags } from '../../../admin/tags/hooks/useTags'
 import { ITag } from '@/types/tag.types'
 import { IFlatUpdateRequest } from '@/types/flat.types'
-import { Checkbox, CheckboxGroup, Card, CardBody } from '@nextui-org/react'
+import { Checkbox, CheckboxGroup, Card, CardBody } from "@heroui/react"
 import Loader from '@/components/ui/Loader'
 import { FlatImageUploader } from '@/components/ui/flat/FlatImageUploader'
 

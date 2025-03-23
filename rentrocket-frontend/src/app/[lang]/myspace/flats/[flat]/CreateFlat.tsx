@@ -1,5 +1,5 @@
 'use client'
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import { IFlatCreateRequest } from '@/types/flat.types'
 import { useCreateFlat } from '../../../admin/flats/hooks/useCreateFlat'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs'
@@ -25,6 +25,10 @@ export function CreateFlat() {
         description: "",
         tags: [] as ITag[],
         iconUrl: "",
+		address: "",
+		entergroup: "",
+		chambres: undefined,
+		size: undefined,
     });
 
     async function onCreateSubmit(event: FormEvent<HTMLFormElement>) {
@@ -34,7 +38,11 @@ export function CreateFlat() {
             order: formData.order,
             description: formData.description as string,
             tags: formData?.tags as ITag[],
-            iconUrl: formData?.iconUrl
+            iconUrl: formData?.iconUrl,
+            address: formData?.address,
+            entergroup: formData?.entergroup,
+            chambres: formData?.chambres,
+            size: formData?.size
         }
         createFlat(userData);
     };

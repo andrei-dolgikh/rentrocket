@@ -2,7 +2,7 @@
 import type { Metadata } from 'next'
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
 import { FlatsFeed } from '@/components/ui/flat/FlatsFeed'
-import { Link } from '@nextui-org/react'
+import { Link } from "@heroui/react"
 import { useFlats } from './hooks/useFlats'
 
 export default function FlatPage() {
