@@ -30,4 +30,22 @@ export class FlatDto {
     @IsNumber()
     @IsOptional()
     order: number
+
+    @IsString()
+    @IsOptional()
+    address: string
+
+    @IsString()
+    @IsOptional()
+    entergroup: string
+
+    @IsNumber()
+    @IsOptional()
+    chambres: number
+
+    @IsNumber()
+    @IsOptional()
+    size: number
+
+    
 }
