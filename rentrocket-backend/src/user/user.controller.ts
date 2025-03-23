@@ -48,6 +48,14 @@ export class UserController {
     return this.userService.getAll()
   }
 
+  @Get('list/:id')
+  @Auth()
+  @UseGuards(JwtGuard, RolesGuard)
+  @RoleUser()
+  async getAllByFlatId(@Param('id') id: string) {
+    return this.userService.getAllByFlatId(id)
+  }
+
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Put('my-update')

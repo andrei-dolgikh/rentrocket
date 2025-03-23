@@ -1,7 +1,7 @@
 'use client'
 import { useTags } from './hooks/useTags'
-import {Input} from "@nextui-org/input";
-import {Button} from "@nextui-org/button";
+import {Input} from "@heroui/input";
+import {Button} from "@heroui/button";
 import Link from 'next/link'
 import { GlobalLoader } from '@/components/header/GlobalLoader'
 import { TagsTable } from '@/components/ui/table/TagsTable'
@@ -62,7 +62,7 @@ export function Tags() {
       <div className='flex justify-between items-center mt-3 mb-[10px]'>
       <Breadcrumbs crumbs={crumbs} />
         <div className='flex items-center gap-5'>
-          <Link href={createLocalizedUrl(lang, '/admin/tags/create')}>
+          <Link href={createLocalizedUrl(lang, '/myspace/tags/create')}>
             <Button 
               color="primary"
               >

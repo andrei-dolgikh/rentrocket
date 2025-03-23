@@ -1,5 +1,5 @@
-import { Card, CardBody } from '@nextui-org/react';
-import { Button, Spinner } from '@nextui-org/react';
+import { Card, CardBody } from "@heroui/react";
+import { Button, Spinner } from "@heroui/react";
 import { PlusCircle } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
 import { FileService } from '../../../services/files.service';
@@ -10,7 +10,7 @@ import useImage from '@/hooks/useImage';
 const fileService = new FileService();
 
 
-export function FlatImageUploader({ flatId, image, setImage }: { flatId?: string, image?: string, setImage: (image: string) => void }) {
+export function FlatImageUploader({ image, setImage }: { image?: string, setImage: (image: string) => void }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [fileName, setFileName] = useState('');
@@ -29,7 +29,6 @@ export function FlatImageUploader({ flatId, image, setImage }: { flatId?: string
       const formData = new FormData();
       formData.append('avatar', file, file.name);
       try {
-        // const response = await fileService.uploadFlatAvatar(formData, flatId);
         const response = await fileService.uploadFlatAvatar(formData);
         setImage(response.data.url);  
         setUploadedImage(response.data.url); 

@@ -1,14 +1,14 @@
 import { IComment } from '@/types/comments.types'
 import { IResourceResponse } from '@/types/flat.types';
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import Link from 'next/link';
 import DOMPurify from 'dompurify';
 // import { X, Check } from 'lucide-react';
-// import { Button, Spinner } from "@nextui-org/react";
+// import { Button, Spinner } from "@heroui/react";
 // import { useApproveComment } from '@/app/admin/moderation/hooks/useApproveComment';
 // import { useDeclineComment } from '@/app/admin/moderation/hooks/useDeclineComment';
 import { format } from 'date-fns';
-import { Checkbox } from '@nextui-org/react'
+import { Checkbox } from "@heroui/react"
 import { Eye, MessageCircle } from 'lucide-react';
 
 function getFormattedDate(date?: any) {

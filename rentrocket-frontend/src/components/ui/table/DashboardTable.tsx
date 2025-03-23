@@ -1,8 +1,8 @@
 'use client'
 import React from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import { EditIcon } from "./editIcon";
-import { Link } from "@nextui-org/react";
+import { Link } from "@heroui/react";
 
 export function DashboardTable({ columns, rows }: { columns?: Array<any>, rows?: Array<any> }) {
 

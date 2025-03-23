@@ -1,10 +1,10 @@
 'use client'
 import React from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import { EditIcon } from "./editIcon";
 import { DeleteIcon } from "./deleteIcon";
-import { Link } from "@nextui-org/react";
-import { Chip } from "@nextui-org/chip";
+import { Link } from "@heroui/react";
+import { Chip } from "@heroui/chip";
 import { Confirmation } from '@/components/ui/modal/Confirmation'
 import { useDeleteRule } from "@/app/admin/spamfilter/hooks/useDeleteRule";
 import { useState } from "react";

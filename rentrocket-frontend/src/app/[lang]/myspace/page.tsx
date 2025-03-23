@@ -1,9 +1,9 @@
 
 import type { Metadata } from 'next'
-import { AdminViewsStatBox } from '@/components/admin-layout/dashboard/AdminViewsStatBox'
-import { AdminCommentsStatBox } from '@/components/admin-layout/dashboard/AdminCommentsStatBox'
+// import { AdminViewsStatBox } from '@/components/admin-layout/dashboard/AdminViewsStatBox'
+// import { AdminCommentsStatBox } from '@/components/admin-layout/dashboard/AdminCommentsStatBox'
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
-import { DashboardFlatsList } from '../../../app/[lang]/admin/dashboard/DashboardFlatsList'
+// import { DashboardFlatsList } from '../../../app/[lang]/admin/dashboard/DashboardFlatsList'
 
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 					<AdminCommentsStatBox header={true}  chartName="Комментарии" />
 				</div>
 			</div> */}
-			<DashboardFlatsList />
+			{/* <DashboardFlatsList /> */}
 		</div>
 		</>
 	)

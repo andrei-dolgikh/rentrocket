@@ -1,14 +1,14 @@
-import Image from 'next/image'
+'use client'
 import Link from 'next/link'
-import { Chip } from "@nextui-org/chip";
-import { CheckCircle } from 'lucide-react';
+import { Chip } from "@heroui/chip";
 import { getColor } from '@/components/ui/tag/TagChip'
 import { useLanguage } from '../../../app/[lang]/languageContext';
 import { createLocalizedUrl } from '../../../utils/utils'
 import { IFlatResponse } from '../../../types/flat.types'
 import useImage from '@/hooks/useImage';
 import DOMPurify from 'dompurify';
-import { Checkbox } from '@nextui-org/react'
+import { Checkbox } from "@heroui/react"
+import {Image} from "@heroui/react";
 
 enum CardType {
     Admin = 'admin',
@@ -27,7 +27,7 @@ export function FlatsFeedElement({
 	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
    
     const flatLinkClient = `${lang}/flat/${flat.id}`
-    const flatLinkAdmin =  createLocalizedUrl(lang, `/admin/flats/${flat.id}`)
+    const flatLinkAdmin =  createLocalizedUrl(lang, `/myspace/flats/${flat.id}`)
     const flatDescriptionCut = flat.description?.length ? flat.description?.length > 250 ? flat.description?.slice(0, 247) + '...' : flat.description : ''
 
 
@@ -38,27 +38,24 @@ export function FlatsFeedElement({
       }
 
     return (
-        <div className={`flex flex-row justify-start items-center w-full border-1 border-gray`}>
-            <div className='w-[111px] lg:w-[265px] h-[111px] lg:h-[265px] m-0'>
+        <div className={`flex flex-row justify-start items-center w-full `}>
                 <Link href={flatLinkClient} className='cursor-pointer'>
                     {flat.iconUrl &&
-                        <Image
-                            src={useImage(flat.iconUrl)}
-                            alt={flat.name || 'flat image'}
-                            width={265}
-                            height={265}
-                            priority
 
-                            className='flatsfeedimage'
+                            <Image
+                            alt={flat.name || 'flat image'}
+                            height={250}
+                            src={useImage(flat.iconUrl)}
+                            width={250}
+                            className='opacity-1'
                         />
                     }
                 </Link>
-            </div>
             <div className={`
-                px-[13px] 
+                px-[8px] 
                 py-[13px] 
                 lg:py-[13px] 
-                lg:px-[40px] 
+                lg:px-[20px] 
                 flex
                 flex-col
                 justify-center

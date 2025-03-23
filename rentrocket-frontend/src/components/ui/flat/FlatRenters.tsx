@@ -1,12 +1,12 @@
 'use client'
-import { useUsers } from './hooks/useUsers'
-import {Input} from "@heroui/input";
+import { useUsers } from '../../../app/[lang]/myspace/flats/hooks/useUsers'
 import {Button} from "@heroui/button";
 import { roleTranslations } from '@/types/user.types'
 import Link from 'next/link'
-import { UsersTable } from '@/components/ui/table/UsersTable'
-import { useState } from 'react';
+import { FlatUsersTable } from '@/components/ui/table/FlatUsersTable'
 import Loader from '@/components/ui/Loader'
+import { useLanguage } from '../../../app/[lang]/languageContext';
+import { createLocalizedUrl } from '../../../utils/utils'
 
 
 const useUsersData = (): { data: { id: string; name: string; login: string; "users:roles": string[] }[], isLoading: boolean } => {
@@ -54,13 +54,10 @@ const columns = [
 
 
 
-export function Users() {
+export function FlatRenters() {
   const { data, isLoading } = useUsersData()
-  const [searchInput, setSearchInput] = useState('');
+	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 
-  const filteredData = data.filter((user) =>
-    user.name.toLowerCase().includes(searchInput.toLowerCase())
-  );
 
 
   return isLoading ? (
@@ -68,26 +65,18 @@ export function Users() {
   ) : (
     <div className='text-black'>
       <div className='flex justify-between items-center mt-[30px] mb-[10px]'>
-        <div className='text-[28px] '>
-          Юзеры <span className='text-[#999999] text-[14px] ml-2 mr-2'>Всего {filteredData.length}</span>
-        </div>
         <div className='flex items-center gap-5'>
-          <Link href={'/admin/users/create'}>
+          <Link href={createLocalizedUrl(lang, '/myspace/users/create')}>
             <Button 
               color="primary"
               >
-              Добавить пользователя
+              Добавить арендатора
             </Button>
           </Link>
-        <Input
-        label="Поиск"
-        placeholder="Логин пользователя"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)} />
         </div>
 
       </div>
-      <UsersTable columns={columns} rows={filteredData} />
+      <FlatUsersTable columns={columns} rows={data} />
     </div>
   )
 }

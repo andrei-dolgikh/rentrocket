@@ -1,4 +1,5 @@
-import { nextui } from '@nextui-org/theme'
+import { heroui } from '@heroui/theme'
+import { heroui } from "@heroui/theme"
 import type { Config } from 'tailwindcss'
 
 import { COLORS } from './src/constants/color.constants'
@@ -10,7 +11,8 @@ const config: Config = {
 		'./src/pages/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/app/**/*.{js,ts,jsx,tsx,mdx}',
-		'./node_modules/@nextui-org/theme/dist/components/(checkbox|chip|input|table|spacer).js'
+		"./node_modules/@heroui/theme/dist/components/(checkbox|chip|input|table|spacer).js",
+		'./node_modules/@heroui/theme/dist/components/tabs.js'
 	],
 	theme: {
 		extend: {
@@ -193,8 +195,8 @@ const config: Config = {
 			brandIndigo: '#5E5CE6',
 			grayMedium: '#747480',
 			brandBlue: '#0A84FF',
-			brandGray: '#202020',
-			brandGrayLight: '#999999',
+			brandGray: '#515151',
+			brandGrayLight: '#5C5F62',
 			brandWhite: '#FFFFFF',
 			brandYellow: '#FFCC00',
 			brandBrown: '#A2845E',
@@ -470,6 +472,6 @@ const config: Config = {
 			}
 		}
 	},
-	plugins: [nextui()]
+	plugins: [heroui(), heroui()]
 }
 export default config

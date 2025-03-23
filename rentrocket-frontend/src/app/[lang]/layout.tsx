@@ -6,10 +6,10 @@ import './globals.scss'
 import { Providers } from './providers'
 import { Footer } from '@/components/footer/Footer'
 import { AuthProvider } from './authContext';
-import {NextUIProvider} from "@nextui-org/react";
-import {Header} from "@/components/header/Header";
+import { HeroUIProvider } from "@heroui/react";
 import { getDictionary } from './dictionaries'
 import { LanguageProvider } from './languageContext';
+import ClientLayout from './ClientLayout';
 
 export const metadata: Metadata = {
 	title: {
@@ -33,24 +33,24 @@ export default async function RootLayout({
 	return (
 		<html lang={lang} className="">
 			<body style={{ fontFamily: '"Avenir Next", sans-serif' }} className="" >
-			<NextUIProvider>
-				<Providers>
-				<LanguageProvider lang={lang} dictionary={dictionary}>
-				<AuthProvider>
-					<Header/>
-					<div className="mx-[30px] max-w-[1000px] lg:mx-auto lg:px-[30px]">
-					{children}
-					</div>
-					<Toaster
-						theme='dark'
-						position='bottom-right'
-						duration={1500}
-					/>
-					<Footer />
-					</AuthProvider>
-				</LanguageProvider>
-				</Providers>
-			</NextUIProvider>
+				<HeroUIProvider>
+					<Providers>
+						<LanguageProvider lang={lang} dictionary={dictionary}>
+							<AuthProvider>
+								<ClientLayout>
+								{children}
+								</ClientLayout>
+								<Toaster
+									theme='dark'
+									position='bottom-right'
+									duration={1500}
+								/>
+								<Footer />
+							</AuthProvider>
+						</LanguageProvider>
+					</Providers>
+				</HeroUIProvider>
+
 			</body>
 		</html>
 

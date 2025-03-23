@@ -17,15 +17,30 @@ export class UserService {
   }
 
   getByLogin(login: string) {
-    return this.prisma.user.findUnique({
+    const user = this.prisma.user.findUnique({
       where: {
         login
       }
     })
+    return user
   }
 
   getAll() {
     return this.prisma.user.findMany()
+  }
+
+  getAllByFlatId(id: string) {
+    const renters = this.prisma.flat.findUnique({
+      where: { id: id },
+      select: {
+        renters: true,
+        managers: true,
+        creator: true,
+        owners: true
+      }
+    });
+
+    return renters;
   }
 
   async getProfile(id: string) {

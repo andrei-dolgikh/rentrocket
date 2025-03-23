@@ -1,18 +1,21 @@
 'use client'
 import React from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import { EditIcon } from "./editIcon";
 import { DeleteIcon } from "./deleteIcon";
-import { Link } from "@nextui-org/react";
+import { Link } from "@heroui/react";
 import { Confirmation } from '@/components/ui/modal/Confirmation'
 import { useDeleteTag } from "../../../app/[lang]/admin/tags/hooks/useDeleteTag";
 import { useState } from "react";
+import { useLanguage } from '../../../app/[lang]/languageContext';
+import { createLocalizedUrl } from '../../../utils/utils'
 
 
 export function TagsTable({ columns, rows }: { columns: Array<any>, rows: Array<any> }) {
   const { deleteTag } = useDeleteTag();
   const [isDeletetagConformationOpen, setIsDeletetagConformationOpen] = useState(false);  
   const [selectedTagId, setSelectedTagId] = useState(undefined);
+	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 
 
   const handleDeleteLink = (tagId?: string) => {
@@ -28,7 +31,7 @@ export function TagsTable({ columns, rows }: { columns: Array<any>, rows: Array<
       case "tags:actions":
         return (
           <div className="relative flex items-center gap-2">
-            <Link href={`/admin/tags/${subject.id}`} className='cursor-pointer'>
+            <Link href={createLocalizedUrl(lang, `/myspace/tags/${subject.id}`)} className='cursor-pointer'>
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                 <EditIcon />
               </span>

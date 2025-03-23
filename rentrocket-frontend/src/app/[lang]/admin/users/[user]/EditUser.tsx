@@ -2,7 +2,7 @@
 import { FormEvent,useEffect,useState } from 'react'
 import { useUser } from '@/hooks/useUser';
 import { Button } from '@/components/ui/buttons/Button';
-import { Checkbox, CheckboxGroup, Input } from '@nextui-org/react';
+import { Checkbox, CheckboxGroup, Input } from "@heroui/react";
 import { TypeUserForm } from '@/types/auth.types';
 import { useUpdateUser } from '../hooks/useUpdateUser';
 import { Roles, roleTranslations } from '@/types/user.types';

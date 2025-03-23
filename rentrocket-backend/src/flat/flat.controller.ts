@@ -22,7 +22,7 @@ export class FlatController {
   async getCatalog() {
     return this.flatService.getCatalog()
   }
-  
+
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Get(":flatId")
@@ -68,7 +68,7 @@ export class FlatController {
   async delete(@Body() flatIds: string[]) {
     return this.flatService.delete(flatIds)
   }
-  
+
   @Post('image')
   @UseGuards(JwtGuard, RolesGuard)
   @RoleUser()
@@ -94,16 +94,32 @@ export class FlatController {
     @CurrentUser('id') userId: string
   ) {
     try {
-      if(req.file) {
+      if (req.file) {
         console.log('Req:', req.file);
         const url = `uploads/${req.file.filename}`;
         return { url };
       }
     }
-    catch(e) {
+    catch (e) {
       throw new HttpException('Убедитесь, что вы загружаете изображение не более 5Мб в формате jpg / jpeg / png.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     throw new HttpException('Файл не был загружен', HttpStatus.INTERNAL_SERVER_ERROR);
   }
+
+
+  @UsePipes(new ValidationPipe())
+  @HttpCode(200)
+  @Put('renters/:flatId')
+  @Auth()
+  @UseGuards(JwtGuard, RolesGuard)
+  @RoleUser()
+  async updateRenters(
+    @Param('flatId') flatId: string,
+    @Body() renterIds: string[]
+  ) {
+    return this.flatService.updateRenters(flatId, renterIds);
+  }
 }
+
+

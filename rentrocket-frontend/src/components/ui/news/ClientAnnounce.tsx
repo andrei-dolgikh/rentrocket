@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import {Chip} from "@nextui-org/chip";
+import {Chip} from "@heroui/chip";
 import { CheckCircle } from 'lucide-react';
 import { AvailLabel } from '../availability/AvailLabel'
 import { IResourceResponse } from '../../../types/flat.types'

@@ -1,6 +1,6 @@
 'use client';
 import {  useEffect, useState } from 'react'
-import { Checkbox, CheckboxGroup } from '@nextui-org/react';
+import { Checkbox, CheckboxGroup } from "@heroui/react";
 import { ITagResponse } from '@/types/tag.types';
 
 export function TagPanel({ tagsList, selectedTags: initialSelectedTags, onTagsChange }: { 
