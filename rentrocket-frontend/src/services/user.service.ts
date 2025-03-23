@@ -39,6 +39,11 @@ class UserService {
 		return response.data
 	}
 
+	async getAllByFlatId(id: string) {
+		const response = await axiosWithAuth.get<IUserResponse[]>(`${this.LIST_URL}/${id}`)
+		return response.data
+	}
+
 	async createUser(data: TypeUserForm) {
 		const response = await axiosWithAuth.post(this.CREATE_URL, data)
 		return response.data

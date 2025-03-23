@@ -25,7 +25,7 @@ class FlatService {
 	}
 
 	async deleteFlat(id: string) {
-		const response = await axiosWithAuth.delete(`${this.BASE_URL}/delete${id}`)
+		const response = await axiosWithAuth.delete(`${this.BASE_URL}/delete/${id}`)
 		return response
 	}
 
@@ -33,6 +33,10 @@ class FlatService {
 		const response = await axiosWithAuth.get<any>(`${this.BASE_URL}/statistics`)
 		return response
 	}
+
+	updateFlatRenters(flatId: string, renterIds: string[]) {
+		return axiosWithAuth.put<IFlatResponse>(`/${this.BASE_URL}/renters/${flatId}`, renterIds);
+	  }
 }
 
 export const flatService = new FlatService()

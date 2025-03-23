@@ -57,6 +57,9 @@ export class FlatService {
           connect: {
             id: creatorId
           }
+        },
+        owners: {
+          connect: [{ id: creatorId }]
         }
       }
     })
@@ -114,5 +117,19 @@ export class FlatService {
       }
     })
 
+  }
+
+  async updateRenters(flatId: string, renterIds: string[]) {
+    return this.prisma.flat.update({
+      where: { id: flatId },
+      data: {
+        renters: {
+          set: renterIds.map(id => ({ id }))
+        }
+      },
+      include: {
+        renters: true
+      }
+    });
   }
 }

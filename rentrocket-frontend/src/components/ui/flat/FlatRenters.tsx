@@ -1,5 +1,5 @@
 'use client'
-import { useUsers } from '../../../app/[lang]/admin/users/hooks/useUsers'
+import { useUsers } from '../../../app/[lang]/myspace/flats/hooks/useUsers'
 import {Input} from "@nextui-org/input";
 import {Button} from "@nextui-org/button";
 import { roleTranslations } from '@/types/user.types'
