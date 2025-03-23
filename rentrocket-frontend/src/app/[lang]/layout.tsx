@@ -7,9 +7,9 @@ import { Providers } from './providers'
 import { Footer } from '@/components/footer/Footer'
 import { AuthProvider } from './authContext';
 import { HeroUIProvider } from "@heroui/react";
-import { Header } from "@/components/header/Header";
 import { getDictionary } from './dictionaries'
 import { LanguageProvider } from './languageContext';
+import ClientLayout from './ClientLayout';
 
 export const metadata: Metadata = {
 	title: {
@@ -37,10 +37,9 @@ export default async function RootLayout({
 					<Providers>
 						<LanguageProvider lang={lang} dictionary={dictionary}>
 							<AuthProvider>
-								<Header />
-								<div className="mx-[30px] max-w-[1000px] lg:mx-auto lg:px-[30px] pb-[30px]">
-									{children}
-								</div>
+								<ClientLayout>
+								{children}
+								</ClientLayout>
 								<Toaster
 									theme='dark'
 									position='bottom-right'
