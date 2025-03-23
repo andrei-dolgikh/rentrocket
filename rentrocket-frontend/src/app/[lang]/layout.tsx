@@ -38,7 +38,7 @@ export default async function RootLayout({
 						<LanguageProvider lang={lang} dictionary={dictionary}>
 							<AuthProvider>
 								<Header />
-								<div className="mx-[30px] max-w-[1000px] lg:mx-auto lg:px-[30px]">
+								<div className="mx-[30px] max-w-[1000px] lg:mx-auto lg:px-[30px] pb-[30px]">
 									{children}
 								</div>
 								<Toaster

@@ -4,8 +4,18 @@
       "DUmap": "Trusted managers map",
       "dictionary": "Dictionary",
       "exit": "Exit",
-      "login": "Login / Registration",
+      "login": "Sign in",
+      "registration": "Sign up",
       "flats": "Flats"
+    },
+    "footer": {
+      "description": "Modern solution for property management and rental services",
+      "contact": "Contact",
+      "privacyPolicy" : "Privacy Policy",
+      "termsOfService" : "Terms of Service",
+      "cookies" : "Cookies",
+      "legal" : "Legal"
+
     },
     "main": {
       "edit": "Edit",
