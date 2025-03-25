@@ -11,7 +11,7 @@ export default function SettingsPage() {
 	return (
 		<div className='w-full h-full'>
 			<div className="mx-[30px] lg:px-[30px] max-w-[1200px] xl:mx-auto flex flex-col">
-			<Profile />
+			{/* <Profile /> */}
 		</div>
 		</div>
 	)

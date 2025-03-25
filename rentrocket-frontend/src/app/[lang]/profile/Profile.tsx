@@ -6,9 +6,13 @@ import { roleTranslations } from '@/types/user.types'
 import Loader from '@/components/ui/Loader'
 import { Chip } from "@heroui/chip";
 import { CircleUser } from 'lucide-react'
+import { AuthContext } from '../../../app/[lang]/authContext';
+import { useLanguage } from '../../../app/[lang]/languageContext';
 
 export function Profile() {
-	const { data, isLoading, isSuccess } = useProfile();
+	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
+	const { data, isLoading, isSuccess } = useProfile({ isAuthenticated: isAuthenticated});
 
 	return isLoading ? (
 		<Loader />
@@ -26,7 +30,7 @@ export function Profile() {
 					</Chip>  
 				))}
 			</div>
-			<div><LogoutButton/></div>
+			<div><LogoutButton dictionary={dictionary}/></div>
 		</div>)
 	)
 }
