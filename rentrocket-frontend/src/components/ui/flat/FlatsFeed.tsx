@@ -1,8 +1,6 @@
 import { FlatsFeedElement } from './FlatsFeedElement'
 import { IFlatResponse } from '../../../types/flat.types';
-import { Link, Card } from "@heroui/react";
-import { AdminAnnounce } from '../news/AdminAnnounce';
-import { ClientAnnounce } from '../news/ClientAnnounce';
+import { Card } from "@heroui/react";
 
 
 enum CardType {

@@ -1,8 +1,6 @@
 import { heroui } from '@heroui/theme'
-import { heroui } from "@heroui/theme"
 import type { Config } from 'tailwindcss'
 
-import { COLORS } from './src/constants/color.constants'
 
 const config: Config = {
 	darkMode: 'class',
