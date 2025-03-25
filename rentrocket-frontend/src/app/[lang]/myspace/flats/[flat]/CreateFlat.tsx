@@ -1,10 +1,10 @@
 'use client'
 import { Button } from "@heroui/button";
 import { IFlatCreateRequest } from '@/types/flat.types'
-import { useCreateFlat } from '../../../admin/flats/hooks/useCreateFlat'
+import { useCreateFlat } from '../../../myspace/flats/hooks/useCreateFlat'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs'
 import { useState, FormEvent } from 'react'
-import { useTags } from '../../../admin/tags/hooks/useTags'
+import { useTags } from '../../../myspace/tags/hooks/useTags'
 import { ITag } from '@/types/tag.types'
 import { FlatSettingsGeneralTab } from "@/components/ui/flat/FlatSettingsGeneralTab";
 import { Tabs, Tab } from "@heroui/react";

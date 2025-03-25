@@ -5,20 +5,20 @@ import { EditIcon } from "./editIcon";
 import { DeleteIcon } from "./deleteIcon";
 import { Link } from "@heroui/react";
 import { Confirmation } from '@/components/ui/modal/Confirmation'
-import { useDeleteUser } from "@/app/[lang]/admin/users/hooks/useDeleteUser";
+// import { useDeleteUser } from "@/app/[lang]/myspace/users/hooks/useDeleteUser";
 import { useState } from "react";
 import { TagChip } from '@/components/ui/tag/TagChip'
 
 
 export function UsersTable({ columns, rows }: { columns: Array<any>, rows: Array<any> }) {
-  const { deleteUser } = useDeleteUser();
+  // const { deleteUser } = useDeleteUser();
   const [isDeleteUserConformationOpen, setIsDeleteUserConformationOpen] = useState(false);  
   const [selectedUserId, setSelectedUserId] = useState(undefined);
 
 
   const handleDeleteLink = (userId?: string) => {
     if (!userId) return;
-    deleteUser(userId);
+    // deleteUser(userId);
     setIsDeleteUserConformationOpen(false);
   };
 
