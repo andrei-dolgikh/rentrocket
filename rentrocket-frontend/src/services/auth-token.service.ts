@@ -16,8 +16,8 @@ export const getAccessToken = () => {
   };
 export const saveTokenStorage = (accessToken: string) => {
 	Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
-		domain: 'rentrocket.lockshield.online',
-		sameSite: 'lax',
+		domain: 'localhost',
+		sameSite: 'strict',
 		expires: 1,
 	})
 }

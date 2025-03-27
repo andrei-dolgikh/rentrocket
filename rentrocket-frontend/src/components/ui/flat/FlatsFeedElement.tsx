@@ -8,96 +8,86 @@ import { IFlatResponse } from '../../../types/flat.types'
 import useImage from '@/hooks/useImage';
 import DOMPurify from 'dompurify';
 import { Checkbox } from "@heroui/react"
-import {Image} from "@heroui/react";
+import { Image, Button } from "@heroui/react";
 
 enum CardType {
     Admin = 'admin',
     Client = 'client',
 }
 
-export function FlatsFeedElement({ 
-    flat, 
+export function FlatsFeedElement({
+    flat,
     showCheckbox,
     onCheckboxChange
-}: { 
-    flat: IFlatResponse, 
+}: {
+    flat: IFlatResponse,
     showCheckbox?: boolean,
     onCheckboxChange?: (id: string, checked: boolean) => void
 }) {
-	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
-   
-    const flatLinkClient = `${lang}/flat/${flat.id}`
-    const flatLinkAdmin =  createLocalizedUrl(lang, `/myspace/flats/${flat.id}`)
+    const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
+
+    const flatLinkClient = createLocalizedUrl(lang, `/flat/${flat.id}`)
+    const flatLinkAdmin = createLocalizedUrl(lang, `/myspace/flats/${flat.id}`)
     const flatDescriptionCut = flat.description?.length ? flat.description?.length > 250 ? flat.description?.slice(0, 247) + '...' : flat.description : ''
 
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onCheckboxChange) {
-          onCheckboxChange(flat.id, event.target.checked);
+            onCheckboxChange(flat.id, event.target.checked);
         }
-      }
+    }
 
     return (
         <div className={`flex flex-row justify-start items-center w-full `}>
-                <Link href={flatLinkClient} className='cursor-pointer'>
-                    {flat.iconUrl &&
+            <Link href={flatLinkClient} className='cursor-pointer'>
+                {flat.iconUrl &&
 
-                            <Image
-                            alt={flat.name || 'flat image'}
-                            height={250}
-                            src={useImage(flat.iconUrl)}
-                            width={250}
-                            className='opacity-1'
-                        />
-                    }
-                </Link>
+                    <Image
+                        alt={flat.name || 'flat image'}
+                        height={250}
+                        src={useImage(flat.iconUrl)}
+                        width={250}
+                        className='opacity-1'
+                    />
+                }
+            </Link>
             <div className={`
                 px-[8px] 
-                py-[13px] 
-                lg:py-[13px] 
+                py-[5px] 
+                lg:py-[5px] 
                 lg:px-[20px] 
                 flex
                 flex-col
-                justify-center
-                gap-[10px]
+                justify-between
                 w-full `
             }>
-                <div className='text-black  flex flex-row justify-between'>
-                    <div>
-                        <Link href={flatLinkAdmin} className='cursor-pointer'>
-                            <div className='text-[16px] lg:text-[32px]'>{flat.name}</div>
-                        </Link>
-                    </div>
-                    {/* <div className='flex flex-row'>
-                        <div className='m-auto'>
+                <div>
 
-                            {flat.recommended &&
-                                <>
-                                    <Chip size="md" radius="full" color="success" className='lg-max:hidden text-black p-1 text-[12px]'>
-                                        <span >Рекомендуем </span>
-                                    </Chip>
-                                    <span className='lg:hidden'><CheckCircle size={16} color="green" /></span>
-                                </>
-                            }
+                    <div className='text-black  flex flex-row justify-between'>
+                        <div>
+                            <Link href={flatLinkAdmin} className='cursor-pointer'>
+                                <div className='text-[16px] lg:text-[32px]'>{flat.name}</div>
+                            </Link>
                         </div>
-                    </div> */}
+                        <div className='flex flex-row flex-wrap items-center gap-2'>
+                            {flat?.tags?.map((tag) => (
+                                <Chip key={tag.id} radius="full" color={getColor(tag.name)} size="md" className='text-[12px] lg:text-[16px] '>
+                                    {tag.name}
+                                </Chip>
+                            ))}
+                        </div>
+                    </div>
+                    <div
+                        className='text-[14px] lg:text-[16px] text-[#999999] py-[3px] lg:py-[10px]'
+                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(flatDescriptionCut) }}></div>
                 </div>
-                <div className='flex flex-row flex-wrap items-center gap-2'>
-                    {flat?.tags?.map((tag) => (
-                        <Chip key={tag.id} radius="full" color={getColor(tag.name)} size="md" className='text-[12px] lg:text-[16px] '>
-                            {tag.name}
-                        </Chip>
-                    ))}
-                </div>
-                <div
-                    className='text-[14px] lg:text-[16px] text-[#999999] py-[3px] lg:py-[13px]'
-                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(flatDescriptionCut) }}></div>
-                <div className='text-[10px] lg:text-[14px] text-[#999999] flex flex-row justify-between'>
-                    {/* <AvailLabel availability={flat.isAvailable ? 'online' : 'offline'} /> */}
+
+
+                <div className='text-[10px] lg:text-[14px] text-[#999999] mt-5 flex flex-row justify-between'>
                     <Link href={flatLinkAdmin} className='cursor-pointer'>
-                        <div className='lg-max:hidden flex flex-row  text-black text-[10px] lg:text-[15px]'>
-                        {dictionary.main.edit}
-                        </div>
+                        <Button as={Link} color="primary" href={flatLinkAdmin} variant="solid">
+                            {dictionary.main.edit}
+                        </Button>
                     </Link>
                 </div>
             </div>

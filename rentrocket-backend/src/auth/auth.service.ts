@@ -105,7 +105,7 @@ export class AuthService {
             expires: expiresIn,
             secure: true,
             // lax if production
-            sameSite: 'lax'
+            sameSite: 'none'
         })
     }
 
