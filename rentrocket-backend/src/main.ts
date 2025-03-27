@@ -11,7 +11,8 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'https://rentrocket.lockshield.online',
+      process.env.DOMAIN,
+      // 'https://rentrocket.lockshield.online',
     ],
     credentials: true,
     exposedHeaders: ['set-cookie'],
