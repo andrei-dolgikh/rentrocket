@@ -10,13 +10,17 @@ export const metadata: Metadata = {
 	...NO_INDEX_PAGE
 }
 
-export default function FlatAdminPage({ params }: { params: { flat: string, category: string } }) {
+export default async function FlatAdminPage({ params }: { 
+	params: Promise<{ flat: string }> }) {
+
+	const { flat } = await params
+
 	return (
 		<div className='w-full h-full '>
 			<div className="max-w-[1200px] xl:mx-auto flex flex-col">
-					{ (params.flat == "new") ? 
+					{ (flat == "new") ? 
 					<CreateFlat /> : 
-					<UpdateFlat flatId={params.flat}  />}
+					<UpdateFlat flatId={flat}  />}
 			</div>
 		</div>
 	)

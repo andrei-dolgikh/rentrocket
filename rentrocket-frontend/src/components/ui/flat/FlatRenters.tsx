@@ -10,7 +10,7 @@ import { createLocalizedUrl } from '../../../utils/utils'
 
 
 const useUsersData = (): { data: { id: string; user: { name: string; login: string; } ; "users:roles": string[] }[], isLoading: boolean } => {
-  const { users, setUsers, isLoading } = useUsers()
+  const { users, isLoading } = useUsers()
   const data: { id: string; user: { name: string; login: string; }, "users:roles": string[]; }[] = [];
   users.map((user) => {
     const roles = user.roles;

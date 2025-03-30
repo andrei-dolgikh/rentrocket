@@ -1,110 +1,68 @@
 'use client'
 import { FlatRenters } from '@/components/ui/flat/FlatRenters'
-import { Accordion, AccordionItem, Chip } from "@heroui/react";
+import { 
+  Card, 
+  CardBody, 
+  CardHeader, 
+  CardFooter,
+  Button,
+  Chip,
+  Divider
+} from "@heroui/react";
 
-
-export function FlatSettingsRentersTab(
-    { }:
-        {}
-) {
-
-    return (
-        <Accordion
-            variant="shadow">
-            <AccordionItem key="anchor" aria-label="Anchor" indicator={<Chip color="secondary">1</Chip>} title="Оплата аренды">
-                <div>Content</div>
-            </AccordionItem>
-            <AccordionItem key="moon" aria-label="Moon" title="Фото-отчеты">
-                <div>Content</div>
-            </AccordionItem>
-            <AccordionItem key="gay" aria-label="Gay" title="Имущество">
-                <div>Content</div>
-            </AccordionItem>
-            <AccordionItem key="sun" aria-label="Sun" indicator={<Chip color="danger">2</Chip>} title="Арендаторы">
-                <FlatRenters />
-            </AccordionItem>
-        </Accordion>
-    )
+export function FlatSettingsRentersTab() {
+  return (
+    <div className="w-full space-y-6">
+      <Card shadow="sm" >
+        <CardHeader className="flex justify-between items-center">
+          <h3 className="text-lg font-medium">Оплата аренды</h3>
+          <Chip color="secondary">1</Chip>
+        </CardHeader>
+        <Divider />
+        <CardBody>
+          <p className="text-sm text-default-500">Настройки оплаты аренды и платежей</p>
+        </CardBody>
+        <CardFooter className="flex justify-end gap-2">
+          <Button color="primary" size="sm">Настроить</Button>
+        </CardFooter>
+      </Card>
+      
+      <Card shadow="sm" >
+        <CardHeader className="flex justify-between items-center">
+          <h3 className="text-lg font-medium">Фото-отчеты</h3>
+        </CardHeader>
+        <Divider />
+        <CardBody>
+          <p className="text-sm text-default-500">Настройки для фото-отчетов</p>
+        </CardBody>
+        <CardFooter className="flex justify-end gap-2">
+          <Button color="primary" size="sm">Настроить</Button>
+        </CardFooter>
+      </Card>
+      
+      <Card shadow="sm" >
+        <CardHeader className="flex justify-between items-center">
+          <h3 className="text-lg font-medium">Имущество</h3>
+        </CardHeader>
+        <Divider />
+        <CardBody>
+          <p className="text-sm text-default-500">Список имущества и его состояние</p>
+        </CardBody>
+        <CardFooter className="flex justify-end gap-2">
+          <Button color="primary" size="sm">Настроить</Button>
+        </CardFooter>
+      </Card>
+      
+      <Card shadow="sm" >
+        <CardHeader className="flex justify-between items-center">
+          <h3 className="text-lg font-medium">Арендаторы</h3>
+          <Chip color="danger">2</Chip>
+        </CardHeader>
+        <Divider />
+        <CardBody>
+          <FlatRenters />
+        </CardBody>
+      </Card>
+    </div>
+  )
 }
-
-
-
-
-const AnchorIcon = (props: any) => {
-    return (
-        <svg
-            aria-hidden="true"
-            focusable="false"
-            height="24"
-            role="presentation"
-            viewBox="0 0 24 24"
-            width="24"
-            {...props}
-        >
-            <path
-                d="M8.465,11.293c1.133-1.133,3.109-1.133,4.242,0L13.414,12l1.414-1.414l-0.707-0.707c-0.943-0.944-2.199-1.465-3.535-1.465 S7.994,8.935,7.051,9.879L4.929,12c-1.948,1.949-1.948,5.122,0,7.071c0.975,0.975,2.255,1.462,3.535,1.462 c1.281,0,2.562-0.487,3.536-1.462l0.707-0.707l-1.414-1.414l-0.707,0.707c-1.17,1.167-3.073,1.169-4.243,0 c-1.169-1.17-1.169-3.073,0-4.243L8.465,11.293z"
-                fill="currentColor"
-            />
-            <path
-                d="M12,4.929l-0.707,0.707l1.414,1.414l0.707-0.707c1.169-1.167,3.072-1.169,4.243,0c1.169,1.17,1.169,3.073,0,4.243 l-2.122,2.121c-1.133,1.133-3.109,1.133-4.242,0L10.586,12l-1.414,1.414l0.707,0.707c0.943,0.944,2.199,1.465,3.535,1.465 s2.592-0.521,3.535-1.465L19.071,12c1.948-1.949,1.948-5.122,0-7.071C17.121,2.979,13.948,2.98,12,4.929z"
-                fill="currentColor"
-            />
-        </svg>
-    );
-};
-
-const MoonIcon = (props: any) => {
-    return (
-        <svg
-            aria-hidden="true"
-            focusable="false"
-            height="24"
-            role="presentation"
-            viewBox="0 0 512 512"
-            width="24"
-            {...props}
-        >
-            <path
-                d="M160 136c0-30.62 4.51-61.61 16-88C99.57 81.27 48 159.32 48 248c0 119.29 96.71 216 216 216 88.68 0 166.73-51.57 200-128-26.39 11.49-57.38 16-88 16-119.29 0-216-96.71-216-216z"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={32}
-            />
-        </svg>
-    );
-};
-
-const SunIcon = (props: any) => {
-    return (
-        <svg
-            aria-hidden="true"
-            focusable="false"
-            height="24"
-            role="presentation"
-            viewBox="0 0 512 512"
-            width="24"
-            {...props}
-        >
-            <path
-                d="M256 48v48M256 416v48M403.08 108.92l-33.94 33.94M142.86 369.14l-33.94 33.94M464 256h-48M96 256H48M403.08 403.08l-33.94-33.94M142.86 142.86l-33.94-33.94"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeMiterlimit={10}
-                strokeWidth={32}
-            />
-            <circle
-                cx={256}
-                cy={256}
-                fill="none"
-                r={80}
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeMiterlimit={10}
-                strokeWidth={32}
-            />
-        </svg>
-    );
-};

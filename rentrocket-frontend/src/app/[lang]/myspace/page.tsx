@@ -5,7 +5,7 @@ import { useFlats } from './flats/hooks/useFlats'
 import { FlatsFeed } from '@/components/ui/flat/FlatsFeed'
 
 export default function MySpacePage() {
-	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
+	const { dictionary }: { dictionary: Record<string, any> } = useLanguage();
 		const { flats } = useFlats();
 
 	return (

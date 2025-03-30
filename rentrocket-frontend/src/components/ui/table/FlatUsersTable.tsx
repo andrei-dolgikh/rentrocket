@@ -44,7 +44,7 @@ export function FlatUsersTable({ columns, rows }: { columns: Array<any>, rows: A
         return (
           <div className="flex gap-3 items-center">
             {cellValue.map((role: any) => (
-              <TagChip key={role.id} name={role} size={"sm"} />
+              <TagChip key={role} name={role} size={"sm"} />
             ))}
           </div>
         );
