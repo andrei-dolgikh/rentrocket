@@ -96,14 +96,17 @@ export function UpdateFlat(
 					<Breadcrumbs crumbs={crumbs} />
 					<Button type='submit' color="primary" className='text-[12px] ' isDisabled={formDisabled}>Сохранить квартиру</Button>
 				</div>
-				<Tabs aria-label="Dynamic tabs" >
+				<Tabs disableAnimation aria-label="Dynamic tabs" >
 					<Tab key={0} title={"Основные настройки"}>
 						<FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange} flat={flat} tags={tags} tabMode={"edit"} />
 					</Tab>
-					<Tab key={1} title={"Арендаторы"}>
+					<Tab key={2} title={"Аренда"}>
 						<FlatSettingsRentersTab />
 					</Tab>
-					<Tab key={2} title={"Фотографии"}>
+					<Tab key={3} title={"Коммунальные услуги"}>
+						<></>
+					</Tab>
+					<Tab key={4} title={"Об объекте"}>
 						<FlatSettingsPhotosTab formData={formData} handleFormChange={handleFormChange} />
 					</Tab>
 				</Tabs>

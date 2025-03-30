@@ -1,11 +1,11 @@
 'use client'
-import { useContext } from 'react';
 import { LogoutButton } from '@/components/ui/buttons/LogoutButton'
 import { useProfile } from '@/hooks/useProfile'
 import { roleTranslations } from '@/types/user.types'
 import Loader from '@/components/ui/Loader'
 import { Chip } from "@heroui/chip";
 import { CircleUser } from 'lucide-react'
+import { useContext } from 'react';
 import { AuthContext } from '../../../app/[lang]/authContext';
 import { useLanguage } from '../../../app/[lang]/languageContext';
 

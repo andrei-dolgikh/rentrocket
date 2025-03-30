@@ -3,11 +3,11 @@ import React from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import { EditIcon } from "./editIcon";
 import { DeleteIcon } from "./deleteIcon";
-import { Link } from "@heroui/react";
 import { Confirmation } from '@/components/ui/modal/Confirmation'
 import { useDeleteUser } from "@/hooks/useDeleteUser";
 import { useState } from "react";
 import { TagChip } from '@/components/ui/tag/TagChip'
+import {User, Link} from "@heroui/react";
 
 
 export function FlatUsersTable({ columns, rows }: { columns: Array<any>, rows: Array<any> }) {
@@ -26,6 +26,20 @@ export function FlatUsersTable({ columns, rows }: { columns: Array<any>, rows: A
     const cellValue = subject[columnKey];
 
     switch (columnKey) {
+      case "user":
+        return (
+          <User key={subject.id}
+          avatarProps={{
+            src: "https://avatars.githubusercontent.com/u/30373425?v=4",
+          }}
+          description={
+            <Link isExternal href="https://x.com/jrgarciadev" size="sm">
+              @{cellValue.login}
+            </Link>
+          }
+          name={cellValue.name}
+        />
+      )
       case "users:roles":
         return (
           <div className="flex gap-3 items-center">

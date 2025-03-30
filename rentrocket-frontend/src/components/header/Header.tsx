@@ -10,7 +10,6 @@ import {
 	NavbarBrand,
 	NavbarContent,
 	NavbarItem,
-	NavbarMenuToggle,
 	NavbarMenu,
 	NavbarMenuItem,
 	Link,
@@ -95,8 +94,10 @@ export function Header() {
 			</NavbarContent>
 			{isAuthenticated && !isLoading && (
 				<>
+				<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE)}>
 					<div>{data?.user?.name}</div>
-					<LogoutButton dictionary={dictionary} />
+				</Link>
+				<LogoutButton dictionary={dictionary} />
 				</>
 			)}
 

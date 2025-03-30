@@ -28,5 +28,10 @@
       "useUpdateFlatDone": "Updated successfully!",
       "useFlatCreateStart": "Create a flat",
       "useFlatEditStart": "Edit a flat"
+    },
+    "myspace": {  
+      "myspace": "My profile",
+      "names": "Last name and first name",
+      "phone": "Phone number"
     }
   }

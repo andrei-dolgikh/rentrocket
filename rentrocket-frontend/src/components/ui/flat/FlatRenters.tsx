@@ -9,9 +9,9 @@ import { useLanguage } from '../../../app/[lang]/languageContext';
 import { createLocalizedUrl } from '../../../utils/utils'
 
 
-const useUsersData = (): { data: { id: string; name: string; login: string; "users:roles": string[] }[], isLoading: boolean } => {
+const useUsersData = (): { data: { id: string; user: { name: string; login: string; } ; "users:roles": string[] }[], isLoading: boolean } => {
   const { users, setUsers, isLoading } = useUsers()
-  const data: { id: string; name: string; login: string; "users:roles": string[]; }[] = [];
+  const data: { id: string; user: { name: string; login: string; }, "users:roles": string[]; }[] = [];
   users.map((user) => {
     const roles = user.roles;
     let rolesDescription = [] as string[];
@@ -20,8 +20,10 @@ const useUsersData = (): { data: { id: string; name: string; login: string; "use
     });
     data.push({
       id: user.id,
-      name: user.name,
-      login: user.login,
+      user: {
+        name: user.name,
+        login: user.login
+      },
       "users:roles": rolesDescription
     })
   })
@@ -31,16 +33,8 @@ const useUsersData = (): { data: { id: string; name: string; login: string; "use
 
 const columns = [
   {
-    key: "login",
-    label: "Логин",
-  },
-  {
-    key: "name",
-    label: "Имя",
-  },
-  {
-    key: "flatName",
-    label: "Квартира",
+    key: "user",
+    label: "Арендатор",
   },
   {
     key: "users:roles",

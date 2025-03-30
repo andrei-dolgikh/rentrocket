@@ -27,5 +27,10 @@
       "useUpdateFlatDone": "Квартира обновлена!",
       "useFlatCreateStart": "Создать квартиру",
       "useFlatEditStart": "Редактировать квартиру"
+    },
+    "myspace": {  
+      "myspace": "Личный кабинет",
+      "names": "Фамилия Имя Отчество",
+      "phone": "Телефон"
     }
   }
