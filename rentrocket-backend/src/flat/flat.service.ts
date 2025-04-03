@@ -136,4 +136,24 @@ export class FlatService {
       }
     });
   }
+
+
+  async addImagesToFlat(flatId: string, imageUrls: string[]) {
+    const flat = await this.prisma.flat.findUnique({
+      where: { id: flatId }
+    });
+  
+    if (!flat) {
+      throw new NotFoundException('Flat not found');
+    }
+  
+    return this.prisma.flat.update({
+      where: { id: flatId },
+      data: {
+        images: {
+          push: imageUrls
+        }
+      }
+    });
+  }
 }

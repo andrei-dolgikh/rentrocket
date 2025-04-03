@@ -69,10 +69,11 @@ export class FlatController {
     return this.flatService.delete(flatIds)
   }
 
-  @Post('image')
+  @Post('images')
   @UseGuards(JwtGuard, RolesGuard)
+  @Auth()
   @RoleUser()
-  @UseInterceptors(FileInterceptor('avatar', {
+  @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
       destination: './uploads',
       filename: (req, file, cb) => {
@@ -89,7 +90,7 @@ export class FlatController {
       cb(null, true);
     },
   }))
-  async uploadFile(
+  async uploadFlatImage(
     @Req() req: any,
     @CurrentUser('id') userId: string
   ) {
@@ -103,8 +104,19 @@ export class FlatController {
     catch (e) {
       throw new HttpException('Убедитесь, что вы загружаете изображение не более 5Мб в формате jpg / jpeg / png.', HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
+  
     throw new HttpException('Файл не был загружен', HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+  
+  @Post('add-images/:flatId')
+  @UseGuards(JwtGuard, RolesGuard)
+  @Auth()
+  @RoleUser()
+  async addImagesToFlat(
+    @Param('flatId') flatId: string,
+    @Body() imageUrls: string[]
+  ) {
+    return this.flatService.addImagesToFlat(flatId, imageUrls);
   }
 
 

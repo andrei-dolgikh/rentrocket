@@ -74,6 +74,7 @@ model Flat {
 
   // превью фото квартиры
   iconUrl String? @map("icon_url")
+  images String[] @default([])
 
   logs FlatHistory[]
 
