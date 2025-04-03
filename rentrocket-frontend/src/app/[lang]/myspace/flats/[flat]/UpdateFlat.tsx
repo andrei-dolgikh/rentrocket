@@ -70,8 +70,8 @@ export function UpdateFlat(
 			iconUrl: formData?.iconUrl,
 			address: formData?.address,
 			entergroup: formData?.entergroup,
-			chambres: formData?.chambres,
-			size: formData?.size,
+			chambres: formData?.chambres as number,
+			size: formData?.size as number,
 		}
 
 		updateFlat({ id: flatId, data: userData });

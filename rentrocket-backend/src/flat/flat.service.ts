@@ -23,6 +23,10 @@ export class FlatService {
         createdAt: true,
         updatedAt: true,
         tags: true,
+        address: true,
+        entergroup: true,
+        chambres: true,
+        size: true
       },
       where: {
         id

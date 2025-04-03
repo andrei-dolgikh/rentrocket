@@ -57,7 +57,9 @@ export function FlatSettingsGeneralTab(
                     className='w-[20%] xl:w-[200px]'
                     label="Количество комнат"
                     value={formData.chambres}
-                    onChange={(e) => handleFormChange({ ...formData, chambres: e.target.value })}
+                    type="number"
+                    min="1"
+                    onChange={(e) => handleFormChange({ ...formData, chambres: +e.target.value })}
                     name='chambres' />
 
                 <Input
@@ -65,7 +67,10 @@ export function FlatSettingsGeneralTab(
                     className='w-[20%] xl:w-[200px]'
                     label="Площадь"
                     value={formData.size}
-                    onChange={(e) => handleFormChange({ ...formData, size: e.target.value })}
+                    onChange={(e) => handleFormChange({ ...formData, size: +e.target.value })}
+                    type="number"
+                    min="1"
+                    step="0.1"
                     name='size' />
 
 
