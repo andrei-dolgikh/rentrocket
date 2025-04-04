@@ -15,7 +15,7 @@ import {
 	Link,
 	Button,
 } from "@heroui/react";
-import React from "react";
+import React, { useMemo } from "react";
 import { Menu, X } from "lucide-react";
 
 
@@ -27,24 +27,24 @@ export function Header() {
 
 
 
-	const menuItems = [
+	const menuItems = useMemo(() => [
 		{
-			label: dictionary.header.about,
-			href: URLS_PAGES.INFO,
+		  label: dictionary.header.about,
+		  href: URLS_PAGES.INFO,
 		},
 		{
-			label: dictionary.header.DUmap,
-			href: URLS_PAGES.MYSPACE_TAGS,
+		  label: dictionary.header.DUmap,
+		  href: URLS_PAGES.MYSPACE_TAGS,
 		},
 		{
-			label: dictionary.header.dictionary,
-			href: URLS_PAGES.AUTH,
+		  label: dictionary.header.dictionary,
+		  href: URLS_PAGES.AUTH,
 		},
 		{
-			label: dictionary.header.flats,
-			href: URLS_PAGES.MYSPACE_FLATS,
+		  label: dictionary.header.flats,
+		  href: URLS_PAGES.MYSPACE_FLATS,
 		},
-	];
+	  ], [dictionary]);
 
 	return (
 		<Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} position="static" className='bg-brandGray p-3 font-semibold'>

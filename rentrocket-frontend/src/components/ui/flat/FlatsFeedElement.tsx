@@ -84,11 +84,9 @@ export function FlatsFeedElement({
 
 
                 <div className='text-[10px] lg:text-[14px] text-[#999999] mt-5 flex flex-row justify-between'>
-                    <Link href={flatLinkAdmin} className='cursor-pointer'>
                         <Button as={Link} color="primary" href={flatLinkAdmin} variant="solid">
                             {dictionary.main.edit}
                         </Button>
-                    </Link>
                 </div>
             </div>
             {showCheckbox && <Checkbox className='m-3' onChange={handleCheckboxChange} />}
