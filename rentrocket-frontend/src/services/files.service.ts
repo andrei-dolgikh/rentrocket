@@ -1,10 +1,10 @@
-import axios from 'axios';
+import { axiosWithAuth } from '@/api/interceptors';
 
 export class FileService {
   private URL = 'http://localhost:4200/api';
 
   uploadFlatAvatar(formData: FormData) {
-    return axios.post(`${this.URL}/flats/images`, formData, {
+    return axiosWithAuth.post(`${this.URL}/flats/images`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -12,7 +12,7 @@ export class FileService {
   }
 
   uploadFlatImage(formData: FormData) {
-    return axios.post(`${this.URL}/flats/images`, formData, {
+    return axiosWithAuth.post(`${this.URL}/flats/images`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -20,6 +20,6 @@ export class FileService {
   }
 
   addImagesToFlat(flatId: string, imageUrls: string[]) {
-    return axios.post(`${this.URL}/flats/add-images/${flatId}`, imageUrls);
+    return axiosWithAuth.post(`${this.URL}/flats/add-images/${flatId}`, imageUrls);
   }
 }

@@ -27,6 +27,11 @@ export class FlatDto {
     @IsOptional()
     iconUrl: string
 
+
+    @IsArray()
+    @IsOptional()
+    images: string[]
+
     @IsNumber()
     @IsOptional()
     order: number

@@ -70,8 +70,8 @@ export class FlatController {
   }
 
   @Post('images')
-  @UseGuards(JwtGuard, RolesGuard)
   @Auth()
+  @UseGuards(JwtGuard, RolesGuard)
   @RoleUser()
   @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
@@ -109,8 +109,8 @@ export class FlatController {
   }
   
   @Post('add-images/:flatId')
-  @UseGuards(JwtGuard, RolesGuard)
   @Auth()
+  @UseGuards(JwtGuard, RolesGuard)
   @RoleUser()
   async addImagesToFlat(
     @Param('flatId') flatId: string,

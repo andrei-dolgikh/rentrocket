@@ -27,7 +27,7 @@ export function FlatImageUploader({ image, setImage }: { image?: string, setImag
 
 
       const formData = new FormData();
-      formData.append('avatar', file, file.name);
+      formData.append('image', file, file.name);
       try {
         const response = await fileService.uploadFlatAvatar(formData);
         setImage(response.data.url);  

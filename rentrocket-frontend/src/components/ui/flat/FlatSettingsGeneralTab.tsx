@@ -3,6 +3,7 @@ import { Input, Textarea } from "@heroui/input";
 import { TagPanel } from '@/components/ui/tag/TagPanel'
 import { ITag } from '@/types/tag.types'
 import { FlatImageUploader } from '@/components/ui/flat/FlatImageUploader'
+import { FlatMultiImageUploader } from '@/components/ui/flat/FlatMultiImageUploader'
 
 
 export function FlatSettingsGeneralTab(
@@ -59,7 +60,7 @@ export function FlatSettingsGeneralTab(
 <Input
     id='chambres'
     className='w-[20%] xl:w-[200px]'
-    label="Количество комнат"
+    label="Комнаты"
     value={formData.chambres || ''}
     type="number"
     min="1"
@@ -77,13 +78,23 @@ export function FlatSettingsGeneralTab(
     step="0.1"
     name='size' />
             </div>
-
-            <div className='flex flex-col xl:flex-row justify-evenly xl:justify-start my-5 '>
-                <FlatImageUploader
-                    image={formData.iconUrl}
-                    setImage={(image) => handleFormChange({ ...formData, iconUrl: image })} />
-
-            </div>
+                    <div className='flex flex-col'>
+                        <div className='flex flex-col xl:flex-row justify-evenly xl:justify-start my-5'>
+                            <div className="w-full mb-8">
+                                <h2 className="text-xl font-semibold mb-4">Основное фото (превью)</h2>
+                                <FlatImageUploader
+                                    image={formData.iconUrl}
+                                    setImage={(image) => handleFormChange({ ...formData, iconUrl: image })} />
+                            </div>
+                        </div>
+                        
+                        <div className='flex flex-col my-5'>
+                            <h2 className="text-xl font-semibold mb-4">Галерея изображений</h2>
+                            <FlatMultiImageUploader
+                                images={formData.images || []}
+                                setImages={(images) => handleFormChange({ ...formData, images })} />
+                        </div>
+                    </div>
         </div>
 
     )

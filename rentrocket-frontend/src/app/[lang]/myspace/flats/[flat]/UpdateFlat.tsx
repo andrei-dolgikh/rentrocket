@@ -38,6 +38,7 @@ export function UpdateFlat(
 		entergroup: flat?.entergroup,
 		chambres: flat?.chambres,
 		size: flat?.size,
+		images: flat?.images,
 	});
 
 	useEffect(() => {
@@ -52,6 +53,7 @@ export function UpdateFlat(
 				entergroup: flat?.entergroup,
 				chambres: flat?.chambres,
 				size: flat?.size,
+				images: flat?.images,
 			})
 		}
 	}, [isFlatSuccess, flat])
@@ -69,6 +71,7 @@ export function UpdateFlat(
 			entergroup: formData?.entergroup,
 			chambres: formData?.chambres as number,
 			size: formData?.size as number,
+			images: formData?.images,
 		}
 
 		updateFlat({ id: flatId, data: userData });

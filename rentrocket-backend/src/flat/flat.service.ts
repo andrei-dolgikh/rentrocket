@@ -20,6 +20,7 @@ export class FlatService {
         description: true,
         order: true,
         iconUrl: true,
+        images: true,
         createdAt: true,
         updatedAt: true,
         tags: true,

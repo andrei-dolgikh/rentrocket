@@ -11,6 +11,7 @@ export interface IFlatResponse extends IBase {
 	name: string
 	description?: string
 	iconUrl?: string
+	images?: string[]
 	order: number
 	tags: ITag[]
 	address?: string
@@ -25,6 +26,7 @@ export interface IFlatCreateRequest {
 	name: string
 	description?: string
 	iconUrl?: string
+	images?: string[]
 	order?: number
 	tags: ITag[]
 	address?: string
@@ -37,6 +39,7 @@ export interface IFlatUpdateRequest {
 	name: string
 	description?: string
 	iconUrl?: string
+	images?: string[]
 	order?: number
 	tags: ITag[]
 	address?: string
