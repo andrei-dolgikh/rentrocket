@@ -57,6 +57,31 @@ UPDATE "users" SET "roles" = ARRAY['user'::"Roles"] WHERE "login" = 'perdus_merd
 
 В rentrocket-backend/src/auth/auth.service.ts нужно настроить работу куки в addRefreshTokenToResponse и removeRefreshTokenFromResponse.
 
-Меняй domain на домен бэкенда, а sameSite выставь в lax
+    addRefreshTokenToResponse(res: Response, refreshToken: string) {
+        const expiresIn = new Date()
+        expiresIn.setDate(expiresIn.getDate() + this.EXPIRE_DAY_REFRESH_TOKEN)
+
+        res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
+            httpOnly: true,
+            domain: '.lockshield.online',
+            expires: expiresIn,
+            secure: true,
+            // lax if production
+            sameSite: 'none'
+        })
+    }
+
+    removeRefreshTokenFromResponse(res: Response) {
+        res.cookie(this.REFRESH_TOKEN_NAME, '', {
+            httpOnly: true,
+            domain: '.lockshield.online',
+            expires: new Date(0),
+            secure: true,
+            // lax if production
+            sameSite: 'none'
+        })
+    }
+
+
 
 
