@@ -104,7 +104,7 @@ export class AuthService {
             domain: 'localhost',
             // domain: '.lockshield.online',
             expires: expiresIn,
-            // secure: true,
+            secure: true,
             sameSite: 'none'
         })
     }
@@ -115,7 +115,7 @@ export class AuthService {
             domain: 'localhost',
             // domain: '.lockshield.online',
             expires: new Date(0),
-            // secure: true,
+            secure: true,
             sameSite: 'none'
         })
     }

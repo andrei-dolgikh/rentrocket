@@ -1,7 +1,7 @@
 import { axiosWithAuth } from '@/api/interceptors';
 
 export class FileService {
-  private URL = 'http://localhost:4200/api';
+  private URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api`;
 
   uploadFlatAvatar(formData: FormData) {
     return axiosWithAuth.post(`${this.URL}/flats/images`, formData, {
