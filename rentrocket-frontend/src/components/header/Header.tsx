@@ -1,9 +1,8 @@
 'use client'
-import { useProfile } from '@/hooks/useProfile'
+// import { useProfile } from '@/hooks/useProfile'
 import { useAuth } from '../../app/[lang]/authContext';
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { createLocalizedUrl } from '../../utils/utils'
-import { useLanguage } from '../../app/[lang]/languageContext';
 import { LogoutButton } from '../ui/buttons/LogoutButton';
 import {
 	Navbar,
@@ -12,17 +11,15 @@ import {
 	NavbarItem,
 	NavbarMenu,
 	NavbarMenuItem,
-	Link,
 	Button,
 } from "@heroui/react";
+import Link from 'next/link';
 import React, { useMemo } from "react";
 import { Menu, X } from "lucide-react";
 
-
-export function Header() {
-	const { isAuthenticated } = useAuth();
-	const { data, isLoading } = useProfile({ isAuthenticated });
-	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
+export const Header = React.memo(function Header({ lang, dictionary }: { lang: string; dictionary: Record<string, any> }) {
+	const { isAuthenticated, profile, isProfileLoading } = useAuth();
+	// const { data, isProfileLoading } = useProfile({ isAuthenticated });
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
 
@@ -83,7 +80,7 @@ export function Header() {
 					</Link>
 				</NavbarItem>
 
-				{isAuthenticated && !isLoading && (
+				{isAuthenticated && !isProfileLoading && (
 					<NavbarItem>
 						<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_FLATS)}>
 							{dictionary.header.flats}
@@ -92,16 +89,16 @@ export function Header() {
 				)}
 
 			</NavbarContent>
-			{isAuthenticated && !isLoading && (
+			{isAuthenticated && !isProfileLoading && (
 				<>
 				<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE)}>
-					<div>{data?.user?.name}</div>
+					<div>{profile?.user?.name}</div>
 				</Link>
 				<LogoutButton dictionary={dictionary} />
 				</>
 			)}
 
-			{(!isAuthenticated || isLoading) && (
+			{(!isAuthenticated || isProfileLoading) && (
 				<NavbarContent justify="end">
 					<NavbarItem className="flex ">
 						<Link color="success" href={createLocalizedUrl(lang, URLS_PAGES.AUTH)}>{dictionary.header.login}</Link>
@@ -120,7 +117,6 @@ export function Header() {
 						<Link
 							className="w-full text-white"
 							href={createLocalizedUrl(lang, item.href)}
-							size="lg"
 						>
 							{item.label}
 						</Link>
@@ -132,5 +128,5 @@ export function Header() {
 
 
 	)
-}
+})
 

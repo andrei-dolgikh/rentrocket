@@ -4,15 +4,18 @@ import { useLanguage } from '../../../app/[lang]/languageContext';
 import { useProfile } from '@/hooks/useProfile'
 import { useContext } from 'react';
 import { AuthContext } from '../../../app/[lang]/authContext';
+import { useAuth } from '../../../app/[lang]/authContext';
 
 export function ProfileCard() {
-    const { isAuthenticated } = useContext(AuthContext);
-    const { data: profile, isLoading: isProfileLoading, isSuccess: isProfileSuccess } = useProfile({ isAuthenticated: isAuthenticated });
+    const { profile } = useAuth();
+
+    // const { isAuthenticated } = useContext(AuthContext);
+    // const { data: profile, isLoading: isProfileLoading, isSuccess: isProfileSuccess } = useProfile({ isAuthenticated: isAuthenticated });
     // data?.user.login
     // @{data?.user.name}
     const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
     return (
-        isProfileLoading ? (<p>Загрузка...</p>) : <Card >
+        !profile ? (<div>Загрузка...</div>) : <Card >
             <CardHeader>
                 <h1>Профиль</h1>
             </CardHeader>

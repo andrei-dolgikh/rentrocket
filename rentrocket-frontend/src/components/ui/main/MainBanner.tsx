@@ -1,9 +1,9 @@
-import Image from 'next/image'
-import { useLanguage } from '../../../app/[lang]/languageContext';
+// import Image from 'next/image'
+// import { useLanguage } from '../../../app/[lang]/languageContext';
 
-export function MainBanner() {
+export function MainBanner( { dictionary }: { dictionary: Record<string, any> }) {
 
-    const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
+    // const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
     return (
         <div className='flex flex-col justify-between w-full text-black text-[32px] lg:text-[46px] mt-5 mb-[50px]'>
             <div className="">RENT PULT BANNER</div>

@@ -10,6 +10,7 @@ import { HeroUIProvider } from "@heroui/react";
 import { getDictionary } from './dictionaries'
 import { LanguageProvider } from './languageContext';
 import ClientLayout from './ClientLayout';
+import { Header } from "@/components/header/Header";
 
 export const metadata: Metadata = {
 	title: {
@@ -37,7 +38,8 @@ export default async function RootLayout({
 					<Providers>
 						<LanguageProvider lang={lang} dictionary={dictionary}>
 							<AuthProvider>
-								<ClientLayout>
+      							<Header lang={lang} dictionary={dictionary} />
+								<ClientLayout lang={lang} dictionary={dictionary}>
 								{children}
 								</ClientLayout>
 								<Toaster
@@ -45,7 +47,7 @@ export default async function RootLayout({
 									position='bottom-right'
 									duration={1500}
 								/>
-								<Footer />
+								<Footer lang={lang} dictionary={dictionary} />
 							</AuthProvider>
 						</LanguageProvider>
 					</Providers>

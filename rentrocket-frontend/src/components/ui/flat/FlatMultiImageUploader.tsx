@@ -82,7 +82,7 @@ export function FlatMultiImageUploader({ images = [], setImages }: {
                             />
                             <Button
                                 color="primary"
-                                onClick={handleButtonClick}
+                                onPress={handleButtonClick}
                                 disabled={isLoading}
                             >
                                 <PlusCircle className="mr-2" />

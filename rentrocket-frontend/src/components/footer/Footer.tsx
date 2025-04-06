@@ -1,12 +1,12 @@
-'use client'
+// 'use client'
 import { Link } from "@heroui/react";
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { createLocalizedUrl } from '../../utils/utils'
 import { useLanguage } from '../../app/[lang]/languageContext';
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
-export function Footer() {
-  const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
+export function Footer( { lang, dictionary }: { lang: string; dictionary: Record<string, any> } ) {
+  // const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
   
   const currentYear = new Date().getFullYear();
 

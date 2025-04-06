@@ -1,27 +1,18 @@
-// 'use client'
-import { MainLayout } from '@/components/ui/main/MainLayout'
-// import { useEffect } from 'react'
+import { MainLayout } from '@/components/ui/main/MainLayout';
+import { getDictionary } from './dictionaries';
 
-export default async function Home(){
+export default async function Home({ 
+  params 
+}: { 
+  params: Promise<{ lang: string }> | { lang: string }
+}) {
+  const resolvedParams = params instanceof Promise ? await params : params;
+  const lang = resolvedParams.lang;
+  const dictionary = await getDictionary(lang as "en" | "ru");
 
-	// useEffect(() => {
-	//   const handlePopState = () => {
-	// 	window.location.reload();
-	//   };
-  
-	//   window.addEventListener('popstate', handlePopState);
-  
-	//   return () => {
-	// 	window.removeEventListener('popstate', handlePopState);
-	//   };
-	// }, []);
-
-	return (
-		<>
-			
-			
-			<MainLayout />
-		</>
-	)
+  return (
+    <>
+      <MainLayout dictionary={dictionary} />
+    </>
+  )
 }
-
