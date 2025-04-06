@@ -1,9 +1,9 @@
-import { MainBanner } from "./MainBanner";
+import { MainPage } from "./MainPage";
 
-export function MainLayout({ dictionary }: { dictionary: Record<string, any> }) {
+export function MainLayout({ dictionary, lang }: { dictionary: Record<string, any> , lang: string}) {
     return (
         <>
-            <MainBanner dictionary={dictionary} />
+            <MainPage dictionary={dictionary} lang={lang} />
         </>
     )
 }
