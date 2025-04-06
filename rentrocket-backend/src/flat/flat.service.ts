@@ -63,8 +63,14 @@ export class FlatService {
           }
         },
         owners: {
-          connect: [{ id: creatorId }]
-        }
+          connect: dto.owners?.map((user) => ({ id: user.id })),
+        },
+        renters: {
+          connect: dto.renters?.map((user) => ({ id: user.id })),
+        },
+        managers: {
+          connect: dto.managers?.map((user) => ({ id: user.id })),
+        },
       }
     })
   }
@@ -87,8 +93,14 @@ export class FlatService {
       data: {
         ...dto,
         updatedAt: new Date(),
-        tags: {
-          set: dto.tags?.map((tag) => ({ id: tag.id })),
+        owners: {
+          connect: dto.owners?.map((user) => ({ id: user.id })),
+        },
+        renters: {
+          connect: dto.renters?.map((user) => ({ id: user.id })),
+        },
+        managers: {
+          connect: dto.managers?.map((user) => ({ id: user.id })),
         },
       },
     });
