@@ -7,7 +7,7 @@ import * as path from 'path';
 async function bootstrap() {
 
   const httpsOptions = {
-    key: fs.readFileSync(path.join(__dirname, '../ssl/certs/private-key')),
+    key: fs.readFileSync(path.join(__dirname, '../ssl/certs/private_key')),
     cert: fs.readFileSync(path.join(__dirname, '../ssl/certs/certificate')),
   };
 
