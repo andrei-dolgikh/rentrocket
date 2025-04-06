@@ -6,8 +6,10 @@ import Loader from '@/components/ui/Loader'
 import { useEffect } from 'react';
 import { Card } from "@heroui/react";
 
-export default function FlatPage({ params }: { params: { flat: string } }) {
-	const { flat, isFlatSuccess, isFlatLoading } = useFlat(params.flat)
+export default async function FlatPage({ params }: { params: Promise<{ flat: string }> }) {
+
+	const { flat } = await params
+	const { flat: flatEntity , isFlatSuccess, isFlatLoading } = useFlat(flat)
 
 
 	return (
@@ -20,7 +22,7 @@ export default function FlatPage({ params }: { params: { flat: string } }) {
 				</Card>
 			}
 
-				<Flat flat={flat} />
+				<Flat flat={flatEntity} />
 		</div>
 	)
 }
