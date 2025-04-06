@@ -16,8 +16,8 @@ export function useCreateFlat() {
 			queryClient.invalidateQueries({
 				queryKey: ['flats']
 			})
-			router.push(`${URLS_PAGES.ADMIN_FLATS}`)
-			toast.success('Материал успешно создан!')
+			router.push(`${URLS_PAGES.MYSPACE_FLATS}`)
+			toast.success('Квартира добавлена!')
 		}
 	})
 

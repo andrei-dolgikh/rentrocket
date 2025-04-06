@@ -1,5 +1,4 @@
 import type { IBase } from './root.types'
-import type { ITag } from './tag.types'
 // export enum EnumFlatPriority {
 // 	low = 'low',
 // 	medium = 'medium',
@@ -13,7 +12,6 @@ export interface IFlatResponse extends IBase {
 	iconUrl?: string
 	images?: string[]
 	order: number
-	tags: ITag[]
 	address?: string
 	entergroup?: string
 	chambres?: number
@@ -28,7 +26,6 @@ export interface IFlatCreateRequest {
 	iconUrl?: string
 	images?: string[]
 	order?: number
-	tags: ITag[]
 	address?: string
 	entergroup?: string
 	chambres?: number
@@ -41,7 +38,6 @@ export interface IFlatUpdateRequest {
 	iconUrl?: string
 	images?: string[]
 	order?: number
-	tags: ITag[]
 	address?: string
 	entergroup?: string
 	chambres?: number

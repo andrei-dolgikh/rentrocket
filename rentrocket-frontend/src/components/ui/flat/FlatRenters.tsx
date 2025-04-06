@@ -34,7 +34,7 @@ const useUsersData = (): { data: { id: string; user: { name: string; login: stri
 const columns = [
   {
     key: "user",
-    label: "Арендатор",
+    label: "Пользователь",
   },
   {
     key: "users:roles",
@@ -58,7 +58,7 @@ export function FlatRenters() {
     <Loader />
   ) : (
     <div className='text-black'>
-      <div className='flex justify-between items-center mt-[30px] mb-[10px]'>
+      <div className='flex justify-between items-center mb-[10px]'>
         <div className='flex items-center gap-5'>
           <Link href={createLocalizedUrl(lang, '/myspace/users/create')}>
             <Button 

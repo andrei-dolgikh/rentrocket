@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
-import { Chip } from "@heroui/chip";
-import { getColor } from '@/components/ui/tag/TagChip'
+// import { Chip } from "@heroui/chip";
+// import { getColor } from '@/components/ui/tag/TagChip'
 import { useLanguage } from '../../../app/[lang]/languageContext';
 import { createLocalizedUrl } from '../../../utils/utils'
 import { IFlatResponse } from '../../../types/flat.types'
@@ -9,6 +9,7 @@ import useImage from '@/hooks/useImage';
 import DOMPurify from 'dompurify';
 import { Checkbox } from "@heroui/react"
 import { Image, Button } from "@heroui/react";
+import { Card } from '@heroui/react';
 
 enum CardType {
     Admin = 'admin',
@@ -38,7 +39,7 @@ export function FlatsFeedElement({
     }
 
     return (
-        <div className={`flex flex-row justify-start items-center w-full `}>
+        <Card className={`flex flex-row justify-start items-center w-full `}>
             <Link href={flatLinkClient} className='cursor-pointer'>
                 {flat.iconUrl &&
 
@@ -69,13 +70,13 @@ export function FlatsFeedElement({
                                 <div className='text-[16px] lg:text-[32px]'>{flat.name}</div>
                             </Link>
                         </div>
-                        <div className='flex flex-row flex-wrap items-center gap-2'>
+                        {/* <div className='flex flex-row flex-wrap items-center gap-2'>
                             {flat?.tags?.map((tag) => (
                                 <Chip key={tag.id} radius="full" color={getColor(tag.name)} size="md" className='text-[12px] lg:text-[16px] '>
                                     {tag.name}
                                 </Chip>
                             ))}
-                        </div>
+                        </div> */}
                     </div>
                     <div
                         className='text-[14px] lg:text-[16px] text-[#999999] py-[3px] lg:py-[10px]'
@@ -90,7 +91,7 @@ export function FlatsFeedElement({
                 </div>
             </div>
             {showCheckbox && <Checkbox className='m-3' onChange={handleCheckboxChange} />}
-        </div>
+        </Card>
     )
 }
 

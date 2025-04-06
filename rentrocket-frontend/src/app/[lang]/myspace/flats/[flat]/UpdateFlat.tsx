@@ -4,8 +4,6 @@ import { useUpdateFlat } from '../../../myspace/flats/hooks/useUpdateFlat'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs'
 import { useState, FormEvent, useEffect } from 'react'
 import { useFlat } from '../../../myspace/flats/hooks/useFlat'
-import { useTags } from '../../../myspace/tags/hooks/useTags'
-import { ITag } from '@/types/tag.types'
 import { IFlatUpdateRequest } from '@/types/flat.types'
 import Loader from '@/components/ui/Loader'
 import { FlatSettingsGeneralTab } from "@/components/ui/flat/FlatSettingsGeneralTab";
@@ -20,7 +18,6 @@ export function UpdateFlat(
 	const [formDisabled, setFormDisabled] = useState(true);
 	const { updateFlat, isUpdatePending } = useUpdateFlat()
 	const { flat, isFlatLoading, isFlatSuccess } = useFlat(flatId)
-	const { tags, isTagsLoading } = useTags()
 	const [activeMenu, setActiveMenu] = useState('general');
 	const [activeCategoryId, setActiveCategoryId] = useState('settings');
 
@@ -32,7 +29,6 @@ export function UpdateFlat(
 		name: flat?.name,
 		order: flat?.order,
 		description: flat?.description,
-		tags: flat?.tags,
 		iconUrl: flat?.iconUrl,
 		address: flat?.address,
 		entergroup: flat?.entergroup,
@@ -47,7 +43,6 @@ export function UpdateFlat(
 				name: flat?.name,
 				order: flat?.order,
 				description: flat?.description,
-				tags: flat?.tags,
 				iconUrl: flat?.iconUrl,
 				address: flat?.address,
 				entergroup: flat?.entergroup,
@@ -65,7 +60,6 @@ export function UpdateFlat(
 			name: formData.name as string,
 			order: formData.order,
 			description: formData.description as string,
-			tags: formData?.tags as ITag[],
 			iconUrl: formData?.iconUrl,
 			address: formData?.address,
 			entergroup: formData?.entergroup,
@@ -131,19 +125,19 @@ export function UpdateFlat(
 	const renderContent = () => {
 		switch (activeMenu) {
 			case 'general':
-				return <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange} flat={flat} tags={tags} tabMode={"edit"} />;
-			case 'rent':
+				return <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange}/>;
+			case 'tenants':
 				return <FlatSettingsRentersTab />;
 			case 'utilities':
 				return <div className="p-4">Содержимое раздела "Коммунальные услуги"</div>;
 			case 'about':
 				return <FlatSettingsPhotosTab formData={formData} handleFormChange={handleFormChange} />;
 			default:
-				return <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange} flat={flat} tags={tags} tabMode={"edit"} />;
+				return <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange}/>;
 		}
 	};
 
-	return isFlatLoading && isTagsLoading ? (
+	return isFlatLoading ? (
 		<Loader />
 	) : (
 		<div>
@@ -157,7 +151,6 @@ export function UpdateFlat(
 				</div>
 
 				<div className='flex gap-6'>
-					{/* Sidebar Menu */}
 					<Card className="w-64 h-fit">
 						<div className="p-2">
 							{menuItems.map((category, index) => (

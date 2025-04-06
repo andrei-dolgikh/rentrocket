@@ -70,12 +70,12 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 					</Link>
 				</NavbarItem>
 				<NavbarItem isActive>
-					<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_TAGS)}>
+					<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_FLATS)}>
 						{dictionary.header.DUmap}
 					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.AUTH)}>
+					<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_FLATS)}>
 						{dictionary.header.dictionary}
 					</Link>
 				</NavbarItem>
@@ -91,7 +91,7 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 			</NavbarContent>
 			{isAuthenticated && !isProfileLoading && (
 				<>
-				<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE)}>
+				<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.PROFILE)}>
 					<div>{profile?.user?.name}</div>
 				</Link>
 				<LogoutButton dictionary={dictionary} />

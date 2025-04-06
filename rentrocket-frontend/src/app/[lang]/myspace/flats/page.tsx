@@ -4,17 +4,16 @@ import { Link } from "@heroui/react"
 import { useFlats } from './hooks/useFlats'
 import { useLanguage } from '../../../../app/[lang]/languageContext';
 import { createLocalizedUrl } from '../../../../utils/utils'
+import { Button } from "@heroui/button";
 
 export default function FlatPage() {
 	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 	const { flats } = useFlats();
 	return (
 		<div>
-			<Link href={createLocalizedUrl(lang, `/myspace/flats/new`)}>
-				<div className={`text-[22px] lg:text-[26px] mt-5 text-black`}>
-					{dictionary.hooks.useFlatCreateStart}
-				</div>
-			</Link>
+			<Button as={Link} color="primary" href={createLocalizedUrl(lang, `/myspace/flats/new`)} variant="solid" className='my-5'>
+				{dictionary.hooks.useFlatCreateStart}
+			</Button>
 			<FlatsFeed flats={flats} />
 		</div>
 	)

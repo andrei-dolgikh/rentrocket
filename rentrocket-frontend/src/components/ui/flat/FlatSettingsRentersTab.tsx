@@ -1,4 +1,3 @@
-// 'use client'
 import { FlatRenters } from '@/components/ui/flat/FlatRenters'
 
 export function FlatSettingsRentersTab() {
