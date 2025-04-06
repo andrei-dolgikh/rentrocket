@@ -5,9 +5,9 @@ import { createLocalizedUrl } from '../../utils/utils'
 import { useLanguage } from '../../app/[lang]/languageContext';
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
-export function Footer( { lang, dictionary }: { lang: string; dictionary: Record<string, any> } ) {
+export function Footer({ lang, dictionary }: { lang: string; dictionary: Record<string, any> }) {
   // const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
-  
+
   const currentYear = new Date().getFullYear();
 
   return (
@@ -34,31 +34,31 @@ export function Footer( { lang, dictionary }: { lang: string; dictionary: Record
               </a>
             </div>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-lg mb-4">{dictionary.footer?.resources || 'Resources'}</h4>
             <ul className="space-y-2">
               <li>
-                <Link className="text-white hover:text-gray-600 transition-colors" 
-                      href={createLocalizedUrl(lang, URLS_PAGES.INFO)}>
+                <Link className="text-white hover:text-gray-600 transition-colors"
+                  href={createLocalizedUrl(lang, URLS_PAGES.INFO)}>
                   {dictionary.header.about}
                 </Link>
               </li>
               <li>
-                <Link className="text-white hover:text-gray-600 transition-colors" 
-                      href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_TAGS)}>
+                <Link className="text-white hover:text-gray-600 transition-colors"
+                  href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_TAGS)}>
                   {dictionary.header.DUmap}
                 </Link>
               </li>
               <li>
-                <Link className="text-white hover:text-gray-600 transition-colors" 
-                      href={createLocalizedUrl(lang, URLS_PAGES.AUTH)}>
+                <Link className="text-white hover:text-gray-600 transition-colors"
+                  href={createLocalizedUrl(lang, URLS_PAGES.AUTH)}>
                   {dictionary.header.dictionary}
                 </Link>
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-lg mb-4">{dictionary.footer?.legal || 'Legal'}</h4>
             <ul className="space-y-2">
@@ -79,7 +79,7 @@ export function Footer( { lang, dictionary }: { lang: string; dictionary: Record
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-lg mb-4">{dictionary.footer?.contact || 'Contact'}</h4>
             <address className="not-italic text-white">
@@ -90,12 +90,20 @@ export function Footer( { lang, dictionary }: { lang: string; dictionary: Record
             </address>
           </div>
         </div>
-        
+
         <div className=" mt-5 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className=" text-sm">
-            © 2022-{currentYear} Rent-pult
-          </p>
-          <div className="mt-4 md:mt-0">
+          <div>
+            <p className=" text-sm">
+              © 2022-{currentYear} Rent-pult
+            </p>
+            <div className="mt-4 flex items-center justify-center md:justify-end">
+              <div className="text-xs text-gray-400 mr-2">Developed by</div>
+              <div className="flex items-center bg-gradient-to-r from-gray-800 to-gray-700 px-3 py-1 rounded-full shadow-md">
+                <a href="https://dev.lockshield.online"><span className="text-xs font-semibold text-gray-200 tracking-wide">LOCKSHIELD</span></a>
+              </div>
+            </div>
+            <div className="mt-4 md:mt-0">
+            </div>
           </div>
         </div>
       </div>
