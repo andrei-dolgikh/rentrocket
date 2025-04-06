@@ -11,7 +11,7 @@ import { IAuthForm } from '@/types/auth.types'
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { Input } from "@heroui/react";
 import { authService } from '@/services/auth.service'
-import { AuthContext } from '../authContext';
+import { AuthContext, useAuth } from '../authContext';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { Button } from "@heroui/button";
 import { createLocalizedUrl } from '../../../utils/utils'
@@ -19,7 +19,7 @@ import Link from 'next/link'
 
 export function Auth() {
 	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
-	const { setIsAuthenticated } = useContext(AuthContext);
+	const { setIsAuthenticated } = useAuth();
 	const [formData, setFormData] = useState({
 		login: '',
 		password: '',
