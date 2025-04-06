@@ -2,7 +2,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import Loader from '@/components/ui/Loader'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { FormEvent } from 'react'
 import { toast } from 'sonner'
 // import { Button } from '@/components/ui/buttons/Button'
@@ -10,12 +10,12 @@ import { IAuthForm } from '@/types/auth.types'
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { Input } from "@heroui/react";
 import { authService } from '@/services/auth.service'
-import { AuthContext } from '../authContext';
+import { useAuth } from '../authContext';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { Button } from "@heroui/button";
 
 export function Register() {
-	const { setIsAuthenticated } = useContext(AuthContext);
+	const { setIsAuthenticated } = useAuth();
 	const [formData, setFormData] = useState({
 		login: '',
 		password: '',
