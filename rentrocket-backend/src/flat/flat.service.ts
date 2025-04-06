@@ -23,11 +23,14 @@ export class FlatService {
         images: true,
         createdAt: true,
         updatedAt: true,
-        tags: true,
         address: true,
         entergroup: true,
         chambres: true,
-        size: true
+        size: true,
+        renters: true,
+        managers: true,
+        owners: true,
+        creator: true
       },
       where: {
         id
@@ -44,7 +47,6 @@ export class FlatService {
         iconUrl: true,
         createdAt: true,
         updatedAt: true,
-        tags: true,
       }
     })
   }
@@ -55,9 +57,6 @@ export class FlatService {
     return this.prisma.flat.create({
       data: {
         ...dto,
-        tags: {
-          connect: dto.tags?.map((tag) => ({ id: tag.id })),
-        },
         creator: {
           connect: {
             id: creatorId

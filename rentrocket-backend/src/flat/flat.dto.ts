@@ -1,4 +1,4 @@
-import { Tag } from "@prisma/client"
+import { Tag, User } from "@prisma/client"
 import { IsArray, IsBoolean, IsEnum, IsInt, IsNumber, IsOptional, IsString } from "class-validator"
 
 export class FlatDto {
@@ -6,10 +6,6 @@ export class FlatDto {
     @IsString()
     @IsOptional()
     name: string
-
-    @IsArray()
-    @IsOptional()
-    tags: Tag[]
 
     @IsInt()
     @IsOptional()
@@ -26,7 +22,6 @@ export class FlatDto {
     @IsString()
     @IsOptional()
     iconUrl: string
-
 
     @IsArray()
     @IsOptional()
@@ -51,6 +46,18 @@ export class FlatDto {
     @IsNumber()
     @IsOptional()
     size: number
+
+    @IsArray()
+    @IsOptional()
+    renters: User[]
+
+    @IsArray()
+    @IsOptional()
+    managers: User[]
+
+    @IsArray()
+    @IsOptional()
+    owners: User[]
 
     
 }
