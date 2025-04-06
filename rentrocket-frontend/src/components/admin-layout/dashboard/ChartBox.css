@@ -1,8 +1,0 @@
-.charts-box {
-    background-color: black; /* Remove the background color */
-    grid: none; /* Remove the grid */
-}
-
-.charts-box .google-visualization-legend {
-    display: none; /* Hide the legends */
-}
