@@ -2,16 +2,14 @@
 
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
-import { useContext } from 'react'
 import { authService } from '@/services/auth.service'
-import { AuthContext } from '../../../app/[lang]/authContext';
+import {  useAuth } from '../../../app/[lang]/authContext';
 import {
-	Link,
 	Button,
 } from "@heroui/react";
 
 export function LogoutButton({ dictionary }: { dictionary: Record<string, any> }) {
-	const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+	const { setIsAuthenticated } = useAuth();
 
 	const router = useRouter()
 

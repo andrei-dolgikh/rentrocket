@@ -1,4 +1,3 @@
-import { AvailLabel } from '@/components/ui/availability/AvailLabel'
 import DOMPurify from 'dompurify';
 import { IFlatResponse } from '@/types/flat.types'
 import { TagChip } from '@/components/ui/tag/TagChip'
@@ -28,11 +27,6 @@ export  function FlatHeader({ flat }:
                   className={`text-brandGrayLight text-[14px] lg:text-[18px] `}
                   dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(flat.description || '') }}
                 />
-                <div className='flex flex-row my-2 gap-2 justify-center lg:justify-start w-[100%] m-auto text-white'>
-                    {flat?.tags?.map((tag) => (
-                       <TagChip key={tag.id} name={tag.name} size={"md"} />
-                    ))}
-                </div>
 
             </div>
         </div>
