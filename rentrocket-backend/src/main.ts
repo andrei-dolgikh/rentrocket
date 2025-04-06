@@ -11,7 +11,8 @@ async function bootstrap() {
     cert: fs.readFileSync(path.join(__dirname, '../src/ssl/certs/certificate')),
   };
 
-  const app = await NestFactory.create(AppModule,  { httpsOptions });
+  // const app = await NestFactory.create(AppModule,  { httpsOptions });
+  const app = await NestFactory.create(AppModule);
 
   app.setGlobalPrefix('api');
   app.use(cookieParser());
@@ -20,8 +21,8 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      // 'http://localhost:3000',
-      'https://rentrocket.lockshield.online',
+      'http://localhost:3000',
+      // 'https://rentrocket.lockshield.online',
     ],
     credentials: true,
     exposedHeaders: ['set-cookie'],

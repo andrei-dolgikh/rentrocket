@@ -44,7 +44,7 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 	  ], [dictionary]);
 
 	return (
-		<Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} position="static" className='bg-brandGray p-3 font-semibold'>
+		<Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} position="static" className='bg-gradient-to-r from-blue-600 to-purple-600 opacity-90 p-3 font-semibold'>
 			<NavbarContent>
 				<Button
 					className="md:hidden bg-transparent min-w-0 p-0"
@@ -101,10 +101,10 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 			{(!isAuthenticated || isProfileLoading) && (
 				<NavbarContent justify="end">
 					<NavbarItem className="flex ">
-						<Link color="success" href={createLocalizedUrl(lang, URLS_PAGES.AUTH)}>{dictionary.header.login}</Link>
+						<Link color="primary" href={createLocalizedUrl(lang, URLS_PAGES.AUTH)}>{dictionary.header.login}</Link>
 					</NavbarItem>
 					<NavbarItem>
-						<Button as={Link} color="success" href={createLocalizedUrl(lang, URLS_PAGES.REG)} variant="solid">
+						<Button as={Link} color="secondary" href={createLocalizedUrl(lang, URLS_PAGES.REG)} variant="solid">
 							{dictionary.header.registration}
 						</Button>
 					</NavbarItem>

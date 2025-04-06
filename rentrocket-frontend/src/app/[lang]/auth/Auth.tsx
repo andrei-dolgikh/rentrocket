@@ -2,12 +2,12 @@
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import Loader from '@/components/ui/Loader'
-import { useState} from 'react'
+import { useState } from 'react'
 import { FormEvent } from 'react'
 import { toast } from 'sonner'
 import { useLanguage } from '../../../app/[lang]/languageContext';
 import { IAuthForm } from '@/types/auth.types'
-import { Input } from "@heroui/react";
+import { Card, Input, CardHeader, CardBody } from "@heroui/react";
 import { authService } from '@/services/auth.service'
 import { useAuth } from '../authContext';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
@@ -57,62 +57,105 @@ export function Auth() {
 		}
 		auth(authData)
 	}
-	return (isAuthPending && isAuthSuccess) ? (
+	return isAuthPending && isAuthSuccess ? (
 		<Loader />
 	) : (
-		<div className='flex '>
-			<form
-				className='w-[303px] m-auto rounded-xl min-h-full py-[50px]'
-				onSubmit={onSubmit}
-			>
-				<Input
-					id="login"
-					className="mb-4 min-w-[303px]"
-					label="Логин:"
-					name='login'
-					onChange={(e) => setFormData({ ...formData, login: e.target.value })}
-					value={formData.login}
-					autoComplete={"username"}
-				/>
-				<Input
-					id="password"
-					className="mb-4 min-w-[303px] "
-					label="Пароль:"
-					name='password'
-					type='password'
-					onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-					value={formData.password}
-					autoComplete={"current-password"}
-				/>
-				<div className='w-[303px] my-[50px] mx-auto'>
-					<HCaptcha
-						sitekey={SITE_KEY as string}
-						onVerify={handleVerificationSuccess}
-					/>
-				</div>
+		<div className="flex justify-center items-center min-h-[80vh]">
+			<Card className="w-full max-w-md shadow-xl">
+				<CardHeader className="pb-0 pt-6 px-6 flex flex-col items-center">
+					<h1 className="text-2xl font-bold text-center">Вход в систему</h1>
+					<p className="text-default-500 text-sm mt-1">Введите данные для авторизации</p>
+				</CardHeader>
 
-				<div className='flex flex-col gap-5 justify-center  min-w-[303px]'>
+				<CardBody className="px-6 py-4">
+					<form
+						className="flex flex-col gap-4"
+						onSubmit={onSubmit}
+					>
+						<Input
+							id="login"
+							label="Логин"
+							name="login"
+							variant="bordered"
+							radius="sm"
+							size="lg"
+							onChange={(e) => setFormData({ ...formData, login: e.target.value })}
+							value={formData.login}
+							autoComplete="username"
+							startContent={
+								<i className="fas fa-user text-default-400 text-sm" />
+							}
+							classNames={{
+								inputWrapper: "border-1"
+							}}
+						/>
 
-					<Button
-						color={isFormValid ? "success" : "default"}
-						radius="md"
-						size="lg"
-						className=' m-auto w-full'
-						type='submit'
-						disabled={!isFormValid}
-					>Вход</Button>
+						<Input
+							id="password"
+							label="Пароль"
+							name="password"
+							type="password"
+							variant="bordered"
+							radius="sm"
+							size="lg"
+							onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+							value={formData.password}
+							autoComplete="current-password"
+							startContent={
+								<i className="fas fa-lock text-default-400 text-sm" />
+							}
+							classNames={{
+								inputWrapper: "border-1"
+							}}
+						/>
 
-					<Link href={createLocalizedUrl(lang, '/register')} className=' text-center text-[#fff] '>
-					<Button
-						color={"secondary"}
-						radius="md"
-						size="lg"
-						className=' m-auto w-full'
-					>Регистрация</Button>
-					</Link>
+						<div className="flex justify-center my-4">
+							<HCaptcha
+								sitekey={SITE_KEY as string}
+								onVerify={handleVerificationSuccess}
+							/>
+						</div>
 
-				</div>
-			</form>
+						<div className="flex flex-col gap-3 mt-2">
+							<Button
+								color={isFormValid ? "success" : "default"}
+								radius="sm"
+								size="lg"
+								type="submit"
+								disabled={!isFormValid}
+								className="w-full font-medium"
+							>
+								Войти
+							</Button>
+
+							<div className="relative flex items-center py-2">
+								<div className="flex-grow border-t border-gray-600 opacity-30"></div>
+								<span className="flex-shrink mx-3 text-default-500 text-sm">или</span>
+								<div className="flex-grow border-t border-gray-600 opacity-30"></div>
+							</div>
+
+							<Link
+								href={createLocalizedUrl(lang, '/register')}
+								className="w-full"
+							>
+								<Button
+									color="secondary"
+									variant="flat"
+									radius="sm"
+									size="lg"
+									className="w-full font-medium"
+								>
+									Зарегистрироваться
+								</Button>
+							</Link>
+						</div>
+
+						<p className="text-center text-default-500 text-sm mt-4">
+							Забыли пароль? <Link href={createLocalizedUrl(lang, '/reset-password')} className="text-primary">Восстановить</Link>
+						</p>
+					</form>
+				</CardBody>
+			</Card>
 		</div>
-	)
+	);
 }

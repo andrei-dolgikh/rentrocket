@@ -12,7 +12,7 @@ export default async function Home({
 
   return (
     <>
-      <MainLayout dictionary={dictionary} />
+      <MainLayout dictionary={dictionary} lang={lang} />
     </>
   )
 }
