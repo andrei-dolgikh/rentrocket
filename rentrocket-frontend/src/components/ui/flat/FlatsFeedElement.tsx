@@ -1,7 +1,5 @@
 'use client'
 import Link from 'next/link'
-// import { Chip } from "@heroui/chip";
-// import { getColor } from '@/components/ui/tag/TagChip'
 import { useLanguage } from '../../../app/[lang]/languageContext';
 import { createLocalizedUrl } from '../../../utils/utils'
 import { IFlatResponse } from '../../../types/flat.types'
@@ -9,12 +7,7 @@ import useImage from '@/hooks/useImage';
 import DOMPurify from 'dompurify';
 import { Checkbox } from "@heroui/react"
 import { Image, Button } from "@heroui/react";
-import { Card } from '@heroui/react';
-
-enum CardType {
-    Admin = 'admin',
-    Client = 'client',
-}
+import { Card, CardBody } from '@heroui/react';
 
 export function FlatsFeedElement({
     flat,
@@ -39,58 +32,67 @@ export function FlatsFeedElement({
     }
 
     return (
-        <Card className={`flex flex-row justify-start items-center w-full `}>
-            <Link href={flatLinkClient} className='cursor-pointer'>
-                {flat.iconUrl &&
+        <Card className={`flex flex-row justify-start items-center w-full overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 `}>
+            <div className="flex flex-col md:flex-row">
+                <Link href={flatLinkClient} className='cursor-pointer'>
+                    {flat.iconUrl &&
 
-                    <Image
-                        alt={flat.name || 'flat image'}
-                        height={250}
-                        src={useImage(flat.iconUrl)}
-                        width={250}
-                        className='opacity-1'
-                    />
-                }
-            </Link>
-            <div className={`
-                px-[8px] 
-                py-[5px] 
-                lg:py-[5px] 
-                lg:px-[20px] 
-                flex
-                flex-col
-                justify-between
-                w-full `
-            }>
-                <div>
+                        <Image
+                            alt={flat.name || 'flat image'}
+                            height={250}
+                            src={useImage(flat.iconUrl)}
+                            width={250}
+                            className='opacity-1'
+                        />
+                    }
+                </Link>
 
-                    <div className='text-black  flex flex-row justify-between'>
-                        <div>
-                            <Link href={flatLinkAdmin} className='cursor-pointer'>
-                                <div className='text-[16px] lg:text-[32px]'>{flat.name}</div>
-                            </Link>
-                        </div>
-                        {/* <div className='flex flex-row flex-wrap items-center gap-2'>
-                            {flat?.tags?.map((tag) => (
-                                <Chip key={tag.id} radius="full" color={getColor(tag.name)} size="md" className='text-[12px] lg:text-[16px] '>
-                                    {tag.name}
-                                </Chip>
-                            ))}
-                        </div> */}
-                    </div>
-                    <div
-                        className='text-[14px] lg:text-[16px] text-[#999999] py-[3px] lg:py-[10px]'
-                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(flatDescriptionCut) }}></div>
-                </div>
-
-
-                <div className='text-[10px] lg:text-[14px] text-[#999999] mt-5 flex flex-row justify-between'>
-                        <Button as={Link} color="primary" href={flatLinkAdmin} variant="solid">
-                            {dictionary.main.edit}
-                        </Button>
-                </div>
             </div>
-            {showCheckbox && <Checkbox className='m-3' onChange={handleCheckboxChange} />}
+                            
+                            <CardBody className="flex flex-col justify-between md:w-2/3 lg:w-3/4 p-4 md:p-6">
+                                <div>
+                                    <div className="flex justify-between items-start mb-2">
+                                        <Link href={flatLinkAdmin} className="block">
+                                            <h3 className="text-xl md:text-2xl font-semibold text-gray-800 hover:text-primary transition-colors">
+                                                {flat.name}
+                                            </h3>
+                                        </Link>
+                                    </div>
+                                    
+                                    {flat.address && (
+                                        <div className="flex items-center text-gray-500 mb-3 text-sm">
+                                            <i className="fas fa-map-marker-alt mr-2"></i>
+                                            <span>{flat.address}</span>
+                                        </div>
+                                    )}
+                                    
+                                    <p className="text-gray-600 mb-4 line-clamp-3">
+                                        {flatDescriptionCut}
+                                    </p>
+                                </div>
+                                
+                                <div className="flex items-center justify-between mt-2">
+                                    <div className="flex gap-2">
+                                        <Button 
+                                            as={Link} 
+                                            href={flatLinkAdmin} 
+                                            color="primary" 
+                                            variant="solid"
+                                            size="md"
+                                        >
+                                            {dictionary.main.edit}
+                                        </Button>
+                                    </div>
+                                    
+                                    {showCheckbox && (
+                                        <Checkbox 
+                                            onChange={handleCheckboxChange} 
+                                            size="lg"
+                                            color="primary"
+                                        />
+                                    )}
+                                </div>
+                            </CardBody>
         </Card>
     )
 }
