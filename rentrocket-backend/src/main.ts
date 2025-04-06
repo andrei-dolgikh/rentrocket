@@ -7,8 +7,8 @@ import * as path from 'path';
 async function bootstrap() {
 
   const httpsOptions = {
-    key: fs.readFileSync(path.join(__dirname, '../ssl/certs/private_key')),
-    cert: fs.readFileSync(path.join(__dirname, '../ssl/certs/certificate')),
+    key: fs.readFileSync(path.join(__dirname, '../src/ssl/certs/private_key')),
+    cert: fs.readFileSync(path.join(__dirname, '../src/ssl/certs/certificate')),
   };
 
   const app = await NestFactory.create(AppModule,  { httpsOptions });
