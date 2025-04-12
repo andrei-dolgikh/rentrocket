@@ -149,6 +149,102 @@ export class FlatService {
     });
   }
 
+  async addRenter(flatId: string, renterId: string) {
+    return this.prisma.flat.update({
+      where: { id: flatId },
+      data: {
+        renters: {
+          connect: {
+            id: renterId
+          }
+        }
+      },
+      include: {
+        renters: true
+      }
+    });
+  }
+
+  async removeRenter(flatId: string, renterId: string) {
+    return this.prisma.flat.update({
+      where: { id: flatId },
+      data: {
+        renters: {
+          disconnect: {
+            id: renterId
+          }
+        }
+      },
+      include: {
+        renters: true
+      }
+    });
+  }
+
+  async addManager(flatId: string, managerId: string) {
+    return this.prisma.flat.update({
+      where: { id: flatId },
+      data: {
+        managers: {
+          connect: {
+            id: managerId
+          }
+        }
+      },
+      include: {
+        managers: true
+      }
+    });
+  }
+
+  async removeManager(flatId: string, managerId: string) {
+    return this.prisma.flat.update({
+      where: { id: flatId },
+      data: {
+        managers: {
+          disconnect: {
+            id: managerId
+          }
+        }
+      },
+      include: {
+        managers: true
+      }
+    });
+  }
+
+  async addOwner(flatId: string, ownerId: string) {
+    return this.prisma.flat.update({
+      where: { id: flatId },
+      data: {
+        owners: {
+          connect: {
+            id: ownerId
+          }
+        }
+      },
+      include: {
+        owners: true
+      }
+    });
+  }
+
+  async removeOwner(flatId: string, ownerId: string) {
+    return this.prisma.flat.update({
+      where: { id: flatId },
+      data: {
+        owners: {
+          disconnect: {
+            id: ownerId
+          }
+        }
+      },
+      include: {
+        owners: true
+      }
+    });
+  }
+
 
   async addImagesToFlat(flatId: string, imageUrls: string[]) {
     const flat = await this.prisma.flat.findUnique({

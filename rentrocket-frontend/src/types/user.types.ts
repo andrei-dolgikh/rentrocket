@@ -15,6 +15,13 @@ export enum Roles {
 	user = 'user'
 }
 
+export enum FlatUserRoles {
+	owner = 'owner',
+	renter = 'renter',
+	manager = 'manager'
+}
+
+
 export const roleTranslations = {
 	[Roles.admin]: 'Администратор',
 	[Roles.user]: 'Пользователь',

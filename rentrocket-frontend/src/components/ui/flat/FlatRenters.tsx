@@ -38,7 +38,7 @@ const columns = [
   },
   {
     key: "users:roles",
-    label: "Роли",
+    label: "Роль в квартире",
   },
   {
     key: "users:actions",
@@ -48,7 +48,7 @@ const columns = [
 
 
 
-export function FlatRenters() {
+export function FlatRenters({ flatId }: { flatId: string }) {
   const { data, isLoading } = useUsersData()
 	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 
@@ -58,19 +58,7 @@ export function FlatRenters() {
     <Loader />
   ) : (
     <div className='text-black'>
-      <div className='flex justify-between items-center mb-[10px]'>
-        <div className='flex items-center gap-5'>
-          <Link href={createLocalizedUrl(lang, '/myspace/users/create')}>
-            <Button 
-              color="primary"
-              >
-              Добавить арендатора
-            </Button>
-          </Link>
-        </div>
-
-      </div>
-      <FlatUsersTable columns={columns} rows={data} />
+      <FlatUsersTable columns={columns} rows={data} flatId={flatId} />
     </div>
   )
 }

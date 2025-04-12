@@ -72,7 +72,7 @@ export function MainPage({
                   <div className="flex flex-col gap-3">
                     <Button
                       as={Link}
-                      href={createLocalizedUrl(lang, '/login')}
+                      href={createLocalizedUrl(lang, '/auth')}
                       color="primary"
                       radius="sm"
                       size="lg"
