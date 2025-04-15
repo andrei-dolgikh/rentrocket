@@ -101,8 +101,8 @@ export class AuthService {
 
         res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
             httpOnly: true,
-            domain: 'localhost',
-            // domain: '.lockshield.online',
+            // domain: 'localhost',
+            domain: '.lockshield.online',
             expires: expiresIn,
             secure: true,
             sameSite: 'none'
@@ -112,8 +112,8 @@ export class AuthService {
     removeRefreshTokenFromResponse(res: Response) {
         res.cookie(this.REFRESH_TOKEN_NAME, '', {
             httpOnly: true,
-            domain: 'localhost',
-            // domain: '.lockshield.online',
+            // domain: 'localhost',
+            domain: '.lockshield.online',
             expires: new Date(0),
             secure: true,
             sameSite: 'none'
