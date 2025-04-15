@@ -5,7 +5,7 @@ import { flatService } from '@/services/flat.service'
 
 export function useFlat(id: string) {
 	const { data, isLoading : isFlatLoading, isSuccess : isFlatSuccess } = useQuery({
-		queryKey: ['flat'],
+		queryKey: ['flats', id],
 		queryFn: () => flatService.getById(id)
 	})
 	

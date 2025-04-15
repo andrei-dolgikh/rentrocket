@@ -119,18 +119,71 @@ export class FlatController {
     return this.flatService.addImagesToFlat(flatId, imageUrls);
   }
 
-
-  @UsePipes(new ValidationPipe())
-  @HttpCode(200)
-  @Put('renters/:flatId')
+  @Post('add-renters/:flatId')
   @Auth()
   @UseGuards(JwtGuard, RolesGuard)
   @RoleUser()
-  async updateRenters(
+  async addRenter(
     @Param('flatId') flatId: string,
-    @Body() renterIds: string[]
+    @Body() renterId: string
   ) {
-    return this.flatService.updateRenters(flatId, renterIds);
+    console.log(renterId) 
+    return this.flatService.addRenter(flatId, renterId);
+  }
+
+  @Post('remove-renters/:flatId')
+  @Auth()
+  @UseGuards(JwtGuard, RolesGuard)
+  @RoleUser()
+  async removeRenter(
+    @Param('flatId') flatId: string,
+    @Body() renterId: string
+  ) {
+    return this.flatService.removeRenter(flatId, renterId);
+  }
+
+  @Post('add-managers/:flatId')
+  @Auth()
+  @UseGuards(JwtGuard, RolesGuard)
+  @RoleUser()
+  async addManager(
+    @Param('flatId') flatId: string,
+    @Body() managerId: string
+  ) {
+    return this.flatService.addManager(flatId, managerId);
+  }
+
+  @Post('remove-managers/:flatId')
+  @Auth()
+  @UseGuards(JwtGuard, RolesGuard)
+  @RoleUser()
+  async removeManager(
+    @Param('flatId') flatId: string,
+    @Body() managerId: string
+  ) {
+    return this.flatService.removeManager(flatId, managerId);
+  }
+
+  @Post('add-owners/:flatId')
+  @Auth()
+  @UseGuards(JwtGuard, RolesGuard)
+  @RoleUser()
+  async addOwner(
+    @Param('flatId') flatId: string,
+    @Body() ownerId: string
+  ) {
+    return this.flatService.addOwner(flatId, ownerId);
+  }
+
+  @Post('remove-owners/:flatId')
+  @Auth()
+  @UseGuards(JwtGuard, RolesGuard)
+  @RoleUser()
+  async removeOwner(
+    @Param('flatId') flatId: string,
+    @Body() ownerId: string
+  ) {
+    return this.flatService.removeOwner(flatId, ownerId);
   }
 }
 

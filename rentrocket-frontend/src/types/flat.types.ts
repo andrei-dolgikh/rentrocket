@@ -20,6 +20,10 @@ export interface IFlatResponse extends IBase {
 	updatedAt: string
 }
 
+export interface IFlatUsersUpdateRequest {
+	userId?: string
+}
+
 export interface IFlatCreateRequest {
 	name: string
 	description?: string

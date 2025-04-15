@@ -1,4 +1,4 @@
-import type { IFlatResponse, IFlatUpdateRequest, IFlatCreateRequest } from '@/types/flat.types'
+import type { IFlatResponse, IFlatUpdateRequest, IFlatCreateRequest, IFlatUsersUpdateRequest } from '@/types/flat.types'
 import { axiosWithAuth } from '@/api/interceptors'
 
 class FlatService {
@@ -34,9 +34,35 @@ class FlatService {
 		return response
 	}
 
-	updateFlatRenters(flatId: string, renterIds: string[]) {
-		return axiosWithAuth.put<IFlatResponse>(`/${this.BASE_URL}/renters/${flatId}`, renterIds);
-	  }
+	async addRenter(flatId: string, data: IFlatUsersUpdateRequest) {
+		const response = await axiosWithAuth.post(`${this.BASE_URL}/add-renters/${flatId}`,  data)
+		return response
+	}
+
+	async removeRenter(flatId: string, data: IFlatUsersUpdateRequest) {
+		const response = await axiosWithAuth.post(`${this.BASE_URL}/remove-renters/${flatId}`,  data)
+		return response
+	}
+
+	async addManager(flatId: string, data: IFlatUsersUpdateRequest) {
+		const response = await axiosWithAuth.post(`${this.BASE_URL}/add-managers/${flatId}`,  data)
+		return response
+	}
+
+	async removeManager(flatId: string, data: IFlatUsersUpdateRequest) {
+		const response = await axiosWithAuth.post(`${this.BASE_URL}/remove-managers/${flatId}`,  data)
+		return response
+	}
+
+	async addOwner(flatId: string, data: IFlatUsersUpdateRequest) {
+		const response = await axiosWithAuth.post(`${this.BASE_URL}/add-owners/${flatId}`,  data)
+		return response
+	}
+
+	async removeOwner(flatId: string, data: IFlatUsersUpdateRequest) {
+		const response = await axiosWithAuth.post(`${this.BASE_URL}/remove-owners/${flatId}`,  data)
+		return response
+	}
 }
 
 export const flatService = new FlatService()

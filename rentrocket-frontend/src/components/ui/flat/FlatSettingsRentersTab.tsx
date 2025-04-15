@@ -1,9 +1,9 @@
 import { FlatRenters } from '@/components/ui/flat/FlatRenters'
 
-export function FlatSettingsRentersTab() {
+export function FlatSettingsRentersTab( { flatId }: { flatId: string }) {
   return (
     <div className='flex flex-col'>
-          <FlatRenters />
+          <FlatRenters  flatId={flatId}/>
     </div>
   )
 }
