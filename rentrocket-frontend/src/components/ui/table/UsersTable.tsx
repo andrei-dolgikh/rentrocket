@@ -12,14 +12,17 @@ import { TagChip } from '@/components/ui/tag/TagChip'
 
 export function UsersTable({ columns, rows }: { columns: Array<any>, rows: Array<any> }) {
   const { deleteUser } = useDeleteUser();
+  const [isLoading, setIsLoading] = useState(false);
   const [isDeleteUserConformationOpen, setIsDeleteUserConformationOpen] = useState(false);  
   const [selectedUserId, setSelectedUserId] = useState(undefined);
 
 
   const handleDeleteLink = (userId?: string) => {
+    setIsLoading(true);
     if (!userId) return;
     deleteUser(userId);
     setIsDeleteUserConformationOpen(false);
+    setIsLoading(false);
   };
 
   const renderCell = React.useCallback((subject: any, columnKey: any) => {
@@ -114,6 +117,7 @@ export function UsersTable({ columns, rows }: { columns: Array<any>, rows: Array
     </Table>
       {isDeleteUserConformationOpen && (
         <Confirmation
+          isLoading={isLoading}
           isOpen={isDeleteUserConformationOpen}
           actionLabel="Удалить пользователя"
           actionHeader="Подтвердите удаление пользователя"
