@@ -26,22 +26,22 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 
 	const menuItems = useMemo(() => [
 		{
-		  label: dictionary.header.about,
-		  href: URLS_PAGES.INFO,
+			label: dictionary.header.about,
+			href: URLS_PAGES.INFO,
 		},
 		{
-		  label: dictionary.header.DUmap,
-		  href: URLS_PAGES.MYSPACE_TAGS,
+			label: dictionary.header.DUmap,
+			href: URLS_PAGES.MYSPACE_TAGS,
 		},
 		{
-		  label: dictionary.header.dictionary,
-		  href: URLS_PAGES.AUTH,
+			label: dictionary.header.dictionary,
+			href: URLS_PAGES.AUTH,
 		},
 		{
-		  label: dictionary.header.flats,
-		  href: URLS_PAGES.MYSPACE_FLATS,
+			label: dictionary.header.flats,
+			href: URLS_PAGES.MYSPACE_FLATS,
 		},
-	  ], [dictionary]);
+	], [dictionary]);
 
 	return (
 		<Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} position="static" className='bg-gradient-to-r from-blue-600 to-purple-600 opacity-90 p-3 font-semibold'>
@@ -91,10 +91,10 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 			</NavbarContent>
 			{isAuthenticated && !isProfileLoading && (
 				<>
-				<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.PROFILE)}>
-					<div>{profile?.user?.name}</div>
-				</Link>
-				<LogoutButton dictionary={dictionary} />
+					<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.PROFILE)}>
+						<div>{profile?.user?.name}</div>
+					</Link>
+					<LogoutButton dictionary={dictionary} />
 				</>
 			)}
 
@@ -111,18 +111,18 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 				</NavbarContent>
 
 			)}
-			<NavbarMenu className='bg-brandGray z-10 p-3'>
+			<StyledNavbarMenu isOpen={isMenuOpen}>
 				{menuItems.map((item, index) => (
-					<NavbarMenuItem key={`${item}-${index}`}>
+					<NavbarMenuItem key={`${item}-${index}`} className="py-2 hover:bg-blue-600/30 rounded-md transition-colors">
 						<Link
-							className="w-full text-white"
+							className="w-full flex items-center text-white font-medium px-3 py-2"
 							href={createLocalizedUrl(lang, item.href)}
 						>
 							{item.label}
 						</Link>
 					</NavbarMenuItem>
 				))}
-			</NavbarMenu>
+			</StyledNavbarMenu>
 
 		</Navbar>
 
@@ -130,3 +130,12 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 	)
 })
 
+const StyledNavbarMenu = ({ isOpen, children }: { isOpen: boolean, children: React.ReactNode }) => {
+	return (
+	  <NavbarMenu className="bg-gradient-to-b from-blue-700 to-purple-800 mt-3 rounded-b-lg shadow-lg p-0 overflow-hidden z-50 opacity-100">
+		<div className="px-4 py-5 space-y-4">
+		  {children}
+		</div>
+	  </NavbarMenu>
+	);
+  };
