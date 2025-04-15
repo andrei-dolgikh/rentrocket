@@ -110,7 +110,8 @@ export function UpdateFlat(
 				{ id: 'neighbors', label: 'Соседи' },
 				{ id: 'documents', label: 'Документы' },
 				{ id: 'investments', label: 'Инвестиции' },
-				{ id: 'notes', label: 'Заметки' }
+				{ id: 'notes', label: 'Заметки' },
+				{ id: 'internet', label: 'Интернет и телефон' }
 			]
 		}
 	];
