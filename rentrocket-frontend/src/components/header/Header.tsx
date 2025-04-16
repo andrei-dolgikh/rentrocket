@@ -111,12 +111,13 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 				</NavbarContent>
 
 			)}
-			<StyledNavbarMenu isOpen={isMenuOpen}>
+			<StyledNavbarMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
 				{menuItems.map((item, index) => (
 					<NavbarMenuItem key={`${item}-${index}`} className="py-2 hover:bg-blue-600/30 rounded-md transition-colors">
 						<Link
 							className="w-full flex items-center text-white font-medium px-3 py-2"
 							href={createLocalizedUrl(lang, item.href)}
+							onClick={() => setIsMenuOpen(false)}
 						>
 							{item.label}
 						</Link>
@@ -130,12 +131,20 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 	)
 })
 
-const StyledNavbarMenu = ({ isOpen, children }: { isOpen: boolean, children: React.ReactNode }) => {
+const StyledNavbarMenu = ({ isOpen, children, onClose }: { isOpen: boolean, children: React.ReactNode, onClose: () => void }) => {
 	return (
-	  <NavbarMenu className="bg-gradient-to-b from-blue-700 to-purple-800 mt-3 rounded-b-lg shadow-lg p-0 overflow-hidden z-50 opacity-100">
-		<div className="px-4 py-5 space-y-4">
-		  {children}
-		</div>
-	  </NavbarMenu>
+		<NavbarMenu className="bg-gradient-to-b from-blue-700 to-purple-800 mt-3 rounded-b-lg shadow-lg p-0 overflow-hidden z-50 opacity-100">
+			<div className="flex justify-end p-2">
+				<Button
+					className="bg-transparent min-w-0 p-1 hover:bg-blue-600/30 rounded-full"
+					onClick={onClose}
+				>
+					<X className="h-6 w-6 text-white" />
+				</Button>
+			</div>
+			<div className="px-4 py-3 space-y-4">
+				{children}
+			</div>
+		</NavbarMenu>
 	);
-  };
+};
