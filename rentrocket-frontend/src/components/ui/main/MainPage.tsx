@@ -128,10 +128,10 @@ export function MainPage({
               <i className="fas fa-search text-blue-600 text-2xl"></i>
             </div>
             <h3 className="text-xl font-semibold mb-3">
-              {dictionary.main.feature1Title || "Простой поиск"}
+              {dictionary.main.feature1Title}
             </h3>
             <p className="text-gray-600">
-              {dictionary.main.mainText3}
+              {dictionary.main.feature1Text}
             </p>
           </div>
 
@@ -141,10 +141,10 @@ export function MainPage({
               <i className="fas fa-shield-alt text-purple-600 text-2xl"></i>
             </div>
             <h3 className="text-xl font-semibold mb-3">
-              {dictionary.main.feature2Title || "Безопасная аренда"}
+              {dictionary.main.feature2Title}
             </h3>
             <p className="text-gray-600">
-              {dictionary.main.mainText4}
+              {dictionary.main.feature2Text}
             </p>
           </div>
 
@@ -154,10 +154,10 @@ export function MainPage({
               <i className="fas fa-home text-green-600 text-2xl"></i>
             </div>
             <h3 className="text-xl font-semibold mb-3">
-              {dictionary.main.feature3Title || "Комфортное проживание"}
+              {dictionary.main.feature3Title }
             </h3>
             <p className="text-gray-600">
-              {dictionary.main.feature3Text || "Широкий выбор комфортабельного жилья для краткосрочной и долгосрочной аренды."}
+              {dictionary.main.feature3Text}
             </p>
           </div>
         </div>
