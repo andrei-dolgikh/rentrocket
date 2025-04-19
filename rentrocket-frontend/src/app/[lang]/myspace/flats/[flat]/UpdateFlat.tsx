@@ -141,7 +141,7 @@ export function UpdateFlat(
 	return isFlatLoading ? (
 		<Loader />
 	) : (
-		<div>
+		<div className="flex flex-col md:flex-row">
 			<form
 				className='mx-auto'
 				onSubmit={onUpdateSubmit}
