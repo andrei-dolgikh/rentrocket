@@ -141,7 +141,7 @@ export function UpdateFlat(
 	return isFlatLoading ? (
 		<Loader />
 	) : (
-		<div className="flex flex-col md:flex-row">
+		<div className="flex flex-row">
 			<form
 				className='mx-auto'
 				onSubmit={onUpdateSubmit}
@@ -151,7 +151,7 @@ export function UpdateFlat(
 					<Button type='submit' color="primary" isDisabled={formDisabled}>Сохранить квартиру</Button>
 				</div>
 
-				<div className='flex gap-6'>
+				<div className='flex flex-col md:flex-row gap-6'>
 					<Card className="w-64 h-fit">
 						<div className="p-2">
 							{menuItems.map((category, index) => (
