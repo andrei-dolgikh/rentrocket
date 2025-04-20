@@ -13,8 +13,9 @@ async function bootstrap() {
   };
 
   // const app = await NestFactory.create(AppModule,  { httpsOptions });
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule,  { httpsOptions });
   const configService = app.get(ConfigService);
+  const FRONTEND_URL = configService.get('FRONTEND_URL');
 
   app.setGlobalPrefix('api');
   app.use(cookieParser());
@@ -22,8 +23,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      // 'http://localhost:3000',
-      configService.get('FRONTEND_URL'),
+      FRONTEND_URL,
     ],
     credentials: true,
     exposedHeaders: ['set-cookie'],

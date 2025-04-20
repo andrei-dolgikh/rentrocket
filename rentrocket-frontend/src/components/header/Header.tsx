@@ -31,7 +31,7 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 		},
 		{
 			label: dictionary.header.DUmap,
-			href: URLS_PAGES.MYSPACE_TAGS,
+			href: URLS_PAGES.MYSPACE_FLATS,
 		},
 		{
 			label: dictionary.header.dictionary,
