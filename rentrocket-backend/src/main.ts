@@ -20,12 +20,10 @@ async function bootstrap() {
   app.use(cookieParser());
 
 
-
   app.enableCors({
     origin: [
       // 'http://localhost:3000',
       configService.get('FRONTEND_URL'),
-      'https://rentrocket.lockshield.online',
     ],
     credentials: true,
     exposedHeaders: ['set-cookie'],

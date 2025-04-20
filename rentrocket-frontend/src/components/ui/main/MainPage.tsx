@@ -1,6 +1,7 @@
 'use client'
 import { Button, Card, CardBody, Divider } from "@heroui/react";
 import Link from 'next/link';
+import { useAuth } from '../../../app/[lang]/authContext';
 import { createLocalizedUrl } from '../../../utils/utils';
 
 export function MainPage({
@@ -10,6 +11,9 @@ export function MainPage({
   dictionary: Record<string, any>,
   lang: string
 }) {
+
+  const { isAuthenticated, profile, isProfileLoading } = useAuth();
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Hero Section */}
@@ -58,6 +62,7 @@ export function MainPage({
             </div>
 
             {/* Auth Card */}
+			{(!isAuthenticated || isProfileLoading) && (
             <div className="md:w-5/12">
               <Card className="shadow-xl bg-white/95 backdrop-blur-sm">
                 <CardBody className="px-6 py-8">
@@ -104,6 +109,7 @@ export function MainPage({
                 </CardBody>
               </Card>
             </div>
+      )}
           </div>
         </div>
 
