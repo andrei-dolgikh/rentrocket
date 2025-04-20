@@ -8,6 +8,11 @@ const nextConfig = {
         hostname: 'localhost',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'backend.lockshield.online',
+        pathname: '/**',
+      },
     ],
   },
   // i18n: {

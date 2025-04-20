@@ -1,6 +1,5 @@
 import DOMPurify from 'dompurify';
 import { IFlatResponse } from '@/types/flat.types'
-import { TagChip } from '@/components/ui/tag/TagChip'
 import Image from 'next/image'
 import useImage from '@/hooks/useImage';
 
