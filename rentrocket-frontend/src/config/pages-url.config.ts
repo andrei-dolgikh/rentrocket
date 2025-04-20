@@ -10,9 +10,11 @@ class URLS {
 	MYSPACE_TAGS = `${this.myspace_zone}/tags`
 
 
+
 	HOME = '/'
 	MYSPACE = `${this.myspace_zone}`
 	PROFILE = `/profile`
+	HELP = '/help'
 
 	ADMIN_DASHBOARD = `${this.admin_zone}`
 	ADMIN_FLATS = `${this.admin_zone}/flats`

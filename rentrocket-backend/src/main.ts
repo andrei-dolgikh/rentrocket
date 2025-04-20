@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 import * as fs from 'fs';
 import * as path from 'path';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
 
@@ -13,6 +14,7 @@ async function bootstrap() {
 
   // const app = await NestFactory.create(AppModule,  { httpsOptions });
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
 
   app.setGlobalPrefix('api');
   app.use(cookieParser());
@@ -22,6 +24,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       // 'http://localhost:3000',
+      configService.get('FRONTEND_URL'),
       'https://rentrocket.lockshield.online',
     ],
     credentials: true,

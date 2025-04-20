@@ -35,7 +35,7 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 		},
 		{
 			label: dictionary.header.dictionary,
-			href: URLS_PAGES.AUTH,
+			href: URLS_PAGES.HELP,
 		},
 		{
 			label: dictionary.header.flats,
@@ -69,13 +69,15 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 						{dictionary.header.about}
 					</Link>
 				</NavbarItem>
+
+				
 				<NavbarItem isActive>
 					<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_FLATS)}>
 						{dictionary.header.DUmap}
 					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_FLATS)}>
+					<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.HELP)}>
 						{dictionary.header.dictionary}
 					</Link>
 				</NavbarItem>

@@ -102,7 +102,7 @@ export class AuthService {
         res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
             httpOnly: true,
             // domain: 'localhost',
-            domain: '.lockshield.online',
+            domain: this.configService.get('TOKEN_DOMAIN'),
             expires: expiresIn,
             secure: true,
             sameSite: 'none'
@@ -113,7 +113,7 @@ export class AuthService {
         res.cookie(this.REFRESH_TOKEN_NAME, '', {
             httpOnly: true,
             // domain: 'localhost',
-            domain: '.lockshield.online',
+            domain: this.configService.get('TOKEN_DOMAIN'),
             expires: new Date(0),
             secure: true,
             sameSite: 'none'

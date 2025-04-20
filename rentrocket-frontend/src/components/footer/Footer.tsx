@@ -11,7 +11,7 @@ export function Footer({ lang, dictionary }: { lang: string; dictionary: Record<
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-brandGray text-white py-12 mt-auto">
+    <footer className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12 mt-auto">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">

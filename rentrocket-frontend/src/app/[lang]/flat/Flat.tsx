@@ -1,19 +1,28 @@
-// 'use client'
+'use client'
 import React from 'react';
-import { IFlatResponse } from '@/types/flat.types'
+import { useFlat } from '../myspace/flats/hooks/useFlat';
+import Loader from '@/components/ui/Loader'
+import { Card } from "@heroui/react";
 import { FlatHeader } from '@/components/ui/flat/FlatHeader'
 
-export  function Flat({ flat }: { flat?: IFlatResponse }) {
-
-    if (!flat) 
-		return <div>Материал не найден</div>
+export function Flat({ flatId }: { flatId?: string }) {
+	if (!flatId) return <div>Квартира не найдена</div>
 
 
-	
+	const { flat, isFlatSuccess, isFlatLoading } = useFlat(flatId)
+	if (!flat)
+		return <div>Квартира не найдена</div>
 
 	return (
 		<div className=' lg:px-[30px]'>
-			<FlatHeader flat={flat}/>
+			{isFlatLoading && <Loader />}
+			{isFlatSuccess && !flat &&
+
+				<Card className="p-5 mt-5">
+					<h1>Здесь ничего нет.</h1>
+				</Card>
+			}
+			<FlatHeader flat={flat} />
 			<div className="xl:mx-auto flex flex-col">
 			</div>
 		</div>

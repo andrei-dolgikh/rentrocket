@@ -12,13 +12,18 @@ nodejs-container - здесь расположено само приложени
 ## Установка и запуск
 ### Создай .env файл в корне проекта
 ```
-DB_URL="postgresql://rentrocketadmin:xnr4nrjeez34nHSB2$32kdDk3ms@postgres:5432/rentrocket?schema=public"
-JWT_SECRET="bhrc3c34njrc=dc34mrkc3*$#cr4vjnXC&c3kn32llce1n"
-CAPTCHA_KEY="ES_5ea2c8b495c14adbb15abc5557dbe53a"
-DOMAIN="localhost"
-POSTGRES_USER=rentrocketadmin
-POSTGRES_PASSWORD=xnr4nrjeez34nHSB2$32kdDk3ms
-POSTGRES_DB=rentrocket
+DB_URL="postgresql://user:pass@postgres:5432/db?schema=public"
+JWT_SECRET="secret"
+CAPTCHA_KEY="key"
+# DOMAIN="localhost"
+TOKEN_DOMAIN="localhost"
+# TOKEN_DOMAIN=".lockshield.online"
+FRONTEND_URL="localhost"
+# FRONTEND_URL="https://rentrocket.lockshield.online"
+POSTGRES_USER=user
+POSTGRES_PASSWORD=pass
+POSTGRES_DB=db
+
 
 
 ```
@@ -51,7 +56,7 @@ psql -U rentrocketadmin -d rentrocket
 UPDATE "users" SET "roles" = ARRAY['user'::"Roles"] WHERE "login" = 'perdus_merdus';
 ```
 
-## Настройка
+## Настройка (неактуально с переходом на env)
 
 В rentrocket-backend/src/main.ts нужно указать домен фронта в app.enableCors.
 

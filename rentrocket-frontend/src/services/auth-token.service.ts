@@ -16,7 +16,8 @@ export const getAccessToken = () => {
   };
 export const saveTokenStorage = (accessToken: string) => {
 	Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, {
-		domain: '.lockshield.online',
+		domain: process.env.NEXT_PUBLIC_TOKEN_DOMAIN,
+		// domain: '.lockshield.online',
 		// domain: 'localhost',
 		sameSite: 'none',
 		secure: true, 

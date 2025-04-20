@@ -2,7 +2,7 @@
   "header": {
     "about": "About the system",
     "DUmap": "Trusted managers map",
-    "dictionary": "Dictionary",
+    "dictionary": "Help",
     "exit": "Exit",
     "login": "Sign in",
     "registration": "Sign up",
@@ -86,5 +86,8 @@
     "login": "Sign In",
     "or": "or",
     "register": "Register"
+  },
+  "help": {
+    "subtitle": "Dictionary"
   }
 }
