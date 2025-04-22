@@ -10,9 +10,9 @@ export function useUpdateUser(key?: string) {
 		mutationFn: ({ id, data }: { id: string; data: IUserUpdateRequest }) => 
 			userService.updateUser(id, data),
 		onSuccess(updatedUser) {
-			queryClient.setQueryData(['users', key], updatedUser)
+			queryClient.setQueryData(['user', key], updatedUser)
 			queryClient.invalidateQueries({
-				queryKey: ['users']
+				queryKey: ['user']
 			})
 			toast.success('Настройки пользователя обновлены!')
 		}
