@@ -14,6 +14,7 @@ class URLS {
 	HOME = '/'
 	MYSPACE = `${this.myspace_zone}`
 	PROFILE = `/profile`
+	PROFILE_UPDATE = `/profile/update`
 	HELP = '/help'
 
 	ADMIN_DASHBOARD = `${this.admin_zone}`

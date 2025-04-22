@@ -10,7 +10,7 @@ nodejs-container - здесь расположено само приложени
 
 
 ## Установка и запуск
-### Создай .env файл в корне проекта
+### Создай .env файл в корне проекта (mode = dev \ prod)
 ```
 DB_URL="postgresql://user:pass@postgres:5432/db?schema=public"
 JWT_SECRET="secret"
@@ -23,6 +23,7 @@ FRONTEND_URL="localhost"
 POSTGRES_USER=user
 POSTGRES_PASSWORD=pass
 POSTGRES_DB=db
+MODE=dev
 
 
 

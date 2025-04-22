@@ -11,7 +11,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'backend.lockshield.online',
-        port: 4200,
+        port: '4200',
         pathname: '/**',
       },
     ],

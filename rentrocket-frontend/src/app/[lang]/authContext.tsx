@@ -9,6 +9,7 @@ interface AuthContextType {
   setIsAuthenticated: (value: boolean) => void;
   profile: any;
   isProfileLoading: boolean;
+  isProfileLoadingSuccess: boolean
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children } : { children: React.ReactNode }) => {
   const accessToken = getAccessToken();
   const [isAuthenticated, setIsAuthenticated] = useState(!!accessToken);
   
-  const { data: profile, isLoading: isProfileLoading } = useQuery({
+  const { data: profile, isLoading: isProfileLoading, isSuccess: isProfileLoadingSuccess } = useQuery({
     queryKey: ['profile'],
     queryFn: () => {
       console.log('Fetching profile data...');
@@ -37,7 +38,8 @@ export const AuthProvider = ({ children } : { children: React.ReactNode }) => {
         isAuthenticated, 
         setIsAuthenticated,
         profile,
-        isProfileLoading
+        isProfileLoading,
+        isProfileLoadingSuccess
       }}
     >
       {children}

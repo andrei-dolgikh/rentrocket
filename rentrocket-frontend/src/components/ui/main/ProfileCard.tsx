@@ -2,11 +2,15 @@
 import { Card, CardBody, CardHeader, Avatar, Badge, Button } from '@heroui/react';
 import { useLanguage } from '../../../app/[lang]/languageContext';
 import { useAuth } from '../../../app/[lang]/authContext';
-import { Mail, User, Edit, MapPin, Calendar } from 'lucide-react';
+import { Mail, User, Edit, Phone, Calendar } from 'lucide-react';
+import { URLS_PAGES } from '@/config/pages-url.config'
+import { createLocalizedUrl } from '../../../utils/utils'
+import Link from 'next/link';
 
 export function ProfileCard() {
     const { profile, isProfileLoading } = useAuth();
     const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
+    
 
     if (isProfileLoading || !profile) {
         return (
@@ -32,7 +36,7 @@ export function ProfileCard() {
         .toUpperCase()
         .substring(0, 2);
 
-    const email = profile.user.email || profile.email || "email@example.com";
+    const email = profile.user.email || profile.email || "Электронная почта не указана";
     
     return (
         <Card className="w-full max-w-md mx-auto shadow-lg overflow-hidden border-0">
@@ -51,6 +55,7 @@ export function ProfileCard() {
                         <h2 className="text-2xl font-bold">{profile.user.name}</h2>
                         <p className="text-gray-500">@{profile.user.login}</p>
                     </div>
+                    <Link href={createLocalizedUrl(lang, URLS_PAGES.PROFILE_UPDATE)}>
                     <Button 
                         color="primary" 
                         variant="light" 
@@ -59,6 +64,7 @@ export function ProfileCard() {
                     >
                         {dictionary?.profile?.edit || "Edit Profile"}
                     </Button>
+                    </Link>
                 </div>
             </div>
             
@@ -74,10 +80,10 @@ export function ProfileCard() {
                         <span>{dictionary?.profile?.username || "Username"}: {profile.user.login}</span>
                     </div>
                     
-                    {profile.user.location && (
+                    {profile.user.primaryPhone && (
                         <div className="flex items-center space-x-3">
-                            <MapPin className="text-gray-400" size={20} />
-                            <span>{profile.user.location}</span>
+                            <Phone className="text-gray-400" size={20} />
+                            <span>{profile.user.primaryPhone}</span>
                         </div>
                     )}
                     

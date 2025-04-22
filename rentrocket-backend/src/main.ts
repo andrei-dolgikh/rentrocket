@@ -6,21 +6,20 @@ import * as path from 'path';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
-
-  const httpsOptions = {
-    key: fs.readFileSync(path.join(__dirname, '../src/ssl/certs/private_key')),
-    cert: fs.readFileSync(path.join(__dirname, '../src/ssl/certs/certificate')),
-  };
-
-  // const app = await NestFactory.create(AppModule,  { httpsOptions });
-  const app = await NestFactory.create(AppModule,  { httpsOptions });
+  let nestAppOptions = {};
+  const appMode = process.env.MODE;
+  if (appMode === 'prod') {
+    nestAppOptions = {
+      key: fs.readFileSync(path.join(__dirname, '../src/ssl/certs/private_key')),
+      cert: fs.readFileSync(path.join(__dirname, '../src/ssl/certs/certificate')),
+    };
+  }
+  const app = await NestFactory.create(AppModule, nestAppOptions);
   const configService = app.get(ConfigService);
   const FRONTEND_URL = configService.get('FRONTEND_URL');
 
   app.setGlobalPrefix('api');
   app.use(cookieParser());
-
-
   app.enableCors({
     origin: [
       FRONTEND_URL,

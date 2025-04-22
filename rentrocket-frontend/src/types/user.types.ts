@@ -1,8 +1,10 @@
 import type { IBase } from './root.types'
 
 export interface IUser {
-	id: number
+	id: string
 	login: string
+	email: string
+	primaryPhone: string
 	roles: Roles[]
 	name: string
 }
@@ -15,6 +17,7 @@ export enum Roles {
 	user = 'user'
 }
 
+//to remove
 export enum FlatUserRoles {
 	owner = 'owner',
 	renter = 'renter',
@@ -32,5 +35,13 @@ export interface IUserResponse extends IBase {
 	login: string
     roles: Roles[]
 	name: string
+	email: string
+	primaryPhone: string
     createdAt: string
+}
+
+export interface IUserUpdateRequest {
+	name: string
+	email: string
+	primaryPhone: string
 }

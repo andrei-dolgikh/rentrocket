@@ -29,6 +29,8 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   login String @unique
+  email String @default("")
+  primaryPhone String @default("")
   name String @unique
   password String
 

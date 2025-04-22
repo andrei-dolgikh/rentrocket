@@ -6,10 +6,12 @@ export interface IAuthForm {
 }
 
 export interface IUser {
-	id: number
+	id: string
 	login: string
 	roles: Roles[]
 	name: string
+	email: string
+	primaryPhone: string
 }
 
 export interface IAuthResponse {

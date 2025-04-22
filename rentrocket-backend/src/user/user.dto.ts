@@ -18,4 +18,13 @@ export class UserDto {
     @IsArray()
     @IsOptional()
     roles?: Roles[]
+
+    @IsString()
+    @IsOptional()
+    @IsEmail()
+    email?: string
+
+    @IsString()
+    @IsOptional()
+    primaryPhone?: string
 }

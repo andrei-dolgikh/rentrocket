@@ -1,7 +1,7 @@
 import { IUser, TypeUserForm } from '@/types/auth.types'
 
 import { axiosWithAuth } from '@/api/interceptors'
-import { IUserResponse } from '@/types/user.types'
+import { IUserResponse, IUserUpdateRequest } from '@/types/user.types'
 
 export interface IProfileResponse {
 	user: IUser
@@ -29,7 +29,7 @@ class UserService {
 		return response.data
 	}
 
-	async updateUser(id: string, data: TypeUserForm) {
+	async updateUser(id: string, data: IUserUpdateRequest) {
 		const response = await axiosWithAuth.put(`${this.UPDATE_URL}/${id}`, data)
 		return response.data
 	}
