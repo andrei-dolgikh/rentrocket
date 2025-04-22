@@ -49,7 +49,7 @@ export function MainPage({
 
                 <Button
                   as={Link}
-                  href={createLocalizedUrl(lang, '/about')}
+                  href={createLocalizedUrl(lang, '/help')}
                   color="default"
                   variant="ghost"
                   size="lg"

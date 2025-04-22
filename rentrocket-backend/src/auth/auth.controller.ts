@@ -54,19 +54,4 @@ export class AuthController {
 
   }
 
-
-  @Get('telegram')
-  @UseGuards(AuthGuard('telegram'))
-  async telegramAuth() {
-      // Этот метод будет перенаправлять на Telegram для аутентификации
-  }
-
-  @Get('telegram/callback')
-  @UseGuards(AuthGuard('telegram'))
-  async telegramAuthCallback(@Req() req: Request, @Res() res: Response) {
-      const accessToken = this.authService.createTokensPair(res, req);
-      if (accessToken) res.redirect(`http://localhost:3000/auth/success?accessToken=${accessToken}`);
-  }
-
-
 }
