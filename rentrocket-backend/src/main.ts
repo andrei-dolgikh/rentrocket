@@ -8,7 +8,8 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   let nestAppOptions = {};
   const appMode = process.env.MODE;
-  if (appMode === 'prod') {
+  console.log(`App Mode: ${appMode}`)
+  if (appMode == 'prod') {
     nestAppOptions = {
       key: fs.readFileSync(path.join(__dirname, '../src/ssl/certs/private_key')),
       cert: fs.readFileSync(path.join(__dirname, '../src/ssl/certs/certificate')),
