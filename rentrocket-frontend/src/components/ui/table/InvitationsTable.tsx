@@ -1,8 +1,6 @@
 'use client'
 import React from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
-import { EditIcon } from "./editIcon";
-import { Link } from "@heroui/react";
 import { IFlatInvitation } from "@/types/flat.types";
 
 export function InvitationsTable({ invitations}: { invitations : IFlatInvitation[]}) {
