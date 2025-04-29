@@ -1,4 +1,4 @@
-import { Roles } from "@prisma/client";
+import { FlatInvitation, Roles, Flat } from "@prisma/client";
 import { IsArray, IsEmail, IsNumber, IsOptional, IsString, Max, Min, MinLength } from "class-validator";
 
 export class UserDto {

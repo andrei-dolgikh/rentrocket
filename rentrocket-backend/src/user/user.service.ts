@@ -56,7 +56,7 @@ export class UserService {
       ]
     }
   }
-
+  
   async create(dto: UserDto) {
     const user = {
       login: dto.login,

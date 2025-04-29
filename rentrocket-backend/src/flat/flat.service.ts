@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { FlatDto } from './flat.dto';
+import { FlatInvitationRole } from '@prisma/client';
+import { AddUserDto, RemoveUserDto, FlatDto } from './flat.dto';
 export interface DashboardLinksStatsInterface {
   id: string;
   timestamp: Date;
@@ -30,7 +31,8 @@ export class FlatService {
         renters: true,
         managers: true,
         owners: true,
-        creator: true
+        creator: true,
+        invitations: true
       },
       where: {
         id
@@ -38,7 +40,7 @@ export class FlatService {
     })
   }
 
-  async getCatalog() {
+  async getCatalog(userId: string) {
     return this.prisma.flat.findMany({
       select: {
         id: true,
@@ -47,6 +49,13 @@ export class FlatService {
         iconUrl: true,
         createdAt: true,
         updatedAt: true,
+      },
+      where: {
+        OR: [
+          { managers: { some: { id: userId } } },
+          { renters: { some: { id: userId } } },
+          { owners: { some: { id: userId } } }
+        ]
       }
     })
   }
@@ -61,16 +70,7 @@ export class FlatService {
           connect: {
             id: creatorId
           }
-        },
-        owners: {
-          connect: dto.owners?.map((user) => ({ id: user.id })),
-        },
-        renters: {
-          connect: dto.renters?.map((user) => ({ id: user.id })),
-        },
-        managers: {
-          connect: dto.managers?.map((user) => ({ id: user.id })),
-        },
+        }
       }
     })
   }
@@ -92,16 +92,7 @@ export class FlatService {
       },
       data: {
         ...dto,
-        updatedAt: new Date(),
-        owners: {
-          connect: dto.owners?.map((user) => ({ id: user.id })),
-        },
-        renters: {
-          connect: dto.renters?.map((user) => ({ id: user.id })),
-        },
-        managers: {
-          connect: dto.managers?.map((user) => ({ id: user.id })),
-        },
+        updatedAt: new Date()
       },
     });
   
@@ -149,100 +140,111 @@ export class FlatService {
     });
   }
 
-  async addRenter(flatId: string, renterId: string) {
-    return this.prisma.flat.update({
-      where: { id: flatId },
-      data: {
-        renters: {
-          connect: {
-            id: renterId
+  async addUserByEmail(flatId: string, dto : AddUserDto, currentUserId : string) {
+    switch (dto.role) {
+      case FlatInvitationRole.RENTER:
+        return this.prisma.flatInvitation.create({
+          data: {
+            email: dto.email,
+            role: FlatInvitationRole.RENTER,
+            invitedBy: {
+              connect: {
+                id: currentUserId
+              }
+            },
+            flat: {
+              connect: {
+                id: flatId
+              }
+            }
           }
-        }
-      },
-      include: {
-        renters: true
+        })
+
+      case FlatInvitationRole.MANAGER:
+        return this.prisma.flatInvitation.create({
+          data: {
+            email: dto.email,
+            role: FlatInvitationRole.MANAGER,
+            invitedBy: {
+              connect: {
+                id: currentUserId
+              }
+            },
+            flat: {
+              connect: {
+                id: flatId
+              }
+            }
+          }
+        })
+
+      case FlatInvitationRole.OWNER:
+        return this.prisma.flatInvitation.create({
+          data: {
+            email: dto.email,
+            role: FlatInvitationRole.OWNER,
+            invitedBy: {
+              connect: {
+                id: currentUserId
+              }
+            },
+            flat: {
+              connect: {
+                id: flatId
+              }
+            }
+          }
+        })
       }
-    });
   }
 
-  async removeRenter(flatId: string, renterId: string) {
-    return this.prisma.flat.update({
-      where: { id: flatId },
-      data: {
-        renters: {
-          disconnect: {
-            id: renterId
+  async removeUser(flatId: string, dto : RemoveUserDto) {
+    switch (dto.role) {
+      case FlatInvitationRole.OWNER:
+        return this.prisma.flat.update({
+          where: { id: flatId },
+          data: {
+            owners: {
+              disconnect: {
+                id: dto.userId
+              }
+            }
+          },
+          include: {
+            owners: true
           }
-        }
-      },
-      include: {
-        renters: true
-      }
-    });
-  }
+        });
 
-  async addManager(flatId: string, managerId: string) {
-    return this.prisma.flat.update({
-      where: { id: flatId },
-      data: {
-        managers: {
-          connect: {
-            id: managerId
+      case FlatInvitationRole.RENTER:
+        return this.prisma.flat.update({
+          where: { id: flatId },
+          data: {
+            renters: {
+              disconnect: {
+                id: dto.userId
+              }
+            }
+          },
+          include: {
+            renters: true
           }
-        }
-      },
-      include: {
-        managers: true
-      }
-    });
-  }
+        });
 
-  async removeManager(flatId: string, managerId: string) {
-    return this.prisma.flat.update({
-      where: { id: flatId },
-      data: {
-        managers: {
-          disconnect: {
-            id: managerId
+      case FlatInvitationRole.MANAGER:
+        return this.prisma.flat.update({
+          where: { id: flatId },
+          data: {
+            managers: {
+              disconnect: {
+                id: dto.userId
+              }
+            }
+          },
+          include: {
+            managers: true
           }
-        }
-      },
-      include: {
-        managers: true
-      }
-    });
-  }
-
-  async addOwner(flatId: string, ownerId: string) {
-    return this.prisma.flat.update({
-      where: { id: flatId },
-      data: {
-        owners: {
-          connect: {
-            id: ownerId
-          }
-        }
-      },
-      include: {
-        owners: true
-      }
-    });
-  }
-
-  async removeOwner(flatId: string, ownerId: string) {
-    return this.prisma.flat.update({
-      where: { id: flatId },
-      data: {
-        owners: {
-          disconnect: {
-            id: ownerId
-          }
-        }
-      },
-      include: {
-        owners: true
-      }
-    });
+        });
+    }
   }
 
 

@@ -2,7 +2,7 @@ import { Body, Controller, Req, Get, HttpCode, Param, Post, Put, UsePipes, Valid
 import { FlatService } from "./flat.service";
 import { Auth } from "src/decorators/auth.decorator";
 import { CurrentUser } from "src/decorators/user.decorator";
-import { FlatDto } from "./flat.dto";
+import { FlatDto, AddUserDto, RemoveUserDto } from "./flat.dto";
 import { RoleUser } from "src/decorators/roles.decorator";
 import { RolesGuard } from 'src/guards/roles.guard';
 import { UseGuards } from "@nestjs/common";
@@ -19,8 +19,8 @@ export class FlatController {
 
   @Get("catalog")
   @HttpCode(200)
-  async getCatalog() {
-    return this.flatService.getCatalog()
+  async getCatalog(@CurrentUser('id') userId: string) {
+    return this.flatService.getCatalog(userId)
   }
 
   @UsePipes(new ValidationPipe())
@@ -119,71 +119,27 @@ export class FlatController {
     return this.flatService.addImagesToFlat(flatId, imageUrls);
   }
 
-  @Post('add-renters/:flatId')
+  @Post('add-user/:flatId')
   @Auth()
   @UseGuards(JwtGuard, RolesGuard)
   @RoleUser()
-  async addRenter(
+  async addUser(
+    @CurrentUser('id') userId: string,
     @Param('flatId') flatId: string,
-    @Body() renterId: string
+    @Body() dto: AddUserDto
   ) {
-    console.log(renterId) 
-    return this.flatService.addRenter(flatId, renterId);
+    return this.flatService.addUserByEmail(flatId, dto, userId);
   }
 
-  @Post('remove-renters/:flatId')
+  @Post('remove-user/:flatId')
   @Auth()
   @UseGuards(JwtGuard, RolesGuard)
   @RoleUser()
-  async removeRenter(
+  async removeUser(
     @Param('flatId') flatId: string,
-    @Body() renterId: string
+    @Body() dto: RemoveUserDto
   ) {
-    return this.flatService.removeRenter(flatId, renterId);
-  }
-
-  @Post('add-managers/:flatId')
-  @Auth()
-  @UseGuards(JwtGuard, RolesGuard)
-  @RoleUser()
-  async addManager(
-    @Param('flatId') flatId: string,
-    @Body() managerId: string
-  ) {
-    return this.flatService.addManager(flatId, managerId);
-  }
-
-  @Post('remove-managers/:flatId')
-  @Auth()
-  @UseGuards(JwtGuard, RolesGuard)
-  @RoleUser()
-  async removeManager(
-    @Param('flatId') flatId: string,
-    @Body() managerId: string
-  ) {
-    return this.flatService.removeManager(flatId, managerId);
-  }
-
-  @Post('add-owners/:flatId')
-  @Auth()
-  @UseGuards(JwtGuard, RolesGuard)
-  @RoleUser()
-  async addOwner(
-    @Param('flatId') flatId: string,
-    @Body() ownerId: string
-  ) {
-    return this.flatService.addOwner(flatId, ownerId);
-  }
-
-  @Post('remove-owners/:flatId')
-  @Auth()
-  @UseGuards(JwtGuard, RolesGuard)
-  @RoleUser()
-  async removeOwner(
-    @Param('flatId') flatId: string,
-    @Body() ownerId: string
-  ) {
-    return this.flatService.removeOwner(flatId, ownerId);
+    return this.flatService.removeUser(flatId, dto);
   }
 }
 

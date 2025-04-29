@@ -1,3 +1,5 @@
+import { IFlatInvitation } from "./flat.types"
+
 export interface IAuthForm {
 	login: string
 	password: string
@@ -12,6 +14,7 @@ export interface IUser {
 	name: string
 	email: string
 	primaryPhone: string
+	invitations: IFlatInvitation[]
 }
 
 export interface IAuthResponse {

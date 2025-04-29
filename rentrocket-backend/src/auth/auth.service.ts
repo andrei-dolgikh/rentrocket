@@ -46,6 +46,8 @@ export class AuthService {
 
         const { password, ...user } = await this.userService.create(dto);
 
+        // check userNotifications for add user to unseennotifications with his email (to link invitations to new user)
+
         const tokens = this.issueTokens(user.id);
         return {
             user,

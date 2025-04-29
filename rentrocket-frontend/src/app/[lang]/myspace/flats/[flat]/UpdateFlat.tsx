@@ -128,7 +128,7 @@ export function UpdateFlat(
 			case 'general':
 				return <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange}/>;
 			case 'tenants':
-				return <FlatSettingsRentersTab flatId={flatId} />;
+				return <FlatSettingsRentersTab flat={flat} />;
 			case 'utilities':
 				return <div className="p-4">Содержимое раздела "Коммунальные услуги"</div>;
 			case 'about':

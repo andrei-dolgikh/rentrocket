@@ -1,12 +1,18 @@
 import type { IBase } from './root.types'
-// export enum EnumFlatPriority {
-// 	low = 'low',
-// 	medium = 'medium',
-// 	high = 'high'
-// }
+import type { IUser } from './user.types'
+
+export enum FlatInvitationRole {
+	OWNER = 'OWNER',
+	MANAGER = 'MANAGER',
+	RENTER = 'RENTER'
+}
+export enum FlatInvitationStatus {
+	PENDING = 'PENDING',
+	ACCEPTED = 'ACCEPTED',
+	DECLINED = 'DECLINED'
+}
 
 export interface IFlatResponse extends IBase {
-	id: string
 	name: string
 	description?: string
 	iconUrl?: string
@@ -16,12 +22,22 @@ export interface IFlatResponse extends IBase {
 	entergroup?: string
 	chambres?: number
 	size?: number
-	createdAt: string
-	updatedAt: string
+	invitations: IFlatInvitation[]
+	renters: IUser[]
+	managers: IUser[]
+	owners: IUser[]
+	creator: IUser
+
 }
 
 export interface IFlatUsersUpdateRequest {
+	email?: string
+	role?: string
+}
+
+export interface IFlatUsersRemoveRequest {
 	userId?: string
+	role?: string
 }
 
 export interface IFlatCreateRequest {
@@ -51,6 +67,17 @@ export interface IFlatUpdateRequest {
 
 export interface IFlatDeleteRequest extends IBase {
 	id: string
+}
+
+export interface IFlatInvitation {
+	id: string
+	createdAt?: string
+	email: string
+	role: FlatInvitationRole
+	status: FlatInvitationStatus
+	user: IUser
+	invitedBy: IUser
+	flat: IFlatResponse
 }
 
 

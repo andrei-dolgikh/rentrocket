@@ -3,10 +3,12 @@ import { useUsers } from '../../../app/[lang]/myspace/flats/hooks/useUsers'
 import {Button} from "@heroui/button";
 import { roleTranslations } from '@/types/user.types'
 import Link from 'next/link'
-import { FlatUsersTable } from '@/components/ui/table/FlatUsersTable'
+import { FlatRentersTable } from '@/components/ui/table/FlatRentersTable'
 import Loader from '@/components/ui/Loader'
 import { useLanguage } from '../../../app/[lang]/languageContext';
 import { createLocalizedUrl } from '../../../utils/utils'
+import { IFlatResponse } from '@/types/flat.types'
+import { InvitationsTable } from '@/components/ui/table/InvitationsTable'
 
 
 const useUsersData = (): { data: { id: string; user: { name: string; login: string; } ; "users:roles": string[] }[], isLoading: boolean } => {
@@ -48,7 +50,7 @@ const columns = [
 
 
 
-export function FlatRenters({ flatId }: { flatId: string }) {
+export function FlatRenters({ flat }: { flat: IFlatResponse }) {
   const { data, isLoading } = useUsersData()
 	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 
@@ -58,7 +60,8 @@ export function FlatRenters({ flatId }: { flatId: string }) {
     <Loader />
   ) : (
     <div className='text-black'>
-      <FlatUsersTable columns={columns} rows={data} flatId={flatId} />
+      <FlatRentersTable columns={columns} rows={data} flatId={flat.id} />
+      <InvitationsTable invitations={flat.invitations} />
     </div>
   )
 }

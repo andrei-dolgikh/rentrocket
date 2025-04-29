@@ -17,11 +17,10 @@ export enum Roles {
 	user = 'user'
 }
 
-//to remove
 export enum FlatUserRoles {
-	owner = 'owner',
-	renter = 'renter',
-	manager = 'manager'
+	owner = 'OWNER',
+	renter = 'RENTER',
+	manager = 'MANAGER'
 }
 
 
