@@ -29,26 +29,26 @@ export function FlatRentersTable({
   const { addUser, removeUser } = useFlatUsers(flatId);
 
   const handleAddUser = async () => {
-    // if (!flatId) return;
+    if (!flatId) return;
 
-    // const data: IFlatUsersUpdateRequest = {
-    //   email: inviteEmail,
-    //   role: selectedUserRole
-    // };
+    const data: IFlatUsersUpdateRequest = {
+      email: inviteEmail,
+      role: selectedUserRole
+    };
 
-    // setIsLoading(true);
-    // try {
-    //   const response = addUser(data);
+    setIsLoading(true);
+    try {
+      const response = addUser(data);
 
-    //   toast.success(`Пользователь успешно добавлен как ${getRoleTranslation(selectedUserRole)}`);
-    //   // You might want to refresh the data here
-    // } catch (error) {
-    //   toast.error(`Ошибка при добавлении пользователя: ${error}`);
-    // } finally {
-    //   setIsLoading(false);
-    //   setIsAddUserConformationOpen(false);
-    //   setInviteEmail('');
-    // }
+      toast.success(`Пользователь успешно добавлен как ${getRoleTranslation(selectedUserRole)}`);
+      // You might want to refresh the data here
+    } catch (error) {
+      toast.error(`Ошибка при добавлении пользователя: ${error}`);
+    } finally {
+      setIsLoading(false);
+      setIsAddUserConformationOpen(false);
+      setInviteEmail('');
+    }
   };
 
   const handleRemoveUser = async () => {
