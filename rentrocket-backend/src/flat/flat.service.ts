@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { FlatInvitationRole } from '@prisma/client';
-import { AddUserDto, RemoveUserDto, FlatDto } from './flat.dto';
+import { FlatDto } from './flat.dto';
 export interface DashboardLinksStatsInterface {
   id: string;
   timestamp: Date;
@@ -32,7 +32,12 @@ export class FlatService {
         managers: true,
         owners: true,
         creator: true,
-        invitations: true
+        invitations: {
+          include: {
+            invitedBy: true,
+            user: true
+          }
+        }
       },
       where: {
         id
@@ -139,114 +144,6 @@ export class FlatService {
       }
     });
   }
-
-  async addUserByEmail(flatId: string, dto : AddUserDto, currentUserId : string) {
-    switch (dto.role) {
-      case FlatInvitationRole.RENTER:
-        return this.prisma.flatInvitation.create({
-          data: {
-            email: dto.email,
-            role: FlatInvitationRole.RENTER,
-            invitedBy: {
-              connect: {
-                id: currentUserId
-              }
-            },
-            flat: {
-              connect: {
-                id: flatId
-              }
-            }
-          }
-        })
-
-      case FlatInvitationRole.MANAGER:
-        return this.prisma.flatInvitation.create({
-          data: {
-            email: dto.email,
-            role: FlatInvitationRole.MANAGER,
-            invitedBy: {
-              connect: {
-                id: currentUserId
-              }
-            },
-            flat: {
-              connect: {
-                id: flatId
-              }
-            }
-          }
-        })
-
-      case FlatInvitationRole.OWNER:
-        return this.prisma.flatInvitation.create({
-          data: {
-            email: dto.email,
-            role: FlatInvitationRole.OWNER,
-            invitedBy: {
-              connect: {
-                id: currentUserId
-              }
-            },
-            flat: {
-              connect: {
-                id: flatId
-              }
-            }
-          }
-        })
-      }
-  }
-
-  async removeUser(flatId: string, dto : RemoveUserDto) {
-    switch (dto.role) {
-      case FlatInvitationRole.OWNER:
-        return this.prisma.flat.update({
-          where: { id: flatId },
-          data: {
-            owners: {
-              disconnect: {
-                id: dto.userId
-              }
-            }
-          },
-          include: {
-            owners: true
-          }
-        });
-
-      case FlatInvitationRole.RENTER:
-        return this.prisma.flat.update({
-          where: { id: flatId },
-          data: {
-            renters: {
-              disconnect: {
-                id: dto.userId
-              }
-            }
-          },
-          include: {
-            renters: true
-          }
-        });
-
-      case FlatInvitationRole.MANAGER:
-        return this.prisma.flat.update({
-          where: { id: flatId },
-          data: {
-            managers: {
-              disconnect: {
-                id: dto.userId
-              }
-            }
-          },
-          include: {
-            managers: true
-          }
-        });
-    }
-  }
-
 
   async addImagesToFlat(flatId: string, imageUrls: string[]) {
     const flat = await this.prisma.flat.findUnique({

@@ -23,7 +23,6 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
 
-
 	const menuItems = useMemo(() => [
 		{
 			label: dictionary.header.about,
@@ -70,7 +69,7 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 					</Link>
 				</NavbarItem>
 
-				
+
 				<NavbarItem isActive>
 					<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_FLATS)}>
 						{dictionary.header.DUmap}
@@ -94,7 +93,15 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 			{isAuthenticated && !isProfileLoading && (
 				<>
 					<Link className='text-white' href={createLocalizedUrl(lang, URLS_PAGES.PROFILE)}>
-						<div>{profile?.user?.name}</div>
+						<div className="relative flex items-center">
+							{profile?.user?.name}
+							
+							{profile?.user?.receivedInvitations?.length > 0 && (
+								<div className="ml-2 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full h-5 min-w-5 px-1">
+									{profile?.user?.receivedInvitations?.length > 99 ? '99+' : profile?.user?.receivedInvitations?.filter((inv: any) => inv.status === 'PENDING').length}
+								</div>
+							)}
+						</div>
 					</Link>
 					<LogoutButton dictionary={dictionary} />
 				</>

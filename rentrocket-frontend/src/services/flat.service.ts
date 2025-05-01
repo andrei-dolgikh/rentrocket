@@ -1,4 +1,4 @@
-import type { IFlatResponse, IFlatUpdateRequest, IFlatCreateRequest, IFlatUsersUpdateRequest, IFlatUsersRemoveRequest } from '@/types/flat.types'
+import type { IFlatResponse, IFlatUpdateRequest, IFlatCreateRequest} from '@/types/flat.types'
 import { axiosWithAuth } from '@/api/interceptors'
 
 class FlatService {
@@ -31,16 +31,6 @@ class FlatService {
 
 	async getStatistics() {
 		const response = await axiosWithAuth.get<any>(`${this.BASE_URL}/statistics`)
-		return response
-	}
-
-	async addUser(flatId: string, data: IFlatUsersUpdateRequest) {
-		const response = await axiosWithAuth.post(`${this.BASE_URL}/add-user/${flatId}`,  data)
-		return response
-	}
-
-	async removeUser(flatId: string, data: IFlatUsersRemoveRequest) {
-		const response = await axiosWithAuth.post(`${this.BASE_URL}/remove-user/${flatId}`,  data)
 		return response
 	}
 }

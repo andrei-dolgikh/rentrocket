@@ -27,4 +27,5 @@ export class UserDto {
     @IsString()
     @IsOptional()
     primaryPhone?: string
+    
 }

@@ -1,19 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { useLanguage } from '../../../languageContext'
+import { useLanguage } from '../../src/app/[lang]/languageContext'
 import { invitationService } from '@/services/invitation.service'
-import { IFlatUsersUpdateRequest} from '@/types/flat.types'
 
 type UserRole = 'renter' | 'manager' | 'owner';
 type UserOperation = 'add' | 'remove' | 'update';
 
-export function useFlatUsers(flatId: string) {
+export function useInvitations() {
   const { dictionary }: { dictionary: Record<string, any> } = useLanguage()
   const queryClient = useQueryClient()
 
   const handleSuccess = (operation: UserOperation, role: UserRole) => {
-    queryClient.invalidateQueries({ queryKey: ['flats', flatId] })
-    queryClient.invalidateQueries({ queryKey: ['users'] })
+    queryClient.invalidateQueries({ queryKey: ['flats'] })
     
     const successMessages: Record<UserOperation, Record<UserRole, string>> = {
       add: {
@@ -36,28 +34,8 @@ export function useFlatUsers(flatId: string) {
     toast.success(successMessages[operation][role]);
   }
 
-  const { mutate: addUser, isPending: isAddingUser } = useMutation({
-    mutationKey: ['add flat renter', flatId],
-    mutationFn: (data: IFlatUsersUpdateRequest) => invitationService.addUser(flatId, data),
-    onSuccess: () => handleSuccess('add', 'renter'),
-    onError: (error) => {
-      toast.error(dictionary?.hooks?.addUserError || 'Failed to add renter')
-      console.error(error)
-    }
-  })
-
-  const { mutate: removeUser, isPending: isRemovingUser } = useMutation({
-    mutationKey: ['remove flat renter', flatId],
-    mutationFn: (data: IFlatUsersUpdateRequest) => invitationService.removeUser(flatId, data),
-    onSuccess: () => handleSuccess('remove', 'renter'),
-    onError: (error) => {
-      toast.error(dictionary?.hooks?.removeUserError || 'Failed to remove user')
-      console.error(error)
-    }
-  })
-
   const { mutate: acceptInvitation, isPending: isAcceptingInvitation } = useMutation({
-    mutationKey: ['accept invitation', flatId],
+    mutationKey: ['accept invitation'],
     mutationFn: (invitationId: string) => invitationService.acceptInvitation(invitationId),
     onSuccess: () => handleSuccess('update', 'renter'),
     onError: (error) => {
@@ -67,7 +45,7 @@ export function useFlatUsers(flatId: string) {
   })
 
   const { mutate: rejectInvitation, isPending: isRejectingInvitation } = useMutation({
-    mutationKey: ['reject invitation', flatId],
+    mutationKey: ['reject invitation'],
     mutationFn: (invitationId: string) => invitationService.rejectInvitation(invitationId),
     onSuccess: () => handleSuccess('update', 'renter'),
     onError: (error) => {
@@ -77,16 +55,12 @@ export function useFlatUsers(flatId: string) {
   })
 
   const isLoading = 
-    isAddingUser || 
-    isRemovingUser;
+  isAcceptingInvitation || 
+    isRejectingInvitation;
 
   return {
-    addUser,
-    removeUser,
     isLoading,
     acceptInvitation,
-    rejectInvitation,
-    isAcceptingInvitation,
-    isRejectingInvitation
+    rejectInvitation
   }
 }

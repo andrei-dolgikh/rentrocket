@@ -9,7 +9,7 @@ export default function MySpacePage() {
 
 	return (
 		<>
-			<div className='grid min-h-screen max-w-[1000px]'>
+			<div className='grid min-h-screen '>
 				<div className={`text-[22px] lg:text-[26px] my-5 text-black`}>
 					{dictionary.myspace.myspace}
 				</div>

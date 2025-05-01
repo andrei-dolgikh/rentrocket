@@ -1,6 +1,7 @@
 import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { InvitationModule } from './invitation/invitation.module';
 import { ConfigModule } from '@nestjs/config';
 import { FlatModule } from './flat/flat.module';
 import { TagModule } from './tag/tag.module';
@@ -20,6 +21,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     UserModule,
     FlatModule,
     TagModule,
+    InvitationModule,
     ConfigModule.forRoot(),
     ScheduleModule.forRoot(),
     // ThrottlerModule\ThrottlerGuard ограничивает макс частоту запросов

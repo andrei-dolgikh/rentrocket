@@ -2,12 +2,11 @@ import { Body, Controller, Req, Get, HttpCode, Param, Post, Put, UsePipes, Valid
 import { FlatService } from "./flat.service";
 import { Auth } from "src/decorators/auth.decorator";
 import { CurrentUser } from "src/decorators/user.decorator";
-import { FlatDto, AddUserDto, RemoveUserDto } from "./flat.dto";
+import { FlatDto } from "./flat.dto";
 import { RoleUser } from "src/decorators/roles.decorator";
 import { RolesGuard } from 'src/guards/roles.guard';
 import { UseGuards } from "@nestjs/common";
 import { FileInterceptor } from '@nestjs/platform-express';
-import { UploadedFile } from '@nestjs/common';
 import { JwtGuard } from "src/guards/jwt.guard";
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -117,29 +116,6 @@ export class FlatController {
     @Body() imageUrls: string[]
   ) {
     return this.flatService.addImagesToFlat(flatId, imageUrls);
-  }
-
-  @Post('add-user/:flatId')
-  @Auth()
-  @UseGuards(JwtGuard, RolesGuard)
-  @RoleUser()
-  async addUser(
-    @CurrentUser('id') userId: string,
-    @Param('flatId') flatId: string,
-    @Body() dto: AddUserDto
-  ) {
-    return this.flatService.addUserByEmail(flatId, dto, userId);
-  }
-
-  @Post('remove-user/:flatId')
-  @Auth()
-  @UseGuards(JwtGuard, RolesGuard)
-  @RoleUser()
-  async removeUser(
-    @Param('flatId') flatId: string,
-    @Body() dto: RemoveUserDto
-  ) {
-    return this.flatService.removeUser(flatId, dto);
   }
 }
 

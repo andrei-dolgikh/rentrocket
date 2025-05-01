@@ -46,9 +46,8 @@ export function CreateFlat() {
         setFormDisabled(false);
     };
     return (
-        <div>
             <form
-                className='mx-auto'
+                className=''
                 onSubmit={onCreateSubmit}
             >
                 <div className='flex justify-between my-[30px]'>
@@ -62,6 +61,5 @@ export function CreateFlat() {
                 </div>
                 <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange} />
             </form>
-        </div>
     )
 }

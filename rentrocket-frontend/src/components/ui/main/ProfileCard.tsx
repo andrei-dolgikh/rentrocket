@@ -6,6 +6,7 @@ import { Mail, User, Edit, Phone, Calendar } from 'lucide-react';
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { createLocalizedUrl } from '../../../utils/utils'
 import Link from 'next/link';
+import { InvitationsTable } from '@/components/ui/table/InvitationsTable'
 
 export function ProfileCard() {
     const { profile, isProfileLoading } = useAuth();
@@ -39,7 +40,8 @@ export function ProfileCard() {
     const email = profile.user.email || profile.email || "Электронная почта не указана";
     
     return (
-        <Card className="w-full max-w-md mx-auto shadow-lg overflow-hidden border-0">
+        <div className='flex flex-col gap-5'>
+        <Card className="w-3/4 mx-auto shadow-lg overflow-hidden border-0">
             <div className="h-32 bg-gradient-to-r from-blue-500 to-purple-600"></div>
             
             <div className="relative px-6">
@@ -98,7 +100,7 @@ export function ProfileCard() {
                         </div>
                     )}
                     
-                    <div className="flex justify-around pt-4 border-t mt-4">
+                    {/* <div className="flex justify-around pt-4 border-t mt-4">
                         <div className="text-center">
                             <div className="font-bold text-xl">{profile.user.rentCount || 0}</div>
                             <div className="text-sm text-gray-500">{dictionary?.profile?.rentCount || " квартир в аренде "}</div>
@@ -111,9 +113,20 @@ export function ProfileCard() {
                             <div className="font-bold text-xl">{profile.user.manageCount || 0}</div>
                             <div className="text-sm text-gray-500">{dictionary?.profile?.manageCount || " квартир в управлении"}</div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </CardBody>
         </Card>
+
+        <Card className=" w-3/4 mx-auto shadow-lg overflow-hidden border-0">
+            <div className='flex justify-between items-center mb-[10px]'>
+              <div className='p-5'>
+                Действия, ожидающие вашего внимания
+              </div>
+            </div>
+        <InvitationsTable invitations={profile.user.receivedInvitations} actions={true}  />
+
+        </Card>
+        </div>
     );
 }

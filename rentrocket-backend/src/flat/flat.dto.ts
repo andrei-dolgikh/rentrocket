@@ -46,36 +46,4 @@ export class FlatDto {
     @IsNumber()
     @IsOptional()
     size: number
-
-    // @IsArray()
-    // @IsOptional()
-    // invitations: FlatInvitation[]
-
-    // @IsArray()
-    // @IsOptional()
-    // renters: User[]
-
-    // @IsArray()
-    // @IsOptional()
-    // managers: User[]
-
-    // @IsArray()
-    // @IsOptional()
-    // owners: User[]
-}
-
-export class AddUserDto {
-    @IsString()
-    email: string
-
-    @IsString()
-    role: string
-}
-
-export class RemoveUserDto {
-    @IsString()
-    userId: string
-
-    @IsString()
-    role: string
 }

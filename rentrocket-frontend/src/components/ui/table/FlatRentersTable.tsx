@@ -9,7 +9,7 @@ import { User, Link, Button } from "@heroui/react";
 import { useFlatUsers } from "@/app/[lang]/myspace/flats/hooks/useFlatUsers";
 import UserTableActionsDropnown from "./UserTableActionsDropnown";
 import { FlatUserRoles } from "@/types/user.types";
-import { IFlatUsersUpdateRequest} from '@/types/flat.types'
+import { IFlatUsersUpdateRequest } from '@/types/flat.types'
 
 export function FlatRentersTable({
   columns,
@@ -29,26 +29,26 @@ export function FlatRentersTable({
   const { addUser, removeUser } = useFlatUsers(flatId);
 
   const handleAddUser = async () => {
-    if (!flatId) return;
+    // if (!flatId) return;
 
-    const data: IFlatUsersUpdateRequest = {
-      email: inviteEmail,
-      role: selectedUserRole
-    };
+    // const data: IFlatUsersUpdateRequest = {
+    //   email: inviteEmail,
+    //   role: selectedUserRole
+    // };
 
-    setIsLoading(true);
-    try {
-      const response = addUser(data);
+    // setIsLoading(true);
+    // try {
+    //   const response = addUser(data);
 
-      toast.success(`Пользователь успешно добавлен как ${getRoleTranslation(selectedUserRole)}`);
-      // You might want to refresh the data here
-    } catch (error) {
-      toast.error(`Ошибка при добавлении пользователя: ${error}`);
-    } finally {
-      setIsLoading(false);
-      setIsAddUserConformationOpen(false);
-      setInviteEmail('');
-    }
+    //   toast.success(`Пользователь успешно добавлен как ${getRoleTranslation(selectedUserRole)}`);
+    //   // You might want to refresh the data here
+    // } catch (error) {
+    //   toast.error(`Ошибка при добавлении пользователя: ${error}`);
+    // } finally {
+    //   setIsLoading(false);
+    //   setIsAddUserConformationOpen(false);
+    //   setInviteEmail('');
+    // }
   };
 
   const handleRemoveUser = async () => {
@@ -89,17 +89,23 @@ export function FlatRentersTable({
     switch (columnKey) {
       case "user":
         return (
-          <User key={subject.id}
-            avatarProps={{
-              src: "https://avatars.githubusercontent.com/u/30373425?v=4",
-            }}
-            description={
-              <Link isExternal href="https://x.com/jrgarciadev" size="sm">
-                @{cellValue.login}
-              </Link>
-            }
-            name={cellValue.name}
-          />
+          <div>
+            {subject.login ? (
+              <User key={subject.id}
+                avatarProps={{
+                  src: "https://avatars.githubusercontent.com/u/30373425?v=4",
+                }}
+                description={
+                  <Link isExternal href="https://x.com/jrgarciadev" size="sm">
+                    @{subject.login}
+                  </Link>
+                }
+                name={subject.name}
+              />
+            ) : (
+              <span className="text-[#999999]">Пользователь не найден</span>
+            )}
+          </div>
         )
       case "users:roles":
         return (
@@ -142,7 +148,7 @@ export function FlatRentersTable({
           </Button>
         </div>
       </div>
-      
+
       <Table aria-label="Table">
         <TableHeader columns={columns} >
           {(column) => (
@@ -161,7 +167,7 @@ export function FlatRentersTable({
       </Table>
 
       {/* invitations table */}
-      
+
 
       <Confirmation
         isOpen={isAddUserConformationOpen}

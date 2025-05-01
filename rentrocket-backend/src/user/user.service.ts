@@ -12,6 +12,17 @@ export class UserService {
     return this.prisma.user.findUnique({
       where: {
         id
+      },
+      include: {
+        sentInvitations: true,
+        receivedInvitations: {
+          include : {
+            invitedBy: true
+          }
+        },
+        FlatsInManagement: true,
+        FlatsInOwnership: true,
+        FlatsInRent: true
       }
     })
   }

@@ -141,9 +141,8 @@ export function UpdateFlat(
 	return isFlatLoading ? (
 		<Loader />
 	) : (
-		<div className="flex flex-row">
 			<form
-				className='mx-auto'
+				className=''
 				onSubmit={onUpdateSubmit}
 			>
 				<div className='flex justify-between my-[30px]'>
@@ -184,6 +183,5 @@ export function UpdateFlat(
 					</Card>
 				</div>
 			</form>
-		</div>
 	)
 }

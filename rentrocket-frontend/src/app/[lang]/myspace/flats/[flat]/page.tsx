@@ -17,7 +17,7 @@ export default async function FlatAdminPage({ params }: {
 
 	return (
 		<div className='w-full h-full '>
-			<div className="max-w-[1200px] xl:mx-auto flex flex-col">
+			<div className="flex flex-col">
 					{ (flat == "new") ? 
 					<CreateFlat /> : 
 					<UpdateFlat flatId={flat}  />}
