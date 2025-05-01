@@ -26,9 +26,9 @@ export class FlatController {
   @HttpCode(200)
   @Get(":flatId")
   async getById(
-    @Param('flatId') flatId: string
+    @Param('flatId') flatId: string, @CurrentUser('id') userId: string
   ) {
-    return this.flatService.getById(flatId)
+    return this.flatService.getById(flatId, userId)
   }
 
   @UsePipes(new ValidationPipe())

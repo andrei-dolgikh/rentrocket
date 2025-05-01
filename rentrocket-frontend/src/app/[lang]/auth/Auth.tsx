@@ -1,5 +1,5 @@
 'use client'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import Loader from '@/components/ui/Loader'
 import { useState } from 'react'
@@ -16,6 +16,7 @@ import { createLocalizedUrl } from '../../../utils/utils'
 import Link from 'next/link'
 
 export function Auth() {
+	const queryClient = useQueryClient()
 	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 	const { setIsAuthenticated } = useAuth();
 	const [formData, setFormData] = useState({
@@ -30,12 +31,15 @@ export function Auth() {
 
 	const router = useRouter()
 	const { mutate: auth, isPending: isAuthPending, isSuccess: isAuthSuccess } = useMutation({
-		mutationKey: ['auth'],
+		mutationKey: ['profile'],
 		mutationFn: (data: IAuthForm) =>
 			authService.auth(data),
 		onSuccess() {
 			toast.success('Успешный вход!')
 			setIsAuthenticated(true);
+			queryClient.invalidateQueries({ queryKey: ['flats'] })
+			queryClient.invalidateQueries({ queryKey: ['profile'] })
+			queryClient.invalidateQueries({ queryKey: ['users'] })
 			router.push(createLocalizedUrl(lang, '/myspace'))
 		},
 		onError() {

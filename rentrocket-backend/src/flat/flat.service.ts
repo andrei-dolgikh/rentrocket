@@ -13,7 +13,7 @@ export interface DashboardLinksStatsInterface {
 export class FlatService {
   constructor(private prisma: PrismaService) {}
 
-  async getById(id: string) {
+  async getById(id: string, userId: string) {
     return this.prisma.flat.findUnique({
       select: {
         id: true,
@@ -40,7 +40,12 @@ export class FlatService {
         }
       },
       where: {
-        id
+        id,
+        OR: [
+          { managers: { some: { id: userId } } },
+          { renters: { some: { id: userId } } },
+          { owners: { some: { id: userId } } }
+        ]
       }
     })
   }

@@ -1,5 +1,5 @@
 'use client'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import Loader from '@/components/ui/Loader'
 import { useState } from 'react'
@@ -17,6 +17,7 @@ import Link from 'next/link'
 import { useLanguage } from '../../../app/[lang]/languageContext';
 
 export function Register() {
+	const queryClient = useQueryClient()
 	const { setIsAuthenticated } = useAuth();
 	const [formData, setFormData] = useState({
 		login: '',
@@ -33,12 +34,15 @@ export function Register() {
 
 	const router = useRouter()
 	const { mutate: auth, isPending: isAuthPending, isSuccess: isAuthSuccess } = useMutation({
-		mutationKey: ['auth'],
+		mutationKey: ['register'],
 		mutationFn: (data: IRegForm) =>
 			authService.register(data),
 		onSuccess() {
 			toast.success('Успешный вход!')
 			setIsAuthenticated(true);
+			queryClient.invalidateQueries({ queryKey: ['flats'] })
+			queryClient.invalidateQueries({ queryKey: ['profile'] })
+			queryClient.invalidateQueries({ queryKey: ['users'] })
 			router.push(URLS_PAGES.ADMIN_DASHBOARD)
 		},
 		onError() {
