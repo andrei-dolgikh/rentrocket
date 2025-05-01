@@ -33,7 +33,7 @@ export function Register() {
 
 
 	const router = useRouter()
-	const { mutate: auth, isPending: isAuthPending, isSuccess: isAuthSuccess } = useMutation({
+	const { mutate: register, isPending: isAuthPending, isSuccess: isAuthSuccess } = useMutation({
 		mutationKey: ['register'],
 		mutationFn: (data: IRegForm) =>
 			authService.register(data),
@@ -64,7 +64,7 @@ export function Register() {
 			name: formData.name,
 			email: formData.email
 		}
-		auth(authData)
+		register(authData)
 	}
 
 	return isAuthPending && isAuthSuccess ? (

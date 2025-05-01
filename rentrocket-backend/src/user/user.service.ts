@@ -4,6 +4,7 @@ import { hash } from 'argon2';
 import { UserDto } from './user.dto';
 import { Roles } from '@prisma/client';
 import { InvitationService } from 'src/invitation/invitation.service';
+import { emit } from 'process';
 
 @Injectable()
 export class UserService {
@@ -84,6 +85,7 @@ export class UserService {
       login: dto.login,
       name: dto.name,
       roles: [Roles.user],
+      email: dto.email,
       password: await hash(dto.password),
     }
 
