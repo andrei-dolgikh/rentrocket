@@ -6,12 +6,13 @@ import { JwtStrategy } from './jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { getJwtConfig } from 'src/config/jwt.config';
-import { UserService } from 'src/user/user.service';
+import { InvitationModule } from 'src/invitation/invitation.module';
 
 @Module({
   imports: [
     UserModule, 
     ConfigModule, 
+    InvitationModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

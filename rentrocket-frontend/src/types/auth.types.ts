@@ -1,10 +1,17 @@
 import { IFlatInvitation } from "./flat.types"
 
+export interface IRegForm {
+	login: string
+	password: string
+	captcha: string
+	name: string
+	email: string
+}
+
 export interface IAuthForm {
 	login: string
 	password: string
 	captcha: string
-	name?: string
 }
 
 export interface IUser {

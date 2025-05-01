@@ -96,9 +96,9 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 						<div className="relative flex items-center">
 							{profile?.user?.name}
 							
-							{profile?.user?.receivedInvitations?.length > 0 && (
+							{profile?.user?.receivedInvitations?.map((inv: any) => inv.status === 'PENDING') && (
 								<div className="ml-2 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full h-5 min-w-5 px-1">
-									{profile?.user?.receivedInvitations?.length > 99 ? '99+' : profile?.user?.receivedInvitations?.filter((inv: any) => inv.status === 'PENDING').length}
+									{profile?.user?.receivedInvitations?.map((inv: any) => inv.status === 'PENDING').length > 99 ? '99+' : profile?.user?.receivedInvitations?.map((inv: any) => inv.status === 'PENDING').filter((inv: any) => inv.status === 'PENDING').length}
 								</div>
 							)}
 						</div>

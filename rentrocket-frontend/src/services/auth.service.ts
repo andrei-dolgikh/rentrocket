@@ -1,13 +1,23 @@
-import { IAuthForm, IAuthResponse } from '@/types/auth.types'
+import { IAuthForm, IAuthResponse, IRegForm } from '@/types/auth.types'
 
 import { axiosClassic } from '@/api/interceptors'
 
 import { removeFromStorage, saveTokenStorage } from './auth-token.service'
 
 export const authService = {
-	async main(type: 'login' | 'register', data: IAuthForm) {
+	async auth( data: IAuthForm) {
 		const response = await axiosClassic.post<IAuthResponse>(
-			`/auth/${type}`,
+			`/auth/login`,
+			data
+		)
+
+		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+
+		return response
+	},
+	async register( data: IRegForm) {
+		const response = await axiosClassic.post<IAuthResponse>(
+			`/auth/register`,
 			data
 		)
 

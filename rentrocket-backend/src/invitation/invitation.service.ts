@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { FlatInvitationRole, FlatInvitationStatus } from '@prisma/client';
+import { FlatInvitation, FlatInvitationRole, FlatInvitationStatus, User } from '@prisma/client';
 import { AddUserDto, RemoveUserDto} from './invitation.dto';
 
 export interface DashboardLinksStatsInterface {
@@ -13,6 +13,30 @@ export interface DashboardLinksStatsInterface {
 @Injectable()
 export class InvitationService {
   constructor(private prisma: PrismaService) {}
+
+  async getInvitationsByEmail(email: string){
+    return this.prisma.flatInvitation.findMany({
+      where: {
+        email: email
+      }
+    })
+  }
+
+  async linkInvitationsToUser(invitations: FlatInvitation[], userId: string) {
+    return this.prisma.flatInvitation.updateMany({
+      where: {
+        id: {
+          in: invitations.map(invitation => invitation.id)
+        }
+      },
+      data: {
+        userId: {
+          set: userId
+        }
+      }
+    })
+    
+  }
 
   async addUserByEmail(flatId: string, dto : AddUserDto, currentUserId : string) {
     const existingUser = await this.prisma.user.findUnique({
@@ -128,6 +152,14 @@ export class InvitationService {
       throw new NotFoundException('Invitation not found');
     }
 
+
+    await this.prisma.flatInvitation.update({
+      where: { id: invitationId },
+      data: {
+        status: FlatInvitationStatus.ACCEPTED
+      }
+    });
+
     switch (invitation.role) {
       case FlatInvitationRole.OWNER:
         return this.prisma.flat.update({
@@ -174,14 +206,6 @@ export class InvitationService {
           }
         });
     }
-
-
-    return this.prisma.flatInvitation.update({
-      where: { id: invitationId },
-      data: {
-        status: FlatInvitationStatus.ACCEPTED
-      }
-    });
   }
 
   async rejectInvitation(invitationId: string, userId: string) {

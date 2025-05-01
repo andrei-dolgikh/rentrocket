@@ -1,8 +1,9 @@
 import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
-import { AuthDto } from './dto/auth.dto';
+import { AuthDto, RegDto } from './dto/auth.dto';
 import { ConfigService } from "@nestjs/config";
+import { InvitationService } from 'src/invitation/invitation.service';
 import { verify } from 'argon2';
 import { Response } from 'express';
 import axios from 'axios';
@@ -15,6 +16,7 @@ export class AuthService {
 
     constructor(
         private readonly configService: ConfigService,
+        private readonly invitationService: InvitationService,
         private jwt: JwtService,
         private userService: UserService
     ) {
@@ -39,14 +41,19 @@ export class AuthService {
         }
     }
 
-    async register(dto: AuthDto) {
+    async register(dto: RegDto) {
         await this.verifyRecaptcha(dto.captcha);
-        const oldUser = await this.userService.getByLogin(dto.login);
-        if (oldUser) throw new BadRequestException('User already exists');
+        const oldUserByLogin = await this.userService.getByLogin(dto.login);
+        const oldUserByEmail = await this.userService.getByEmail(dto.email);
+        if (oldUserByLogin) throw new BadRequestException('User with this login already exists');
+        if (oldUserByEmail) throw new BadRequestException('User with this email already exists');
 
         const { password, ...user } = await this.userService.create(dto);
 
         // check userNotifications for add user to unseennotifications with his email (to link invitations to new user)
+        const invitationsForThisEmail = await this.invitationService.getInvitationsByEmail(user.email);
+        await this.invitationService.linkInvitationsToUser(invitationsForThisEmail, user.id);
+        
 
         const tokens = this.issueTokens(user.id);
         return {

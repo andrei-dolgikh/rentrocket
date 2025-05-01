@@ -1,12 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { hash } from 'argon2';
 import { UserDto } from './user.dto';
 import { Roles } from '@prisma/client';
+import { InvitationService } from 'src/invitation/invitation.service';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService,
+    private readonly invitationService: InvitationService) { }
 
   getById(id: string) {
     return this.prisma.user.findUnique({
@@ -16,7 +18,7 @@ export class UserService {
       include: {
         sentInvitations: true,
         receivedInvitations: {
-          include : {
+          include: {
             invitedBy: true
           }
         },
@@ -25,6 +27,15 @@ export class UserService {
         FlatsInRent: true
       }
     })
+  }
+
+  getByEmail(email: string) {
+    const user = this.prisma.user.findUnique({
+      where: {
+        email
+      }
+    })
+    return user
   }
 
   getByLogin(login: string) {
@@ -61,13 +72,13 @@ export class UserService {
     const { password, ...rest } = profile
 
     return {
-      user : rest,
+      user: rest,
       statistics: [
-        { label : 'Роли: ', value: roles },
+        { label: 'Роли: ', value: roles },
       ]
     }
   }
-  
+
   async create(dto: UserDto) {
     const user = {
       login: dto.login,
@@ -92,13 +103,27 @@ export class UserService {
   async update(id: string, dto: UserDto) {
     let data = dto
 
+    if (dto.email) {
+      const user = await this.getByEmail(dto.email)
+      if (user) throw new BadRequestException('User with this email already exists')
+    }
+    if (dto.login) {
+      const user = await this.getByLogin(dto.login)
+      if (user) throw new BadRequestException('User with this login already exists')
+    }
+
+    const invitationsForThisEmail = await this.invitationService.getInvitationsByEmail(dto.email);
+    await this.invitationService.linkInvitationsToUser(invitationsForThisEmail, id);
+
+
+
     if (dto.password) {
       data = {
         ...dto,
         password: await hash(dto.password)
       }
     }
-    
+
     return this.prisma.user.update({
       where: {
         id,

@@ -32,7 +32,7 @@ export function Auth() {
 	const { mutate: auth, isPending: isAuthPending, isSuccess: isAuthSuccess } = useMutation({
 		mutationKey: ['auth'],
 		mutationFn: (data: IAuthForm) =>
-			authService.main('login', data),
+			authService.auth(data),
 		onSuccess() {
 			toast.success('Успешный вход!')
 			setIsAuthenticated(true);

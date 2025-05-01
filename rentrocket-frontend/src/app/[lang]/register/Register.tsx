@@ -5,7 +5,7 @@ import Loader from '@/components/ui/Loader'
 import { useState } from 'react'
 import { FormEvent } from 'react'
 import { toast } from 'sonner'
-import { IAuthForm } from '@/types/auth.types'
+import { IRegForm } from '@/types/auth.types'
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { Card, CardHeader, Input,CardBody} from "@heroui/react";
 import { authService } from '@/services/auth.service'
@@ -22,6 +22,7 @@ export function Register() {
 		login: '',
 		password: '',
 		name: '',
+		email: '',
 		captcha: 'sds'
 	});
 	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
@@ -33,8 +34,8 @@ export function Register() {
 	const router = useRouter()
 	const { mutate: auth, isPending: isAuthPending, isSuccess: isAuthSuccess } = useMutation({
 		mutationKey: ['auth'],
-		mutationFn: (data: IAuthForm) =>
-			authService.main('register', data),
+		mutationFn: (data: IRegForm) =>
+			authService.register(data),
 		onSuccess() {
 			toast.success('Успешный вход!')
 			setIsAuthenticated(true);
@@ -52,11 +53,12 @@ export function Register() {
 
 	async function onSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault()
-		const authData: IAuthForm = {
+		const authData: IRegForm = {
 			login: formData.login,
 			password: formData.password,
 			captcha: formData.captcha,
-			name: formData.name
+			name: formData.name,
+			email: formData.email
 		}
 		auth(authData)
 	}
@@ -104,6 +106,24 @@ export function Register() {
 				  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
 				  value={formData.name}
 				  autoComplete="name"
+				  startContent={
+					<i className="fas fa-user text-default-400 text-sm" />
+				  }
+				  classNames={{
+					inputWrapper: "border-1"
+				  }}
+				/>
+				
+				<Input
+				  id="email"
+				  label="Электронная почта"
+				  name="email"
+				  variant="bordered"
+				  radius="sm"
+				  size="lg"
+				  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+				  value={formData.email}
+				  autoComplete="email"
 				  startContent={
 					<i className="fas fa-user text-default-400 text-sm" />
 				  }
