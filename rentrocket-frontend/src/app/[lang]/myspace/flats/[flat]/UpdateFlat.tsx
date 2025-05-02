@@ -10,6 +10,7 @@ import { FlatSettingsGeneralTab } from "@/components/flat/tabs/FlatSettingsGener
 import { FlatSettingsPhotosTab } from "@/components/flat/tabs/FlatSettingsPhotosTab";
 import { FlatSettingsRentersTab } from "@/components/flat/tabs/FlatSettingsRentersTab";
 import { Card, Divider } from "@heroui/react";
+import { FlatSettingsMenu } from "@/components/flat/FlatSettingsMenu"; 
 
 export function UpdateFlat(
 	{ flatId }:
@@ -77,44 +78,6 @@ export function UpdateFlat(
 		setFormDisabled(false);
 	};
 
-	const menuItems = [
-		{
-			id: 'utilities',
-			label: 'Коммунальные услуги',
-			subItems: [
-				{ id: 'meter_readings', label: 'Показания счётчиков' },
-				{ id: 'bills', label: 'Платёжки' },
-				{ id: 'maintenance', label: 'Эксплуатация' },
-				{ id: 'personal_accounts', label: 'Личные кабинеты' }
-			]
-		},
-		{
-			id: 'rent',
-			label: 'Аренда',
-			subItems: [
-				{ id: 'rent_payment', label: 'Оплата аренды' },
-				{ id: 'photo_reports', label: 'Фото-отчёты' },
-				{ id: 'property', label: 'Имущество' },
-				{ id: 'tenants', label: 'Арендаторы' },
-				{ id: 'chat', label: 'Чат' }
-			]
-		},
-		{
-			id: 'about',
-			label: 'Об объекте',
-			subItems: [
-				{ id: 'general_data', label: 'Общие данные' },
-				{ id: 'property_payment', label: 'Оплата объекта' },
-				{ id: 'notification_settings', label: 'Настройка уведомлений' },
-				{ id: 'useful_contacts', label: 'Полезные контакты' },
-				{ id: 'neighbors', label: 'Соседи' },
-				{ id: 'documents', label: 'Документы' },
-				{ id: 'investments', label: 'Инвестиции' },
-				{ id: 'notes', label: 'Заметки' },
-				{ id: 'internet', label: 'Интернет и телефон' }
-			]
-		}
-	];
 
 	const handleMenuItemClick = (categoryId: string, itemId: string) => {
 		setActiveCategoryId(categoryId);
@@ -123,14 +86,47 @@ export function UpdateFlat(
 
 	const renderContent = () => {
 		switch (activeMenu) {
-			case 'general':
-				return <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange}/>;
+			case 'meter_readings': 
+				return <div className="p-4">Содержимое раздела "Показания счетчиков"</div>;
+			case 'bills':
+				return <div className="p-4">Содержимое раздела "Платёжки"</div>;
+			case 'maintenance':
+				return <div className="p-4">Содержимое раздела "Эксплуатация"</div>;
+			case 'personal_accounts':
+				return <div className="p-4">Содержимое раздела "Личные кабинеты"</div>;
+
+			case 'rent_payment':
+				return <div className="p-4">Содержимое раздела "Оплата аренды"</div>;
+			case 'photo_reports':
+				return <div className="p-4">Содержимое раздела "Фото-отчёты"</div>;
+			case 'property':
+				return <div className="p-4">Содержимое раздела "Имущество"</div>;
 			case 'tenants':
 				return <FlatSettingsRentersTab flat={flat} />;
-			case 'utilities':
-				return <div className="p-4">Содержимое раздела "Коммунальные услуги"</div>;
-			case 'about':
-				return <FlatSettingsPhotosTab formData={formData} handleFormChange={handleFormChange} />;
+			case 'chat':
+				return <div className="p-4">Содержимое раздела "Чат"</div>;
+
+
+			
+			case 'general':
+				return <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange}/>;
+			case 'property_payment':
+				return <div className="p-4">Содержимое раздела "Оплата объекта"</div>;
+			case 'notification_settings':
+				return <div className="p-4">Содержимое раздела "Настройка уведомлений"</div>;
+			case 'useful_contacts':
+				return <div className="p-4">Содержимое раздела "Полезные контакты"</div>;
+			case 'neighbors':
+				return <div className="p-4">Содержимое раздела "Соседи"</div>;
+			case 'documents':
+				return <div className="p-4">Содержимое раздела "Документы"</div>;
+			case 'investments':
+				return <div className="p-4">Содержимое раздела "Инвестиции"</div>;
+			case 'notes':
+				return <div className="p-4">Содержимое раздела "Заметки"</div>;
+			case 'internet':
+				return <div className="p-4">Содержимое раздела "Интернет и телефон"</div>;
+			
 			default:
 				return <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange}/>;
 		}
@@ -149,32 +145,10 @@ export function UpdateFlat(
 				</div>
 
 				<div className='flex flex-col md:flex-row gap-6'>
-					<Card className="w-64 h-fit">
-						<div className="p-2">
-							{menuItems.map((category, index) => (
-								<div key={category.id} className="mb-3">
-									<h3 className="font-medium text-default-700 text-md px-2 py-1">{category.label}</h3>
-									<ul>
-										{category.subItems.map(item => (
-											<li
-												key={item.id}
-												className={`
-                                                    py-2 px-3 rounded-md cursor-pointer text-sm transition-colors
-                                                    ${activeMenu === item.id
-														? 'bg-primary-50 text-primary-600 font-medium'
-														: 'text-default-600 hover:bg-default-100'}
-                                                `}
-												onClick={() => handleMenuItemClick(category.id, item.id)}
-											>
-												{item.label}
-											</li>
-										))}
-									</ul>
-									{index < menuItems.length - 1 && <Divider className="my-2" />}
-								</div>
-							))}
-						</div>
-					</Card>
+				<FlatSettingsMenu 
+				activeMenu={activeMenu}
+				onMenuItemClick={handleMenuItemClick}
+				/>
 
 					<Card className="flex-1 p-4">
 						{renderContent()}
