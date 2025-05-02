@@ -1,8 +1,8 @@
 'use client'
-import { UpdateUser } from '@/components/ui/user/UpdateUser';
+import { UpdateUser } from '@/components/user/UpdateUser';
 import { useLanguage } from '../../languageContext';
 import { useAuth } from '../../authContext';
-import Loader from '@/components/ui/Loader'
+import Loader from '@/components/Loader'
 
 export default function UpdateProfilePage() {
 	const { dictionary }: { dictionary: Record<string, any> } = useLanguage();

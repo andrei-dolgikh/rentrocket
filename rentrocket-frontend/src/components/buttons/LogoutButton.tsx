@@ -3,7 +3,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { authService } from '@/services/auth.service'
-import {  useAuth } from '../../../app/[lang]/authContext';
+import {  useAuth } from '../../app/[lang]/authContext';
 import {
 	Button,
 } from "@heroui/react";

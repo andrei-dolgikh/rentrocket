@@ -2,7 +2,7 @@ import { Card, CardBody } from "@heroui/react";
 import { Button, Spinner } from "@heroui/react";
 import { PlusCircle } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
-import { FileService } from '../../../services/files.service';
+import { FileService } from '../../services/files.service';
 import useImage from '@/hooks/useImage';
 
 

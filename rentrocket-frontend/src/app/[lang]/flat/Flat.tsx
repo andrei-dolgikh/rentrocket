@@ -1,9 +1,9 @@
 'use client'
 import React from 'react';
 import { useFlat } from '../myspace/flats/hooks/useFlat';
-import Loader from '@/components/ui/Loader'
+import Loader from '@/components/Loader'
 import { Card } from "@heroui/react";
-import { FlatHeader } from '@/components/ui/flat/FlatHeader'
+import { FlatHeader } from '@/components/flat/FlatHeader'
 
 export function Flat({ flatId }: { flatId?: string }) {
 	if (!flatId) return <div>Квартира не найдена</div>

@@ -1,12 +1,12 @@
 'use client'
 import { Card, CardBody, CardHeader, Avatar, Badge, Button } from '@heroui/react';
-import { useLanguage } from '../../../app/[lang]/languageContext';
-import { useAuth } from '../../../app/[lang]/authContext';
+import { useLanguage } from '../../app/[lang]/languageContext';
+import { useAuth } from '../../app/[lang]/authContext';
 import { Mail, User, Edit, Phone, Calendar } from 'lucide-react';
 import { URLS_PAGES } from '@/config/pages-url.config'
-import { createLocalizedUrl } from '../../../utils/utils'
+import { createLocalizedUrl } from '../../utils/utils'
 import Link from 'next/link';
-import { InvitationsTable } from '@/components/ui/table/InvitationsTable'
+import { InvitationsTable } from '@/components/table/InvitationsTable'
 
 export function ProfileCard() {
     const { profile, isProfileLoading } = useAuth();

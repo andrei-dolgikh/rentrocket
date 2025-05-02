@@ -3,7 +3,7 @@
 import { useAuth } from '../../app/[lang]/authContext';
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { createLocalizedUrl } from '../../utils/utils'
-import { LogoutButton } from '../ui/buttons/LogoutButton';
+import { LogoutButton } from '../buttons/LogoutButton';
 import {
 	Navbar,
 	NavbarBrand,

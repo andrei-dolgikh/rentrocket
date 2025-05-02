@@ -1,14 +1,14 @@
 'use client'
 import { Button } from "@heroui/button";
 import { useUpdateFlat } from '../../../myspace/flats/hooks/useUpdateFlat'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs/Breadcrumbs'
+import { Breadcrumbs } from '@/components/breadcrumbs/Breadcrumbs'
 import { useState, FormEvent, useEffect } from 'react'
 import { useFlat } from '../../../myspace/flats/hooks/useFlat'
 import { IFlatUpdateRequest } from '@/types/flat.types'
-import Loader from '@/components/ui/Loader'
-import { FlatSettingsGeneralTab } from "@/components/ui/flat/FlatSettingsGeneralTab";
-import { FlatSettingsPhotosTab } from "@/components/ui/flat/FlatSettingsPhotosTab";
-import { FlatSettingsRentersTab } from "@/components/ui/flat/FlatSettingsRentersTab";
+import Loader from '@/components/Loader'
+import { FlatSettingsGeneralTab } from "@/components/flat/tabs/FlatSettingsGeneralTab";
+import { FlatSettingsPhotosTab } from "@/components/flat/tabs/FlatSettingsPhotosTab";
+import { FlatSettingsRentersTab } from "@/components/flat/tabs/FlatSettingsRentersTab";
 import { Card, Divider } from "@heroui/react";
 
 export function UpdateFlat(
@@ -116,13 +116,11 @@ export function UpdateFlat(
 		}
 	];
 
-	// Handle menu item click
 	const handleMenuItemClick = (categoryId: string, itemId: string) => {
 		setActiveCategoryId(categoryId);
 		setActiveMenu(itemId);
 	};
 
-	// Render content based on active menu
 	const renderContent = () => {
 		switch (activeMenu) {
 			case 'general':

@@ -93,7 +93,7 @@ model Flat {
   creatorId String @map("creator_id")
 
   invitations FlatInvitation[]
-
+  flatCounters FlatCounter[]
   tags Tag[]  // набор тегов
 
   // превью фото квартиры
@@ -124,6 +124,36 @@ model FlatInvitation {
   invitedById String @map("invited_by_id")
   
   @@map("flat_invitations")
+}
+
+model FlatCounter {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  name      String
+  flat      Flat     @relation(fields: [flatId], references: [id])
+  flatId    String   @map("flat_id")
+
+  flatCounterReadings FlatCounterReadings[]
+  
+  @@map("flat_counters")
+
+}
+
+model FlatCounterReadings {
+
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  flatCounter FlatCounter @relation(fields: [flatCounterId], references: [id])
+  flatCounterId String @map("flat_counter_id")
+
+  value Float
+  period DateTime 
+
+  @@map("flat_counter_readings")
 }
 
 model UserNotification {

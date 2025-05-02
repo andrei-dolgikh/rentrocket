@@ -2,7 +2,7 @@
 
 import { useIsFetching, useIsMutating } from '@tanstack/react-query'
 
-import Loader from '@/components/ui/Loader'
+import Loader from '@/components/Loader'
 
 export function GlobalLoader() {
 	const isMutating = useIsMutating()

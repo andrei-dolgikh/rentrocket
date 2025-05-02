@@ -1,8 +1,8 @@
 'use client'
 import Link from 'next/link'
-import { useLanguage } from '../../../app/[lang]/languageContext';
-import { createLocalizedUrl } from '../../../utils/utils'
-import { IFlatResponse } from '../../../types/flat.types'
+import { useLanguage } from '../../app/[lang]/languageContext';
+import { createLocalizedUrl } from '../../utils/utils'
+import { IFlatResponse } from '../../types/flat.types'
 import useImage from '@/hooks/useImage';
 import DOMPurify from 'dompurify';
 import { Checkbox } from "@heroui/react"

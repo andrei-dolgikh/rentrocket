@@ -1,10 +1,10 @@
 'use client'
 import React from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Input } from "@heroui/react";
-import { Confirmation } from '@/components/ui/modal/Confirmation'
+import { Confirmation } from '@/components/modal/Confirmation'
 import { toast } from 'sonner'
 import { useState } from "react";
-import { TagChip } from '@/components/ui/tag/TagChip'
+import { TagChip } from '@/components/tag/TagChip'
 import { User, Link, Button } from "@heroui/react";
 import { useFlatUsers } from "@/app/[lang]/myspace/flats/hooks/useFlatUsers";
 import UserTableActionsDropnown from "./UserTableActionsDropnown";

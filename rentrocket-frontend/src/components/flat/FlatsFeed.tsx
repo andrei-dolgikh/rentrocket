@@ -1,5 +1,5 @@
 import { FlatsFeedElement } from './FlatsFeedElement'
-import { IFlatResponse } from '../../../types/flat.types';
+import { IFlatResponse } from '../../types/flat.types';
 import { Card } from "@heroui/react";
 
 

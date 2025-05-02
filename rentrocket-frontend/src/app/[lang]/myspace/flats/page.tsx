@@ -1,5 +1,5 @@
 'use client'
-import { FlatsFeed } from '@/components/ui/flat/FlatsFeed'
+import { FlatsFeed } from '@/components/flat/FlatsFeed'
 import { Link } from "@heroui/react"
 import { useFlats } from './hooks/useFlats'
 import { useLanguage } from '../../../../app/[lang]/languageContext';

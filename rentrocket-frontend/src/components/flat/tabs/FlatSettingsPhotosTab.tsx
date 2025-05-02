@@ -1,6 +1,6 @@
 'use client'
-import { FlatImageUploader } from '@/components/ui/flat/FlatImageUploader'
-import { FlatMultiImageUploader } from '@/components/ui/flat/FlatMultiImageUploader'
+import { FlatImageUploader } from '@/components/flat/FlatImageUploader'
+import { FlatMultiImageUploader } from '@/components/flat/FlatMultiImageUploader'
 
 export function FlatSettingsPhotosTab(
     { formData, handleFormChange}:

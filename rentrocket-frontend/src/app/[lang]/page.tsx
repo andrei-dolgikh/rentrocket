@@ -1,4 +1,4 @@
-import { MainLayout } from '@/components/ui/main/MainLayout';
+import { MainLayout } from '@/components/main/MainLayout';
 import { getDictionary } from './dictionaries';
 
 export default async function Home({ 

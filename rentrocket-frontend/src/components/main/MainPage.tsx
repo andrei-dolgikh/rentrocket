@@ -1,8 +1,8 @@
 'use client'
 import { Button, Card, CardBody, Divider } from "@heroui/react";
 import Link from 'next/link';
-import { useAuth } from '../../../app/[lang]/authContext';
-import { createLocalizedUrl } from '../../../utils/utils';
+import { useAuth } from '../../app/[lang]/authContext';
+import { createLocalizedUrl } from '../../utils/utils';
 
 export function MainPage({
   dictionary,

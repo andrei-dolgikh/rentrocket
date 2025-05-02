@@ -1,12 +1,12 @@
 'use client'
-import { useUsers } from '../../../app/[lang]/myspace/flats/hooks/useUsers'
+import { useUsers } from '../../app/[lang]/myspace/flats/hooks/useUsers'
 import { IUser, roleTranslations } from '@/types/user.types'
-import { FlatRentersTable } from '@/components/ui/table/FlatRentersTable'
-import Loader from '@/components/ui/Loader'
-import { useLanguage } from '../../../app/[lang]/languageContext';
+import { FlatRentersTable } from '@/components/table/FlatRentersTable'
+import Loader from '@/components/Loader'
+import { useLanguage } from '../../app/[lang]/languageContext';
 // import { createLocalizedUrl } from '../../../utils/utils'
 import { IFlatResponse } from '@/types/flat.types'
-import { InvitationsTable } from '@/components/ui/table/InvitationsTable'
+import { InvitationsTable } from '@/components/table/InvitationsTable'
 
 
 // const useUsersData = (): { data: { id: string; user: { name: string; login: string; } ; "users:roles": string[] }[], isLoading: boolean } => {

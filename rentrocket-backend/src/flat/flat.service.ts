@@ -89,6 +89,25 @@ export class FlatService {
     const flat = await this.prisma.flat.findUnique({
       where: {
         id: flatId,
+        OR: [
+          {
+            creatorId: userId
+          },
+          {
+            owners: {
+              some: {
+                id: userId
+              }
+            }
+          },
+          {
+            managers: {
+              some: {
+                id: userId
+              }
+            }
+          }
+        ]
       },
     });
   
@@ -125,30 +144,44 @@ export class FlatService {
     });
   }
 
-  async delete(flatsIds: string[]) {
-    await this.prisma.flat.deleteMany({
+  async delete(flatsIds: string[], userId: string) {
+    const flats = await this.prisma.flat.findMany({
       where: {
         id: {
           in: flatsIds
+        },
+        OR: [
+          {
+            creatorId: userId
+          },
+          {
+            owners: {
+              some: {
+                id: userId
+              }
+            }
+          }
+        ]
+      }
+    })
+
+    const verifiedFlatsIds = flats.map(flat => flat.id)
+
+    if (flats.length !== flatsIds.length) {
+      throw new NotFoundException('Flats not found');
+    }
+
+
+    await this.prisma.flat.deleteMany({
+      where: {
+        id: {
+          in: verifiedFlatsIds
         }
       }
     })
 
   }
 
-  async updateRenters(flatId: string, renterIds: string[]) {
-    return this.prisma.flat.update({
-      where: { id: flatId },
-      data: {
-        renters: {
-          set: renterIds.map(id => ({ id }))
-        }
-      },
-      include: {
-        renters: true
-      }
-    });
-  }
 
   async addImagesToFlat(flatId: string, imageUrls: string[]) {
     const flat = await this.prisma.flat.findUnique({

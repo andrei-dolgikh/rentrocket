@@ -4,7 +4,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import { IFlatInvitation, FlatInvitationStatus, FlatInvitationRole } from "@/types/flat.types";
 import ReceivedInvitationsDropdown from "../flat/ReceivedInvitationsDropnown";
 import { toast } from "sonner";
-import { Confirmation } from '@/components/ui/modal/Confirmation';
+import { Confirmation } from '@/components/modal/Confirmation';
 import { User, Link } from "@heroui/react";
 import { useInvitations } from "@/hooks/useInvitations";
 

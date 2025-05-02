@@ -1,7 +1,7 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
-import Loader from '@/components/ui/Loader'
+import Loader from '@/components/Loader'
 import { useState } from 'react'
 import { FormEvent } from 'react'
 import { toast } from 'sonner'

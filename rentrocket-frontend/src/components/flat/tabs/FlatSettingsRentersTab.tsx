@@ -1,4 +1,4 @@
-import { FlatRenters } from '@/components/ui/flat/FlatRenters'
+import { FlatRenters } from '@/components/flat/FlatRenters'
 import { IFlatResponse } from '@/types/flat.types'
 
 export function FlatSettingsRentersTab( { flat }: { flat?: IFlatResponse }) {

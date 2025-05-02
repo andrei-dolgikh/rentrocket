@@ -64,8 +64,8 @@ export class FlatController {
   @Auth()
   @UseGuards(JwtGuard, RolesGuard)
   @RoleUser()
-  async delete(@Body() flatIds: string[]) {
-    return this.flatService.delete(flatIds)
+  async delete(@Body() flatIds: string[], @CurrentUser('id') userId: string) {
+    return this.flatService.delete(flatIds, userId)
   }
 
   @Post('images')

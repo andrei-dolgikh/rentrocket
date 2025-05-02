@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
-import { ProfileCard } from '@/components/ui/main/ProfileCard'
+import { ProfileCard } from '@/components/main/ProfileCard'
 
 export const metadata: Metadata = {
 	title: 'Settings',
