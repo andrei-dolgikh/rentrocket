@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function SettingsPage() {
 	return (
-		<div className='grid min-h-screen mx-[30px] lg:mx-auto lg:px-[30px]'>
+		<div className=' min-h-screen mx-[30px] lg:mx-auto lg:px-[30px]'>
 			<div className='my-5'>
 			<ProfileCard />
 			</div>

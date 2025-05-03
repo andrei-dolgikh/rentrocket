@@ -9,7 +9,7 @@ export default function UpdateProfilePage() {
 	const { isProfileLoadingSuccess, profile, isProfileLoading } = useAuth();
 
 	return (
-		<div className='grid min-h-screen max-w-[1000px] mx-[30px] lg:mx-auto lg:px-[30px]'>
+		<div className=' min-h-screen  mx-[30px] lg:mx-auto lg:px-[30px]'>
 			<div className='my-5'>
 				{isProfileLoadingSuccess && <UpdateUser user={profile?.user} />
 				}

@@ -9,7 +9,7 @@ import { User, Link, Button } from "@heroui/react";
 import { useFlatUsers } from "@/app/[lang]/myspace/flats/hooks/useFlatUsers";
 import UserTableActionsDropnown from "./UserTableActionsDropnown";
 import { FlatUserRoles } from "@/types/user.types";
-import { IFlatUsersUpdateRequest } from '@/types/flat.types'
+import { IFlatUsersUpdateRequest, IFlatUsersRemoveRequest} from '@/types/flat.types'
 
 export function FlatRentersTable({
   columns,
@@ -54,8 +54,8 @@ export function FlatRentersTable({
   const handleRemoveUser = async () => {
     if (!selectedUserId || !flatId) return;
 
-    const data: IFlatUsersUpdateRequest = {
-      email: selectedUserId,
+    const data: IFlatUsersRemoveRequest = {
+      userId: selectedUserId,
       role: selectedUserRole
     };
 

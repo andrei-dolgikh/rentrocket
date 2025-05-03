@@ -33,7 +33,7 @@ export function FlatSettingsGeneralTab(
 
                 <Input
                     id='address'
-                    className='w-[30%] xl:w-[380px]'
+                    className='w-[50%] xl:w-[380px]'
                     label="Адрес"
                     value={formData.address || ''}
                     onChange={(e) => handleFormChange({ ...formData, address: e.target.value })}
@@ -41,7 +41,7 @@ export function FlatSettingsGeneralTab(
 
                 <Input
                     id='entergroup'
-                    className='w-[20%] xl:w-[200px]'
+                    className='w-[50%] xl:w-[200px]'
                     label="Подъезд и этаж"
                     value={formData.entergroup || ''}
                     onChange={(e) => handleFormChange({ ...formData, entergroup: e.target.value })}
@@ -53,7 +53,7 @@ export function FlatSettingsGeneralTab(
 
                 <Input
                     id='chambres'
-                    className='w-[20%] xl:w-[200px]'
+                    className='w-[50%] xl:w-[200px]'
                     label="Комнаты"
                     value={formData.chambres || ''}
                     type="number"
@@ -63,7 +63,7 @@ export function FlatSettingsGeneralTab(
 
                 <Input
                     id='size'
-                    className='w-[20%] xl:w-[200px]'
+                    className='w-[50%] xl:w-[200px]'
                     label="Площадь"
                     value={formData.size || ''}
                     onChange={(e) => handleFormChange({ ...formData, size: +e.target.value })}

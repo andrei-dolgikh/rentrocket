@@ -7,7 +7,7 @@ import { useFlat } from '../../../myspace/flats/hooks/useFlat'
 import { IFlatUpdateRequest } from '@/types/flat.types'
 import Loader from '@/components/Loader'
 import { FlatSettingsGeneralTab } from "@/components/flat/tabs/FlatSettingsGeneralTab";
-import { FlatSettingsPhotosTab } from "@/components/flat/tabs/FlatSettingsPhotosTab";
+import { FlatSettingsCountersTab } from "@/components/flat/tabs/FlatSettingsCountersTab";
 import { FlatSettingsRentersTab } from "@/components/flat/tabs/FlatSettingsRentersTab";
 import { Card, Divider } from "@heroui/react";
 import { FlatSettingsMenu } from "@/components/flat/FlatSettingsMenu"; 
@@ -87,7 +87,7 @@ export function UpdateFlat(
 	const renderContent = () => {
 		switch (activeMenu) {
 			case 'meter_readings': 
-				return <div className="p-4">Содержимое раздела "Показания счетчиков"</div>;
+				return <div className="p-4"><FlatSettingsCountersTab formData={formData} handleFormChange={handleFormChange} /></div>;
 			case 'bills':
 				return <div className="p-4">Содержимое раздела "Платёжки"</div>;
 			case 'maintenance':

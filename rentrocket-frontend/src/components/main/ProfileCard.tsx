@@ -6,6 +6,8 @@ import { Mail, User, Edit, Phone, Calendar } from 'lucide-react';
 import { URLS_PAGES } from '@/config/pages-url.config'
 import { createLocalizedUrl } from '../../utils/utils'
 import Link from 'next/link';
+import { Divider } from '@heroui/react';
+import { Home, Settings } from 'lucide-react';
 import { InvitationsTable } from '@/components/table/InvitationsTable'
 
 export function ProfileCard() {
@@ -41,7 +43,7 @@ export function ProfileCard() {
     
     return (
         <div className='flex flex-col gap-5'>
-        <Card className="w-3/4 mx-auto shadow-lg overflow-hidden border-0">
+        <Card className="w-full md:w-3/4 mx-auto shadow-lg overflow-hidden border-0">
             <div className="h-32 bg-gradient-to-r from-blue-500 to-purple-600"></div>
             
             <div className="relative px-6">
@@ -118,14 +120,13 @@ export function ProfileCard() {
             </CardBody>
         </Card>
 
-        <Card className=" w-3/4 mx-auto shadow-lg overflow-hidden border-0">
-            <div className='flex justify-between items-center mb-[10px]'>
-              <div className='p-5'>
-                Действия, ожидающие вашего внимания
-              </div>
-            </div>
+        <Card className="w-full md:w-3/4 mx-auto shadow-lg overflow-hidden border-0">
+        <CardHeader className="flex justify-between items-center bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-5">
+    <h3 className="text-xl font-semibold">{dictionary?.profile?.actions || "Actions Requiring Attention"}</h3>
+  </CardHeader>
+  <CardBody className="flex justify-between items-center mb-[10px]">
         <InvitationsTable invitations={profile.user.receivedInvitations} actions={true}  />
-
+</CardBody>
         </Card>
         </div>
     );
