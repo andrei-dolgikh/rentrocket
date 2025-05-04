@@ -1,7 +1,7 @@
 'use client'
 import { FlatsFeed } from '@/components/flat/FlatsFeed'
 import { Link } from "@heroui/react"
-import { useFlats } from './hooks/useFlats'
+import { useFlats } from '@/hooks/flats/useFlats'
 import { useLanguage } from '../../../../app/[lang]/languageContext';
 import { createLocalizedUrl } from '../../../../utils/utils'
 import { Button } from "@heroui/button";

@@ -1,9 +1,9 @@
 'use client'
 import { Button } from "@heroui/button";
-import { useUpdateFlat } from '../../../myspace/flats/hooks/useUpdateFlat'
+import { useUpdateFlat } from '@/hooks/flats/useUpdateFlat'
 import { Breadcrumbs } from '@/components/breadcrumbs/Breadcrumbs'
 import { useState, FormEvent, useEffect } from 'react'
-import { useFlat } from '../../../myspace/flats/hooks/useFlat'
+import { useFlat } from '@/hooks/flats/useFlat'
 import { IFlatUpdateRequest } from '@/types/flat.types'
 import Loader from '@/components/Loader'
 import { FlatSettingsGeneralTab } from "@/components/flat/tabs/FlatSettingsGeneralTab";

@@ -6,7 +6,7 @@ import { toast } from 'sonner'
 import { useState } from "react";
 import { TagChip } from '@/components/tag/TagChip'
 import { User, Link, Button } from "@heroui/react";
-import { useFlatUsers } from "@/app/[lang]/myspace/flats/hooks/useFlatUsers";
+import { useFlatUsers } from "@/hooks/flats/useFlatUsers";
 import UserTableActionsDropnown from "./UserTableActionsDropnown";
 import { FlatUserRoles } from "@/types/user.types";
 import { IFlatUsersUpdateRequest, IFlatUsersRemoveRequest } from '@/types/flat.types'

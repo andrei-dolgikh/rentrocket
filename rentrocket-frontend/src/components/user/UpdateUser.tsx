@@ -1,6 +1,6 @@
 'use client'
 import { Button } from "@heroui/button";
-import { useUpdateUser } from '../../hooks/useUpdateUser'
+import { useUpdateUser } from '../../hooks/user/useUpdateUser'
 import { useState, FormEvent } from 'react'
 import { IUserUpdateRequest } from '@/types/user.types'
 import { Input, Card, CardHeader, CardBody, Divider, Avatar } from "@heroui/react";

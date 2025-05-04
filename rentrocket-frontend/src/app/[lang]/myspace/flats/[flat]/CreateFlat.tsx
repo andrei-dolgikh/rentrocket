@@ -1,7 +1,7 @@
 'use client'
 import { Button } from "@heroui/button";
 import { IFlatCreateRequest } from '@/types/flat.types'
-import { useCreateFlat } from '../../../myspace/flats/hooks/useCreateFlat'
+import { useCreateFlat } from '@/hooks/flats/useCreateFlat'
 import { Breadcrumbs } from '@/components/breadcrumbs/Breadcrumbs'
 import { useState, FormEvent } from 'react'
 import { FlatSettingsGeneralTab } from "@/components/flat/tabs/FlatSettingsGeneralTab";

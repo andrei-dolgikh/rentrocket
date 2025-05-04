@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { useLanguage } from '../../../languageContext'
+import { useLanguage } from '../../app/[lang]/languageContext'
 import { invitationService } from '@/services/invitation.service'
 import { IFlatUsersUpdateRequest} from '@/types/flat.types'
 

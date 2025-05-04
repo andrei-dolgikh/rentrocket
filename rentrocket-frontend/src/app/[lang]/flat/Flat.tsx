@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import { useFlat } from '../myspace/flats/hooks/useFlat';
+import { useFlat } from '@/hooks/flats/useFlat';
 import Loader from '@/components/Loader'
 import { Card } from "@heroui/react";
 import { FlatHeader } from '@/components/flat/FlatHeader'

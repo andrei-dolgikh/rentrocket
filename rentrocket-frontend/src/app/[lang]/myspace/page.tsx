@@ -1,6 +1,6 @@
 'use client'
 import { useLanguage } from '../../../app/[lang]/languageContext';
-import { useFlats } from './flats/hooks/useFlats'
+import { useFlats } from '@/hooks/flats/useFlats'
 import { FlatsFeed } from '@/components/flat/FlatsFeed'
 
 export default function MySpacePage() {

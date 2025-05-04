@@ -1,6 +1,4 @@
 'use client'
-import { useUsers } from '../../app/[lang]/myspace/flats/hooks/useUsers'
-import { IUser, roleTranslations } from '@/types/user.types'
 import { FlatRentersTable } from '@/components/table/FlatRentersTable'
 import Loader from '@/components/Loader'
 import { useLanguage } from '../../app/[lang]/languageContext';
