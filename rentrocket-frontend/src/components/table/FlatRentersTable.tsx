@@ -10,6 +10,7 @@ import { useFlatUsers } from "@/app/[lang]/myspace/flats/hooks/useFlatUsers";
 import UserTableActionsDropnown from "./UserTableActionsDropnown";
 import { FlatUserRoles } from "@/types/user.types";
 import { IFlatUsersUpdateRequest, IFlatUsersRemoveRequest } from '@/types/flat.types'
+import { InviteUserModal } from "../modal/InviteUserModal";
 
 export function FlatRentersTable({
   columns,
@@ -180,25 +181,12 @@ export function FlatRentersTable({
       {/* invitations table */}
 
 
-      <Confirmation
+      <InviteUserModal
         isOpen={isAddUserConformationOpen}
         onClose={() => setIsAddUserConformationOpen(false)}
-        onActionClick={handleAddUser}
-        actionLabel={`Добавить пользователя в квартиру`}
-        actionHeader={`Добавить пользователя в квартиру как ${getRoleTranslation(selectedUserRole)}`}
+        onInviteUser={handleAddUser}
         isLoading={isLoading}
-      >
-        <div className="my-4">
-          <p className="mb-2">Введите email пользователя для отправки приглашения:</p>
-          <Input
-            type="email"
-            placeholder="Email пользователя"
-            value={inviteEmail}
-            onChange={(e) => setInviteEmail(e.target.value)}
-            className="w-full"
-          />
-        </div>
-      </Confirmation>
+      />
 
       <Confirmation
         isOpen={isDeleteUserConformationOpen}

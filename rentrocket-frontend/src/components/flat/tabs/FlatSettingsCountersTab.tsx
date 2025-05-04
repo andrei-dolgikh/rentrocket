@@ -158,7 +158,7 @@ export function FlatSettingsCountersTab(
                             {counters.map((counter) => (
                                 <TableRow 
                                     key={counter.id} 
-                                    className={selectedCounter?.id === counter.id ? "bg-primary-50" : ""}
+                                    className={`${selectedCounter?.id === counter.id ? "bg-primary-50" : ""} cursor-pointer`}
                                     onClick={() => setSelectedCounter(counter)}
                                 >
                                     <TableCell>{counter.name}</TableCell>
@@ -176,6 +176,7 @@ export function FlatSettingsCountersTab(
                                             <DropdownMenu aria-label="Действия">
                                                 <DropdownItem 
                                                     key={counter.id + "edit"}
+                                                    className="text-primary"
                                                     startContent={<Edit size={16} />}
                                                     onPress={() => handleEditCounter(counter)}
                                                 >
@@ -273,7 +274,14 @@ export function FlatSettingsCountersTab(
         )}
 
         {/* Add/Edit Counter Modal */}
-        <Modal isOpen={isCounterModalOpen} onClose={onCounterModalClose}>
+        <Modal 
+        isOpen={isCounterModalOpen} 
+        onClose={onCounterModalClose}
+        placement="center" 
+        hideCloseButton={true}
+        backdrop="blur"
+        className="mx-4 max-w-md text-black"
+        >
             <ModalContent>
                 <ModalHeader>{counterForm.id ? "Редактирование счетчика" : "Добавление счетчика"}</ModalHeader>
                 <ModalBody>
@@ -299,7 +307,14 @@ export function FlatSettingsCountersTab(
             </Modal>
 
             {/* Add Reading Modal */}
-            <Modal isOpen={isReadingModalOpen} onClose={onReadingModalClose}>
+            <Modal 
+            isOpen={isReadingModalOpen} 
+            onClose={onReadingModalClose}
+            placement="center" 
+            hideCloseButton={true}
+            backdrop="blur"
+            className="mx-4 max-w-md text-black"
+            >
                 <ModalContent>
                     <ModalHeader>Внести показания счетчика</ModalHeader>
                     <ModalBody>
