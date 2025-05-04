@@ -17,7 +17,7 @@ interface MenuCategory {
 interface FlatSettingsMenuProps {
   menuItems?: MenuCategory[];
   activeMenu: string;
-  onMenuItemClick: (categoryId: string, itemId: string) => void;
+  onMenuItemClick: (itemId: string) => void;
 }
 
 const defaultMenuItems = [
@@ -133,7 +133,7 @@ export function FlatSettingsMenu({
                           : 'text-gray-600 hover:bg-gray-50'}
                       `}
                       onClick={() => {
-                        onMenuItemClick(category.id, item.id);
+                        onMenuItemClick(item.id);
                         if (isMobile) setIsMenuOpen(false);
                       }}
                     >

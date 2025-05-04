@@ -42,6 +42,10 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 		},
 	], [dictionary]);
 
+	const pendingInvitations = profile?.user?.receivedInvitations?.filter((inv: any) => inv.status === 'PENDING');
+	console.log('pendingInvitations', pendingInvitations)
+	const pendingInvitationsCount = pendingInvitations?.length;
+
 	return (
 		<Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} position="static" className='bg-gradient-to-r from-blue-600 to-purple-600 opacity-90 p-3 font-semibold'>
 			<NavbarContent>
@@ -96,9 +100,9 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 						<div className="relative flex items-center">
 							{profile?.user?.name}
 							
-							{profile?.user?.receivedInvitations?.map((inv: any) => inv.status === 'PENDING') && (
+							{pendingInvitationsCount > 0 && (
 								<div className="ml-2 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full h-5 min-w-5 px-1">
-									{profile?.user?.receivedInvitations?.map((inv: any) => inv.status === 'PENDING').length > 99 ? '99+' : profile?.user?.receivedInvitations?.map((inv: any) => inv.status === 'PENDING').filter((inv: any) => inv.status === 'PENDING').length}
+									{pendingInvitationsCount > 99 ? '99+' : pendingInvitationsCount}
 								</div>
 							)}
 						</div>
@@ -143,14 +147,14 @@ export const Header = React.memo(function Header({ lang, dictionary }: { lang: s
 const StyledNavbarMenu = ({ isOpen, children, onClose }: { isOpen: boolean, children: React.ReactNode, onClose: () => void }) => {
 	return (
 		<NavbarMenu className="bg-gradient-to-b from-blue-700 to-purple-800 mt-3 rounded-b-lg shadow-lg p-0 overflow-hidden z-50 opacity-100">
-			<div className="flex justify-end p-2">
+			{/* <div className="flex justify-end p-2">
 				<Button
 					className="bg-transparent min-w-0 p-1 hover:bg-blue-600/30 rounded-full"
 					onClick={onClose}
 				>
 					<X className="h-6 w-6 text-white" />
 				</Button>
-			</div>
+			</div> */}
 			<div className="px-4 py-3 space-y-4">
 				{children}
 			</div>

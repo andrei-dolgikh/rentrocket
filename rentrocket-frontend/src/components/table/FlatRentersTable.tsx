@@ -9,7 +9,7 @@ import { User, Link, Button } from "@heroui/react";
 import { useFlatUsers } from "@/app/[lang]/myspace/flats/hooks/useFlatUsers";
 import UserTableActionsDropnown from "./UserTableActionsDropnown";
 import { FlatUserRoles } from "@/types/user.types";
-import { IFlatUsersUpdateRequest, IFlatUsersRemoveRequest} from '@/types/flat.types'
+import { IFlatUsersUpdateRequest, IFlatUsersRemoveRequest } from '@/types/flat.types'
 
 export function FlatRentersTable({
   columns,
@@ -118,13 +118,24 @@ export function FlatRentersTable({
       case "users:actions":
         return (
           <div className="relative flex items-center gap-2">
-            <UserTableActionsDropnown
+            {/* <UserTableActionsDropnown
               setSelectedUserId={setSelectedUserId}
               setSelectedUserRole={setSelectedUserRole}
               setIsAddUserConformationOpen={setIsAddUserConformationOpen}
               setIsDeleteUserConformationOpen={setIsDeleteUserConformationOpen}
               subject={subject}
-            />
+            /> */}
+            <Button
+              key="remove-renter"
+              color="danger"
+              onPress={() => {
+                setSelectedUserId(subject.id);
+                setSelectedUserRole(FlatUserRoles.renter);
+                setIsDeleteUserConformationOpen(true);
+              }}
+            >
+              Удалить
+            </Button>
           </div>
         );
 
@@ -193,11 +204,11 @@ export function FlatRentersTable({
         isOpen={isDeleteUserConformationOpen}
         onClose={() => setIsDeleteUserConformationOpen(false)}
         onActionClick={handleRemoveUser}
-        actionLabel={`Удалить пользователя из квартиры`}
-        actionHeader={`Подтвердите удаление пользователя в квартру как ${getRoleTranslation(selectedUserRole)}`}
+        actionLabel={`Удалить арендатора`}
+        actionHeader={`Подтвердите удаление арендатора`}
         isLoading={isLoading}
       >
-        <p className="my-4">Вы уверены, что хотите удалить этого пользователя из роли {getRoleTranslation(selectedUserRole)}?</p>
+        <p className="my-4">Вы уверены, что хотите удалить этого арендатора?</p>
       </Confirmation>
     </>
   );

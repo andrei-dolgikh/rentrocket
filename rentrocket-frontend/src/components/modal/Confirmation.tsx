@@ -9,9 +9,7 @@ type ConfirmationProps = {
   isOpen: boolean;
   onClose: () => void;
   isLoading: boolean;
-  // Добавляем возможность передать дополнительные действия в футер
   additionalActions?: React.ReactNode;
-  // Добавляем возможность изменить стиль основной кнопки действия
   actionButtonColor?: "primary" | "success" | "danger" | "warning";
 };
 
@@ -26,19 +24,14 @@ export function Confirmation({
   additionalActions,
   actionButtonColor = "primary"
 }: ConfirmationProps) {
-  // Обработчик клика по кнопке действия
   const handleActionClick = () => {
-    // Вызываем переданную функцию
     onActionClick();
-    // Если не в состоянии загрузки, сразу закрываем модальное окно
     if (!isLoading) {
       onClose();
     }
   };
 
-  // Обработчик закрытия модального окна
   const handleClose = () => {
-    // Только если не в состоянии загрузки
     if (!isLoading) {
       onClose();
     }
@@ -49,38 +42,41 @@ export function Confirmation({
       isOpen={isOpen} 
       placement="center" 
       backdrop="blur" 
-      className="max-w-md text-black"
-      onClose={handleClose} // Добавляем обработчик закрытия
-      isDismissable={!isLoading} // Запрещаем закрытие при клике вне модалки во время загрузки
+      className="mx-4 max-w-md text-black"
+      // onClose={handleClose}
+      isDismissable={!isLoading}
+      hideCloseButton={true}
     >
       {isLoading ? (
-        <ModalContent className="p-5 flex justify-center items-center min-h-[200px]">
+        <ModalContent className="p-4 flex justify-center items-center min-h-[200px]">
           <div className="flex flex-col items-center gap-4">
             <div className="w-12 h-12 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
             <p>Пожалуйста, подождите...</p>
           </div>
         </ModalContent>
       ) : (
-        <ModalContent className="p-5">
-          <ModalHeader className="flex flex-col gap-1">{actionHeader}</ModalHeader>
-          <ModalBody>{children}</ModalBody>
-          <ModalFooter className="flex justify-between">
-            <div className="flex gap-2">
+        <ModalContent className="p-4">
+          <ModalHeader className="flex flex-col gap-1 text-center sm:text-left">{actionHeader}</ModalHeader>
+          <ModalBody className="py-1">{children}</ModalBody>
+          <ModalFooter className="flex flex-col-reverse sm:flex-row justify-between gap-4">
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-start w-full sm:w-auto">
               {additionalActions}
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 w-full sm:w-auto">
               <Button 
                 color="danger" 
                 variant="light" 
                 onPress={handleClose}
-                autoFocus={actionButtonColor === "danger"} // Фокус на кнопке отмены для опасных действий
+                autoFocus={actionButtonColor === "danger"}
+                className="flex-1 sm:flex-none"
               >
                 Отмена
               </Button>
               <Button 
                 color={actionButtonColor} 
                 onPress={handleActionClick}
-                autoFocus={actionButtonColor !== "danger"} // Фокус на кнопке действия для безопасных действий
+                autoFocus={actionButtonColor !== "danger"}
+                className="flex-1 sm:flex-none"
               >
                 {actionLabel}
               </Button>

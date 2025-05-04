@@ -20,7 +20,6 @@ export function UpdateFlat(
 	const { updateFlat, isUpdatePending } = useUpdateFlat()
 	const { flat, isFlatLoading, isFlatSuccess } = useFlat(flatId)
 	const [activeMenu, setActiveMenu] = useState('general');
-	const [activeCategoryId, setActiveCategoryId] = useState('settings');
 
 	const crumbs = [
 		{ active: true, name: flat?.name, url: '/' }
@@ -79,8 +78,7 @@ export function UpdateFlat(
 	};
 
 
-	const handleMenuItemClick = (categoryId: string, itemId: string) => {
-		setActiveCategoryId(categoryId);
+	const handleMenuItemClick = ( itemId: string) => {
 		setActiveMenu(itemId);
 	};
 
