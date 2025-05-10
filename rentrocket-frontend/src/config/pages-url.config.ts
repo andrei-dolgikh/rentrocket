@@ -6,8 +6,11 @@ class URLS {
 	AUTH = '/auth'
 	REG = '/register'
 	LOGOUT = '/logout'
+
 	MYSPACE_FLATS = `${this.myspace_zone}/flats`
-	MYSPACE_TAGS = `${this.myspace_zone}/tags`
+    MYSPACE_FLATS_HK(lang: string) { 
+        return this.getUrl(lang, `${this.myspace_zone}/flats`) 
+    }
 
 
 
@@ -24,6 +27,9 @@ class URLS {
 	ADMIN_USERS = `${this.admin_zone}/users`
 	ADMIN_TAGS = `${this.admin_zone}/tags`
 
+	getUrl(lang: string, path: string) {
+        return `/${lang}${path}`
+    }
 
 }
 

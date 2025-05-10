@@ -9,6 +9,8 @@ import Loader from '@/components/Loader'
 import { FlatSettingsGeneralTab } from "@/components/flat/tabs/FlatSettingsGeneralTab";
 import { FlatSettingsCountersTab } from "@/components/flat/tabs/FlatSettingsCountersTab";
 import { FlatSettingsRentersTab } from "@/components/flat/tabs/FlatSettingsRentersTab";
+import { FlatSettingsOwnersTab } from "@/components/flat/tabs/FlatSettingsOwnersTab";
+import { FlatSettingsManagersTab } from "@/components/flat/tabs/FlatSettingsManagersTab";
 import { Card, Divider } from "@heroui/react";
 import { FlatSettingsMenu } from "@/components/flat/FlatSettingsMenu"; 
 
@@ -101,6 +103,10 @@ export function UpdateFlat(
 				return <div className="p-4">Содержимое раздела "Имущество"</div>;
 			case 'tenants':
 				return <FlatSettingsRentersTab flat={flat} />;
+			case 'owners':
+				return <FlatSettingsOwnersTab flat={flat} />;
+			case 'managers':
+				return <FlatSettingsManagersTab flat={flat} />;
 			case 'chat':
 				return <div className="p-4">Содержимое раздела "Чат"</div>;
 

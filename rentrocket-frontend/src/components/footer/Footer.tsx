@@ -46,7 +46,7 @@ export function Footer({ lang, dictionary }: { lang: string; dictionary: Record<
               </li>
               <li>
                 <Link className="text-white hover:text-gray-600 transition-colors"
-                  href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_TAGS)}>
+                  href={createLocalizedUrl(lang, URLS_PAGES.MYSPACE_FLATS)}>
                   {dictionary.header.DUmap}
                 </Link>
               </li>

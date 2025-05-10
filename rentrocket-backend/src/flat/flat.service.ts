@@ -44,8 +44,10 @@ export class FlatService {
         OR: [
           { managers: { some: { id: userId } } },
           { renters: { some: { id: userId } } },
-          { owners: { some: { id: userId } } }
+          { owners: { some: { id: userId } } },
+          { creatorId: userId }
         ]
+
       }
     })
   }
@@ -59,12 +61,15 @@ export class FlatService {
         iconUrl: true,
         createdAt: true,
         updatedAt: true,
+        creatorId: true,
+        address: true,
       },
       where: {
         OR: [
-          { managers: { some: { id: userId } } },
+          { creatorId: userId },
+          { owners: { some: { id: userId } } },
           { renters: { some: { id: userId } } },
-          { owners: { some: { id: userId } } }
+          { managers: { some: { id: userId } } }
         ]
       }
     })

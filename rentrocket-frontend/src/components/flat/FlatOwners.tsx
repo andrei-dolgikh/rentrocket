@@ -1,5 +1,5 @@
 'use client'
-import { FlatRentersTable } from '@/components/table/FlatRentersTable'
+import { FlatOwnersTable } from '@/components/table/FlatOwnersTable'
 import Loader from '@/components/Loader'
 import { useLanguage } from '../../app/[lang]/languageContext';
 // import { createLocalizedUrl } from '../../../utils/utils'
@@ -46,7 +46,7 @@ const columns = [
 
 
 
-export function FlatRenters({ flat }: { flat: IFlatResponse }) {
+export function FlatOwners({ flat }: { flat: IFlatResponse }) {
   // const { data, isLoading } = useUsersData()
 	const { lang, dictionary }: { lang: string; dictionary: Record<string, any> } = useLanguage();
 
@@ -57,7 +57,7 @@ export function FlatRenters({ flat }: { flat: IFlatResponse }) {
   //   <Loader />
   // ) : (
     <div className='text-black'>
-      <FlatRentersTable columns={columns} rows={flat.renters} flatId={flat.id} mode='renter'/>
+      <FlatOwnersTable columns={columns} rows={flat.owners} flatId={flat.id}/>
             <div className='flex justify-between items-center mb-[10px]'>
               <div className='p-5'>
                 История приглашений в квартире

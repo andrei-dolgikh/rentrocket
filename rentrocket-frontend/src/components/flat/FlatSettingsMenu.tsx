@@ -22,6 +22,15 @@ interface FlatSettingsMenuProps {
 
 const defaultMenuItems = [
     {
+        id: 'team',
+        label: 'Пользователи квартиры',
+        subItems: [
+            { id: 'owners', label: 'Собственники' },
+            { id: 'managers', label: 'Менеджеры' },
+            { id: 'tenants', label: 'Арендаторы' },
+        ]
+    },
+    {
         id: 'utilities',
         label: 'Коммунальные услуги',
         subItems: [
@@ -38,7 +47,6 @@ const defaultMenuItems = [
             { id: 'rent_payment', label: 'Оплата аренды' },
             { id: 'photo_reports', label: 'Фото-отчёты' },
             { id: 'property', label: 'Имущество' },
-            { id: 'tenants', label: 'Арендаторы' },
             { id: 'chat', label: 'Чат' }
         ]
     },

@@ -12,21 +12,19 @@ import { IFlatUsersUpdateRequest, IFlatUsersRemoveRequest } from '@/types/flat.t
 import { InviteUserModal } from "../modal/InviteUserModal";
 import { UserBadge } from "../user/UserBadge";
 
-export function FlatRentersTable({
+export function FlatOwnersTable({
   columns,
   rows,
   flatId, 
-  mode
 }: {
   columns: Array<any>,
   rows: Array<any>,
   flatId: string,
-  mode: string
 }) {
   const [isDeleteUserConformationOpen, setIsDeleteUserConformationOpen] = useState(false);
   const [isAddUserConformationOpen, setIsAddUserConformationOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState<string | undefined>(undefined);
-  const [selectedUserRole, setSelectedUserRole] = useState<FlatUserRoles>(FlatUserRoles.renter);
+  const [selectedUserRole, setSelectedUserRole] = useState<FlatUserRoles>(FlatUserRoles.owner);
   const [isLoading, setIsLoading] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
   const { addUser, removeUser } = useFlatUsers(flatId);
@@ -113,11 +111,11 @@ export function FlatRentersTable({
               subject={subject}
             /> */}
             <Button
-              key="remove-renter"
+              key="remove-owner"
               color="danger"
               onPress={() => {
                 setSelectedUserId(subject.id);
-                setSelectedUserRole(FlatUserRoles.renter);
+                setSelectedUserRole(FlatUserRoles.owner);
                 setIsDeleteUserConformationOpen(true);
               }}
             >
@@ -138,11 +136,11 @@ export function FlatRentersTable({
           <Button
             color="primary"
             onPress={() => {
-              setSelectedUserRole(FlatUserRoles.renter);
+              setSelectedUserRole(FlatUserRoles.owner);
               setIsAddUserConformationOpen(true);
             }}
           >
-            Добавить арендатора
+            Добавить владельца
           </Button>
         </div>
       </div>
