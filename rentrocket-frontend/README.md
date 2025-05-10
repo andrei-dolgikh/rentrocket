@@ -32,3 +32,13 @@ export const saveTokenStorage = (accessToken: string) => {
 }
 
 
+query keys
+
+flats
+user
+
+Mutation 
+
+accept invitation
+reject invitation
+update user', key

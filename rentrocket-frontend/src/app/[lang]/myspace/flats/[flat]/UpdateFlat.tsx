@@ -13,6 +13,7 @@ import { FlatSettingsOwnersTab } from "@/components/flat/tabs/FlatSettingsOwners
 import { FlatSettingsManagersTab } from "@/components/flat/tabs/FlatSettingsManagersTab";
 import { Card, Divider } from "@heroui/react";
 import { FlatSettingsMenu } from "@/components/flat/FlatSettingsMenu"; 
+import { FlatSettingsChatTab } from "@/components/flat/tabs/FlatSettingsChatTab";
 
 export function UpdateFlat(
 	{ flatId }:
@@ -108,10 +109,7 @@ export function UpdateFlat(
 			case 'managers':
 				return <FlatSettingsManagersTab flat={flat} />;
 			case 'chat':
-				return <div className="p-4">Содержимое раздела "Чат"</div>;
-
-
-			
+				return <FlatSettingsChatTab flat={flat} /> ;
 			case 'general':
 				return <FlatSettingsGeneralTab formData={formData} handleFormChange={handleFormChange}/>;
 			case 'property_payment':

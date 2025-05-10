@@ -36,7 +36,7 @@ export function useFlatUsers(flatId: string) {
     toast.success(successMessages[operation][role]);
   }
 
-  const { mutate: addUser, isPending: isAddingUser } = useMutation({
+  const { mutate: addRenter, isPending: isAddingRenter } = useMutation({
     mutationKey: ['add flat renter', flatId],
     mutationFn: (data: IFlatUsersUpdateRequest) => invitationService.addUser(flatId, data),
     onSuccess: () => handleSuccess('add', 'renter'),
@@ -46,7 +46,50 @@ export function useFlatUsers(flatId: string) {
     }
   })
 
-  const { mutate: removeUser, isPending: isRemovingUser } = useMutation({
+  const { mutate: addManager, isPending: isAddingManager } = useMutation({
+    mutationKey: ['add flat manager', flatId],
+    mutationFn: (data: IFlatUsersUpdateRequest) => invitationService.addUser(flatId, data),
+    onSuccess: () => handleSuccess('add', 'manager'),
+    onError: (error) => {
+      toast.error(dictionary?.hooks?.addUserError || 'Failed to add manager')
+      console.error(error)
+    }
+  })
+
+  const { mutate: addOwner, isPending: isAddingOwner } = useMutation({
+    mutationKey: ['add flat owner', flatId],
+    mutationFn: (data: IFlatUsersUpdateRequest) => invitationService.addUser(flatId, data),
+		onSuccess() {
+			handleSuccess('add', 'owner')
+			// queryClient.invalidateQueries({ queryKey: ['users'] })
+		},
+    onError: (error) => {
+      toast.error(dictionary?.hooks?.addUserError || 'Failed to add owner')
+      console.error(error)
+    }
+  })
+
+  const { mutate: removeRenter, isPending: isRemovingRenter } = useMutation({
+    mutationKey: ['remove flat renter', flatId],
+    mutationFn: (data: IFlatUsersUpdateRequest) => invitationService.removeUser(flatId, data),
+    onSuccess: () => handleSuccess('remove', 'renter'),
+    onError: (error) => {
+      toast.error(dictionary?.hooks?.removeUserError || 'Failed to remove user')
+      console.error(error)
+    }
+  })
+
+  const { mutate: removeManager, isPending: isRemovingManager } = useMutation({
+    mutationKey: ['remove flat renter', flatId],
+    mutationFn: (data: IFlatUsersUpdateRequest) => invitationService.removeUser(flatId, data),
+    onSuccess: () => handleSuccess('remove', 'renter'),
+    onError: (error) => {
+      toast.error(dictionary?.hooks?.removeUserError || 'Failed to remove user')
+      console.error(error)
+    }
+  })
+
+  const { mutate: removeOwner, isPending: isRemovingOwner } = useMutation({
     mutationKey: ['remove flat renter', flatId],
     mutationFn: (data: IFlatUsersUpdateRequest) => invitationService.removeUser(flatId, data),
     onSuccess: () => handleSuccess('remove', 'renter'),
@@ -77,12 +120,20 @@ export function useFlatUsers(flatId: string) {
   })
 
   const isLoading = 
-    isAddingUser || 
-    isRemovingUser;
+    isAddingRenter || 
+    isAddingOwner || 
+    isAddingManager || 
+    isRemovingRenter || 
+    isRemovingOwner || 
+    isRemovingManager;
 
   return {
-    addUser,
-    removeUser,
+    addRenter,
+    addManager,
+    addOwner,
+    removeManager,
+    removeRenter,
+    removeOwner,
     isLoading,
     acceptInvitation,
     rejectInvitation,

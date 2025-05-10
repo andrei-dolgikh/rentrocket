@@ -12,7 +12,7 @@ export function useUpdateUser(key?: string) {
 		onSuccess(updatedUser) {
 			queryClient.setQueryData(['user', key], updatedUser)
 			queryClient.invalidateQueries({
-				queryKey: ['user']
+				queryKey: ['users']
 			})
 			toast.success('Настройки пользователя обновлены!')
 		}

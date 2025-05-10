@@ -57,6 +57,8 @@ model User {
 
   flatsLogs FlatHistory[]
 
+  chatMessages ChatMessage[]
+
   FlatsInRent Flat[] @relation("renters")
   FlatsInManagement Flat[] @relation("managers")
   FlatsInOwnership Flat[] @relation("owners")
@@ -85,6 +87,7 @@ model Flat {
   size Int?
   chambres Int?
   
+  chatMessages ChatMessage[]
 
   managers User[] @relation("managers")
   renters User[] @relation("renters")
@@ -208,3 +211,20 @@ model Tag {
   @@map("tags")
 }
 
+model ChatMessage {
+  id        String   @id @default(uuid())
+  message   String
+  files     String[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  flat   Flat   @relation(fields: [flatId], references: [id], onDelete: Cascade)
+  flatId String
+
+  @@index([userId])
+  @@index([flatId])
+}

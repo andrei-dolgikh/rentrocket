@@ -26,29 +26,27 @@ export function FlatManagersTable({
   const [selectedUserId, setSelectedUserId] = useState<string | undefined>(undefined);
   const [selectedUserRole, setSelectedUserRole] = useState<FlatUserRoles>(FlatUserRoles.manager);
   const [isLoading, setIsLoading] = useState(false);
-  const [inviteEmail, setInviteEmail] = useState('');
-  const { addUser, removeUser } = useFlatUsers(flatId);
+  const { addManager, removeManager } = useFlatUsers(flatId);
 
-  const handleAddUser = async () => {
+  const handleAddUser = async (email: string) => {
     if (!flatId) return;
 
     const data: IFlatUsersUpdateRequest = {
-      email: inviteEmail,
+      email: email,
       role: selectedUserRole
     };
 
     setIsLoading(true);
     try {
-      const response = addUser(data);
+      const response = addManager(data);
 
-      toast.success(`Пользователь успешно добавлен как ${getRoleTranslation(selectedUserRole)}`);
+      // toast.success(`Пользователь успешно добавлен как ${getRoleTranslation(selectedUserRole)}`);
       // You might want to refresh the data here
     } catch (error) {
       toast.error(`Ошибка при добавлении пользователя: ${error}`);
     } finally {
       setIsLoading(false);
       setIsAddUserConformationOpen(false);
-      setInviteEmail('');
     }
   };
 
@@ -62,7 +60,7 @@ export function FlatManagersTable({
 
     setIsLoading(true);
     try {
-      let response = removeUser(data);
+      let response = removeManager(data);
 
       toast.success(`Пользователь успешно удален из роли ${getRoleTranslation(selectedUserRole)}`);
       // You might want to refresh the data here
