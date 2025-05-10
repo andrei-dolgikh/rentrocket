@@ -13,6 +13,7 @@ import { PrismaService } from './prisma.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ScheduleModule } from '@nestjs/schedule';
+import { ChatModule } from './chat/chat.module';
 
 
 @Module({
@@ -21,6 +22,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     UserModule,
     FlatModule,
     TagModule,
+    ChatModule,
     InvitationModule,
     ConfigModule.forRoot(),
     ScheduleModule.forRoot(),

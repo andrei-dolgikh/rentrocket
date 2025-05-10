@@ -10,14 +10,18 @@ import { useAuth } from '@/app/[lang]/authContext';
 import { IChatMessageCreateRequest } from '@/types/chat.types'
 import { FileUploader } from '@/components/shared/FileUploader'
 
-export function FlatSettingsChatTab({ flat }: { flat?: any }) {
+export function FlatSettingsChatTab({ flat }: { flat: any }) {
   const [message, setMessage] = useState('')
   const [files, setFiles] = useState<string[]>([])
   const [showFileUploader, setShowFileUploader] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
-const { profile } = useAuth();
+    const { profile } = useAuth();
+
+  if (!flat || !flat.id) {
+    return <div className="p-4 text-center">Квартира не найдена или не имеет идентификатора</div>
+  }
   
-  if (!flat) return <div>Квартира не найдена</div>
+  
   
   const { messages, isLoading } = useChat(flat.id)
   const { sendMessage, isPending } = useSendMessage(flat.id)
