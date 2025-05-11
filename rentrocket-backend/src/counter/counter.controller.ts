@@ -12,12 +12,12 @@ import { JwtGuard } from "src/guards/jwt.guard";
 export class CounterController {
   constructor(private readonly counterService: CounterService) {}
 
-  @Get("list")
+  @Get("list/:flatId")
   @Auth()
   @UseGuards(JwtGuard, RolesGuard)
   @RoleUser()
-  async getAll() {
-    return this.counterService.getAll()
+  async getAll(@Param('flatId') flatId: string) {
+    return this.counterService.getAll(flatId)
   }
 
   @UsePipes(new ValidationPipe())

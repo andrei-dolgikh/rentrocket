@@ -88,7 +88,7 @@ export function UpdateFlat(
 	const renderContent = () => {
 		switch (activeMenu) {
 			case 'meter_readings': 
-				return <div className="p-4"><FlatSettingsCountersTab formData={formData} handleFormChange={handleFormChange} /></div>;
+				return <div className="p-4"><FlatSettingsCountersTab flatId={flatId} /></div>;
 			case 'bills':
 				return <div className="p-4">Содержимое раздела "Платёжки"</div>;
 			case 'maintenance':

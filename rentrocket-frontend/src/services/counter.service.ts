@@ -9,13 +9,13 @@ class CounterService {
 		return response
 	}
 
-	async getCounters() {
-		const response = await axiosWithAuth.get<ICounter[]>(`${this.BASE_URL}/list`)
+	async getCounters(flatId: string) {
+		const response = await axiosWithAuth.get<ICounter[]>(`${this.BASE_URL}/list/${flatId}`)
 		return response
 	}
 
-	async createCounter(data: ICounter) {
-		const response = await axiosWithAuth.post(`${this.BASE_URL}/create`, data)
+	async createCounter(id: string, data: ICounter) {
+		const response = await axiosWithAuth.post(`${this.BASE_URL}/create/${id}`, data)
 		return response
 	}
 

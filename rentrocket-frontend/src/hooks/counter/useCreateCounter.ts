@@ -13,12 +13,13 @@ export function useCreateCounter() {
 
 	const { mutate: createCounter, isPending } = useMutation({
 		mutationKey: ['create counter'],
-		mutationFn: (data: ICounter) => counterService.createCounter(data),
+		mutationFn: ({ id, data }: { id: string, data: ICounter}) => counterService.createCounter(id, data),
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['counters']
 			})
-			router.push(`${URLS_PAGES.MYSPACE_FLATS_HK(lang)}`)
+			router.refresh()
+			// router.push(`${URLS_PAGES.MYSPACE_FLATS_HK(lang)}`)
 			toast.success('Счетчик добавлен!')
 		}
 	})

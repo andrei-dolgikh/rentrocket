@@ -14,6 +14,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ChatModule } from './chat/chat.module';
+import { CounterModule } from './counter/counter.module';
 
 
 @Module({
@@ -23,6 +24,7 @@ import { ChatModule } from './chat/chat.module';
     FlatModule,
     TagModule,
     ChatModule,
+    CounterModule,
     InvitationModule,
     ConfigModule.forRoot(),
     ScheduleModule.forRoot(),

@@ -1,6 +1,7 @@
 import type { IBase } from './root.types'
 
-export interface ICounter extends IBase {
+export interface ICounter {
+	id?: string
 	name: string
 }
 

@@ -14,8 +14,12 @@ export class CounterService {
     })
   }
 
-  async getAll() {
-    return this.prisma.flatCounter.findMany()
+  async getAll(flatId: string) {
+    return this.prisma.flatCounter.findMany( {
+      where: {
+        flatId
+      }
+    })
   }
 
   async create(dto: CounterDto, flatId: string, userId : string) {
