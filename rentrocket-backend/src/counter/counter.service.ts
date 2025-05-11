@@ -76,25 +76,25 @@ export class CounterService {
     const flat = await this.prisma.flat.findUnique({
       where: {
         id: flatCounter.flatId,
-        OR: [
-          {
-            creatorId: userId
-          },
-          {
-            owners: {
-              some: {
-                id: userId
-              }
-            }
-          },
-          {
-            managers: {
-              some: {
-                id: userId
-              }
-            }
-          }
-        ]
+        // OR: [
+        //   {
+        //     creatorId: userId
+        //   },
+        //   {
+        //     owners: {
+        //       some: {
+        //         id: userId
+        //       }
+        //     }
+        //   },
+        //   {
+        //     managers: {
+        //       some: {
+        //         id: userId
+        //       }
+        //     }
+        //   }
+        // ]
       }
     });
 
@@ -124,25 +124,25 @@ export class CounterService {
     const flat = await this.prisma.flat.findUnique({
       where: {
         id: flatCounter.flatId,
-        OR: [
-          {
-            creatorId: userId
-          },
-          {
-            owners: {
-              some: {
-                id: userId
-              }
-            }
-          },
-          {
-            managers: {
-              some: {
-                id: userId
-              }
-            }
-          }
-        ]
+        // OR: [
+        //   {
+        //     creatorId: userId
+        //   },
+        //   {
+        //     owners: {
+        //       some: {
+        //         id: userId
+        //       }
+        //     }
+        //   },
+        //   {
+        //     managers: {
+        //       some: {
+        //         id: userId
+        //       }
+        //     }
+        //   }
+        // ]
       }
     });
 
@@ -163,29 +163,29 @@ export class CounterService {
         id: counterId,
         flat: {
           creatorId: userId,
-          OR : [
-            {
-              owners: {
-                some: {
-                  id: userId
-                }
-              }
-            },
-            {
-              managers: {
-                some: {
-                  id: userId
-                }
-              }
-            },
-            {
-              renters: {
-                some: {
-                  id: userId
-                }
-              }
-            }
-          ]
+          // OR : [
+          //   {
+          //     owners: {
+          //       some: {
+          //         id: userId
+          //       }
+          //     }
+          //   },
+          //   {
+          //     managers: {
+          //       some: {
+          //         id: userId
+          //       }
+          //     }
+          //   },
+          //   {
+          //     renters: {
+          //       some: {
+          //         id: userId
+          //       }
+          //     }
+          //   }
+          // ]
         }
       }
     }) 
@@ -213,29 +213,29 @@ export class CounterService {
         flatCounter: {
           flat: {
             creatorId: userId,
-            OR : [
-              {
-                owners: {
-                  some: {
-                    id: userId
-                  }
-                }
-              },
-              {
-                managers: {
-                  some: {
-                    id: userId
-                  }
-                }
-              },
-              {
-                renters: {
-                  some: {
-                    id: userId
-                  }
-                }
-              }
-            ]
+            // OR : [
+            //   {
+            //     owners: {
+            //       some: {
+            //         id: userId
+            //       }
+            //     }
+            //   },
+            //   {
+            //     managers: {
+            //       some: {
+            //         id: userId
+            //       }
+            //     }
+            //   },
+            //   {
+            //     renters: {
+            //       some: {
+            //         id: userId
+            //       }
+            //     }
+            //   }
+            // ]
           }
         }
       }
