@@ -26,25 +26,25 @@ export class CounterService {
     const flat = await this.prisma.flat.findUnique({
       where: {
         id: flatId,
-        OR: [
-          {
-            creatorId: userId
-          },
-          {
-            owners: {
-              some: {
-                id: userId
-              }
-            }
-          },
-          {
-            managers: {
-              some: {
-                id: userId
-              }
-            }
-          }
-        ]
+        // OR: [
+        //   {
+        //     creatorId: userId
+        //   },
+        //   {
+        //     owners: {
+        //       some: {
+        //         id: userId
+        //       }
+        //     }
+        //   },
+        //   {
+        //     managers: {
+        //       some: {
+        //         id: userId
+        //       }
+        //     }
+        //   }
+        // ]
       }
     });
 
