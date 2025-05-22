@@ -16,6 +16,9 @@ export class CounterService {
 
   async getAll(flatId: string) {
     return this.prisma.flatCounter.findMany( {
+      include: {
+        flatCounterReadings: true
+      },
       where: {
         flatId
       }
@@ -162,7 +165,7 @@ export class CounterService {
       where: {
         id: counterId,
         flat: {
-          creatorId: userId,
+          // creatorId: userId,
           // OR : [
           //   {
           //     owners: {
@@ -212,7 +215,7 @@ export class CounterService {
         id: readingId,
         flatCounter: {
           flat: {
-            creatorId: userId,
+            // creatorId: userId,
             // OR : [
             //   {
             //     owners: {

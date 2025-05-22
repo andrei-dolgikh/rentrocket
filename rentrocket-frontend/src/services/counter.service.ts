@@ -1,4 +1,4 @@
-import type { ICounter } from '@/types/counter.types'
+import type { ICounter, IReading } from '@/types/counter.types'
 import { axiosWithAuth } from '@/api/interceptors'
 
 class CounterService {
@@ -26,6 +26,16 @@ class CounterService {
 
 	async deleteCounter(id: string) {
 		const response = await axiosWithAuth.delete(`${this.BASE_URL}/delete/${id}`)
+		return response
+	}
+
+	async createReading(id: string, data: IReading) {
+		const response = await axiosWithAuth.post(`${this.BASE_URL}/readings/${id}`, data)
+		return response
+	}
+
+	async deleteReading(id: string) {
+		const response = await axiosWithAuth.delete(`${this.BASE_URL}/readings/${id}`)
 		return response
 	}
 }
