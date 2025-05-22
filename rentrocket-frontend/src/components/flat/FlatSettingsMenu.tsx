@@ -127,7 +127,7 @@ export function FlatSettingsMenu({
           <div className="p-3">
             {menuItems.map((category, index) => (
               <div key={category.id} className="mb-3">
-                <h3 className="font-medium text-gray-800 text-md px-2 py-2 bg-gray-50 rounded-md">
+                <h3 className="font-medium text-gray-200 text-md px-2 py-2 bg-gradient-to-r from-blue-500 to-purple-600  rounded-md">
                   {category.label}
                 </h3>
                 <ul className="mt-2 space-y-1">
