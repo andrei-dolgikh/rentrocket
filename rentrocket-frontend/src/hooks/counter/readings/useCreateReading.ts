@@ -15,7 +15,7 @@ export function useCreateReading() {
 		mutationFn: ({ id, data }: { id: string, data: IReading}) => counterService.createReading(id, data),
 		onSuccess() {
 			queryClient.invalidateQueries({
-				queryKey: ['reading']
+				queryKey: ['counters']
 			})
 			router.refresh()
 			// router.push(`${URLS_PAGES.MYSPACE_FLATS_HK(lang)}`)

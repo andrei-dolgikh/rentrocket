@@ -200,6 +200,7 @@ export class CounterService {
     return this.prisma.flatCounterReadings.create({
       data: {
         ...dto,
+        period : new Date(dto.period),
         flatCounter: {
           connect : {
             id: counterId

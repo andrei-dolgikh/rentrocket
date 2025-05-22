@@ -10,7 +10,7 @@ export function useDeleteReading() {
 		mutationFn: (id: string) => counterService.deleteReading(id),
 		onSuccess() {
 			queryClient.invalidateQueries({
-				queryKey: ['reading']
+				queryKey: ['counters']
 			})
 		}
 	})

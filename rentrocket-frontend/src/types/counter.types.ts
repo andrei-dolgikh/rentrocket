@@ -12,7 +12,7 @@ export interface ICounterDeleteRequest {
 export interface IReading {
 	id?: string
 	value: number
-	date: Date
+	period: Date
 }
 
 export interface IReadingDeleteRequest {

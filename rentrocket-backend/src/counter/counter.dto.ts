@@ -17,7 +17,7 @@ export class CounterReadingDto {
     @IsOptional()
     value: number
 
-    @IsDate()
+    @IsString()
     @IsOptional()
-    period: Date
+    period: string
 }

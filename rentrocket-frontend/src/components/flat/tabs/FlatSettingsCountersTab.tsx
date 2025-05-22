@@ -34,7 +34,7 @@ export function FlatSettingsCountersTab({ flatId }: { flatId: string }) {
 
     const [readingForm, setReadingForm] = useState<IReading>({
         value: 0,
-        date: new Date()
+        period: new Date()
     });
 
     useEffect(() => {
@@ -73,7 +73,7 @@ export function FlatSettingsCountersTab({ flatId }: { flatId: string }) {
 
         createReading({ id: selectedCounter.id, data: newReading });
         onReadingModalClose();
-        setReadingForm({ value: 0, date: new Date() });
+        setReadingForm({ value: 0, period: new Date() });
     };
 
     // Format date
@@ -184,7 +184,7 @@ export function FlatSettingsCountersTab({ flatId }: { flatId: string }) {
                             color="primary"
                             startContent={<TrendingUp size={18} />}
                             onPress={() => {
-                                setReadingForm({ value: 0, date: new Date() });
+                                setReadingForm({ value: 0, period: new Date() });
                                 onReadingModalOpen();
                             }}
                         >
@@ -201,7 +201,7 @@ export function FlatSettingsCountersTab({ flatId }: { flatId: string }) {
                                     color="primary"
                                     startContent={<TrendingUp size={18} />}
                                     onPress={() => {
-                                        setReadingForm({ value: 0, date: new Date() });
+                                        setReadingForm({ value: 0, period: new Date() });
                                         onReadingModalOpen();
                                     }}
                                 >
@@ -217,7 +217,7 @@ export function FlatSettingsCountersTab({ flatId }: { flatId: string }) {
                                 </TableHeader>
                                 <TableBody>
                                     {readings
-                                        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                                        .sort((a, b) => new Date(b.period).getTime() - new Date(a.period).getTime())
                                         .map((reading, index, arr) => {
                                             const prevReading = index < arr.length - 1 ? arr[index + 1].value : 0;
                                             const difference = reading.value - prevReading;
@@ -225,7 +225,7 @@ export function FlatSettingsCountersTab({ flatId }: { flatId: string }) {
                                             return (
                                                 <TableRow key={reading.id}>
                                                     <TableCell className="font-medium">{reading.value}</TableCell>
-                                                    <TableCell>{formatDate(reading.date)}</TableCell>
+                                                    <TableCell>{formatDate(reading.period)}</TableCell>
                                                     <TableCell>
                                                         {index < arr.length - 1 ? (
                                                             <span className={`font-medium ${difference > 0 ? "text-success" : "text-danger"}`}>
@@ -295,12 +295,12 @@ export function FlatSettingsCountersTab({ flatId }: { flatId: string }) {
                             <Input
                                 type="date"
                                 label="Дата снятия показаний"
-                                value={readingForm.date instanceof Date
-                                    ? readingForm.date.toISOString().split('T')[0]
+                                value={readingForm.period instanceof Date
+                                    ? readingForm.period.toISOString().split('T')[0]
                                     : new Date().toISOString().split('T')[0]}
                                 onChange={(e) => setReadingForm({
                                     ...readingForm,
-                                    date: new Date(e.target.value)
+                                    period: new Date(e.target.value)
                                 })}
                             />
                             <Input
