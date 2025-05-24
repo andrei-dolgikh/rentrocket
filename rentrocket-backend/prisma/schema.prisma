@@ -67,6 +67,8 @@ model User {
   receivedInvitations FlatInvitation[]
   sentInvitations FlatInvitation[] @relation("InvitedBy")
 
+  flatPayments FlatPayments[]
+
 
   @@map("users")
 }
@@ -97,9 +99,9 @@ model Flat {
 
   invitations FlatInvitation[]
   flatCounters FlatCounter[]
-  tags Tag[]  // набор тегов
+  flatPayments FlatPayments[]
+  tags Tag[]  
 
-  // превью фото квартиры
   iconUrl String? @map("icon_url")
   images String[] @default([])
 
@@ -157,6 +159,26 @@ model FlatCounterReadings {
   period DateTime 
 
   @@map("flat_counter_readings")
+}
+
+model FlatPayments {
+
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  flat Flat @relation(fields: [flatId], references: [id])
+  flatId String @map("flat_id")
+
+  user User @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  name String
+  description String
+  files String[] @default([])
+  amount Float
+  period DateTime 
+  
 }
 
 model UserNotification {

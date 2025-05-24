@@ -14,6 +14,7 @@ import { FlatSettingsManagersTab } from "@/components/flat/tabs/FlatSettingsMana
 import { Card, Divider } from "@heroui/react";
 import { FlatSettingsMenu } from "@/components/flat/FlatSettingsMenu"; 
 import { FlatSettingsChatTab } from "@/components/flat/tabs/FlatSettingsChatTab";
+import { FlatSettingsPaymentsTab } from "@/components/flat/tabs/FlatSettingsPaymentsTab";
 
 export function UpdateFlat(
 	{ flatId }:
@@ -90,7 +91,7 @@ export function UpdateFlat(
 			case 'meter_readings': 
 				return <div className="p-4"><FlatSettingsCountersTab flatId={flatId} /></div>;
 			case 'bills':
-				return <div className="p-4">Содержимое раздела "Платёжки"</div>;
+				return <div className="p-4"><FlatSettingsPaymentsTab flat={flat} /></div>;
 			case 'maintenance':
 				return <div className="p-4">Содержимое раздела "Эксплуатация"</div>;
 			case 'personal_accounts':

@@ -15,6 +15,7 @@ import { join } from 'path';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ChatModule } from './chat/chat.module';
 import { CounterModule } from './counter/counter.module';
+import { FlatPaymentsModule } from './flatPayments/flatPayments.module';
 
 
 @Module({
@@ -26,6 +27,7 @@ import { CounterModule } from './counter/counter.module';
     ChatModule,
     CounterModule,
     InvitationModule,
+    FlatPaymentsModule,
     ConfigModule.forRoot(),
     ScheduleModule.forRoot(),
     // ThrottlerModule\ThrottlerGuard ограничивает макс частоту запросов
@@ -33,7 +35,6 @@ import { CounterModule } from './counter/counter.module';
       ttl: 60000,
       limit: 100,
       // generateKey: (request) => request.ip,
-      // написать чтобы генерировался не IP  а device fingerprint? надо глянуть будет, как в таблицы ядра пишутся юзеры
     }]),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
@@ -57,6 +58,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(VisitsMiddleware)
-      .forRoutes('*'); // Применение сбора статистики посещений ко всем маршрутам
+      .forRoutes('*'); 
   }
 }

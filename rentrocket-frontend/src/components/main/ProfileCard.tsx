@@ -122,7 +122,7 @@ export function ProfileCard() {
 
         <Card className="w-full md:w-3/4 mx-auto shadow-lg overflow-hidden border-0">
         <CardHeader className="flex justify-between items-center bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-5">
-    <h3 className="text-xl font-semibold">{dictionary?.profile?.actions || "Actions Requiring Attention"}</h3>
+    <h3 className="text-xl font-semibold">{dictionary?.profile?.actions || "Полученные приглашения"}</h3>
   </CardHeader>
   <CardBody className="flex justify-between items-center mb-[10px]">
         <InvitationsTable invitations={profile.user.receivedInvitations} actions={true}  />
