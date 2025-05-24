@@ -29,9 +29,13 @@ class CounterService {
 		return response
 	}
 
-	async createReading(id: string, data: IReading) {
+	async createReading(id: string, data: IReading) : Promise<IReading> {
 		const response = await axiosWithAuth.post(`${this.BASE_URL}/readings/${id}`, data)
-		return response
+		const newReading = {
+			value: response.data.value,
+			period: response.data.period
+		}
+		return newReading 
 	}
 
 	async deleteReading(id: string) {

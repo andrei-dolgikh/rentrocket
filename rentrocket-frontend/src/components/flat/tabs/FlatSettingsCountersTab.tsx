@@ -67,11 +67,14 @@ export function FlatSettingsCountersTab({ flatId }: { flatId: string }) {
         if (!selectedCounter || !selectedCounter.id) return;
 
         const newReading = {
-            ...readingForm,
-            id: `temp-${Date.now()}` // In real app, this would be assigned by the backend
+            ...readingForm
         };
 
-        createReading({ id: selectedCounter.id, data: newReading });
+        createReading({ id: selectedCounter.id, data: newReading }, {
+            onSuccess: (data) => {
+                setReadings(prevReadings => [...prevReadings, data]);
+            }
+        });
         onReadingModalClose();
         setReadingForm({ value: 0, period: new Date() });
     };

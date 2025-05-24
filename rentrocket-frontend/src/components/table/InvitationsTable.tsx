@@ -9,7 +9,10 @@ import { User, Link } from "@heroui/react";
 import { useInvitations } from "@/hooks/useInvitations";
 import { UserBadge } from "../user/UserBadge";
 
-export function InvitationsTable({ invitations, actions }: { invitations: IFlatInvitation[], actions?: boolean }) {
+export function InvitationsTable({ invitations, actions, filter }: { invitations: IFlatInvitation[], actions?: boolean, filter?: any }) {
+  if (filter) {
+    invitations = invitations.filter(invitation => invitation.role === filter)
+  }
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [currentAction, setCurrentAction] = useState<{ type: 'accept' | 'reject', userId: string } | null>(null);
   const { acceptInvitation, rejectInvitation, isLoading } = useInvitations();

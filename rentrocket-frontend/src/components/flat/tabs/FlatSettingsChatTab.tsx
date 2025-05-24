@@ -73,15 +73,15 @@ export function FlatSettingsChatTab({ flat }: { flat: any }) {
             Нет сообщений. Начните общение!
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-4 ">
             {messages.map((msg) => (
               <div 
                 key={msg.id} 
-                className={`flex ${msg.user.id === profile?.id ? 'justify-end' : 'justify-start'}`}
+                className={`flex  ${msg.user.id === profile?.user.id ? 'justify-end' : 'justify-start'}`}
               >
                 <div 
                   className={`max-w-[70%] ${
-                    msg.user.id === profile?.id 
+                    msg.user.id === profile?.user.id 
                       ? 'bg-primary-100 rounded-l-lg rounded-br-lg' 
                       : 'bg-gray-100 rounded-r-lg rounded-bl-lg'
                   } p-3`}
@@ -94,7 +94,7 @@ export function FlatSettingsChatTab({ flat }: { flat: any }) {
                     />
                     <span className="font-semibold text-sm">{msg.user.name}</span>
                     <span className="text-xs text-gray-500">
-                      {msg.createdAt}
+                      {msg.createdAt.split('T')[0] + ' ' + msg.createdAt.split('T')[1].substring(0, 5)}
                     </span>
                   </div>
                   <p className="whitespace-pre-wrap">{msg.message}</p>

@@ -13,13 +13,14 @@ export function useCreateReading() {
 	const { mutate: createReading, isPending } = useMutation({
 		mutationKey: ['create reading'],
 		mutationFn: ({ id, data }: { id: string, data: IReading}) => counterService.createReading(id, data),
-		onSuccess() {
+		onSuccess(newReading : IReading) {
 			queryClient.invalidateQueries({
 				queryKey: ['counters']
 			})
-			router.refresh()
+			// router.refresh()
 			// router.push(`${URLS_PAGES.MYSPACE_FLATS_HK(lang)}`)
 			toast.success('Показания добавлены!')
+			return newReading;
 		}
 	})
 

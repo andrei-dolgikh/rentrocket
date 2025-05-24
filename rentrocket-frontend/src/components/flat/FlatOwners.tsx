@@ -3,7 +3,7 @@ import { FlatOwnersTable } from '@/components/table/FlatOwnersTable'
 import Loader from '@/components/Loader'
 import { useLanguage } from '../../app/[lang]/languageContext';
 // import { createLocalizedUrl } from '../../../utils/utils'
-import { IFlatResponse } from '@/types/flat.types'
+import { FlatInvitationRole, IFlatResponse } from '@/types/flat.types'
 import { InvitationsTable } from '@/components/table/InvitationsTable'
 
 
@@ -63,7 +63,7 @@ export function FlatOwners({ flat }: { flat: IFlatResponse }) {
                 История приглашений в квартире
               </div>
             </div>
-      <InvitationsTable invitations={flat.invitations} actions={false} />
+      <InvitationsTable invitations={flat.invitations} actions={false}  filter={FlatInvitationRole.OWNER}/>
     </div>
   )
 }
