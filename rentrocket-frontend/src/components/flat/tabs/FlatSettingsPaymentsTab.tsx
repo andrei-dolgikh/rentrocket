@@ -1,98 +1,101 @@
 'use client'
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Button, Card, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@heroui/react";
 import { Input } from "@heroui/input";
 import { PlusCircle, MoreVertical, Edit, Trash2 } from "lucide-react";
 import { IFlatResponse } from '@/types/flat.types'
 import { Divider } from "@heroui/react";
+import { useCreateFlatPayment } from "@/hooks/flatPayments/useCreateFlatPayment";
+import { useUpdateFlatPayment } from "@/hooks/flatPayments/useUpdateFlatPayment";
+import { useDeleteFlatPayment } from "@/hooks/flatPayments/useDeleteFlatPayment";
+import { FlatPaymentDocumentsUploader } from "../FlatPaymentDocumentsUploader";
+import { FlatPaymentDelete } from "@/components/modal/FlatPaymentDelete";
+import { FlatPaymentEdit } from "@/components/modal/FlatPaymentEdit";
 
-// You would need to create these hooks for your bills functionality
-// import { useUtilityBills } from "@/hooks/bills/useUtilityBills";
-// import { useCreateBill } from "@/hooks/bills/useCreateBill";
-// import { useUpdateBill } from "@/hooks/bills/useUpdateBill";
-// import { useDeleteBill } from "@/hooks/bills/useDeleteBill";
-
-// Define interfaces for your bill types
-interface IBill {
+interface IFlatPayment {
   id?: string;
   name: string;
   amount: number;
-  dueDate: Date;
+  period: Date;
   description?: string;
+  files: string[];
 }
 
 export function FlatSettingsPaymentsTab({ flat }: { flat?: IFlatResponse }) {
   if (!flat) return <div>Квартира не найдена</div>
 
-  // Uncomment when you have real hooks
-  // const { bills, isBillsLoading } = useUtilityBills(flat.id);
-  // const { createBill } = useCreateBill();
-  // const { updateBill } = useUpdateBill();
-  // const { deleteBill } = useDeleteBill();
+  const { createFlatPayment, isPending: isCreating } = useCreateFlatPayment();
+  const { updateFlatPayment, isUpdatePending } = useUpdateFlatPayment();
+  const { deleteFlatPayment, isDeletePending } = useDeleteFlatPayment();
 
-  // Mock data for demonstration
-  const [bills, setBills] = useState<IBill[]>([
-    { id: '1', name: 'Электричество', amount: 2500, dueDate: new Date()},
-    { id: '2', name: 'Вода', amount: 1200, dueDate: new Date()},
+
+  const [flatPayments, setFlatPayments] = useState<IFlatPayment[]>([
+    { id: '1', name: 'Электричество', amount: 2500, period: new Date(), files: ['file1.pdf', 'file2.pdf'] },
+    { id: '2', name: 'Вода', amount: 1200, period: new Date(), files: []},
   ]);
   
-  const [selectedBill, setSelectedBill] = useState<IBill | null>(null);
-  const [billForm, setBillForm] = useState<IBill>({
+  const [selectedFlatPayment, setSelectedFlatPayment] = useState<IFlatPayment | null>(null);
+  const [flatPaymentForm, setFlatPaymentForm] = useState<IFlatPayment>({
     name: "",
+    description: "",
     amount: 0,
-    dueDate: new Date(),
-  });
+    period: new Date(),
+    files: [],
+  });  
 
-  const { isOpen: isBillModalOpen, onOpen: onBillModalOpen, onClose: onBillModalClose } = useDisclosure();
+  const { isOpen: isFlatPaymentModalOpen, onOpen: onFlatPaymentModalOpen, onClose: onFlatPaymentModalClose } = useDisclosure();
   const { isOpen: isDeleteModalOpen, onOpen: onDeleteModalOpen, onClose: onDeleteModalClose } = useDisclosure();
 
-  const handleAddBill = () => {
-    setBillForm({
+  const handleAddFlatPayment = () => {
+    setFlatPaymentForm({
       name: "",
+      description: "",
       amount: 0,
-      dueDate: new Date(),
+      period: new Date(),
+      files: [],
     });
-    onBillModalOpen();
+    onFlatPaymentModalOpen();
   };
 
-  const handleEditBill = (bill: IBill) => {
-    setBillForm(bill);
-    onBillModalOpen();
+  const handleEditFlatPayment = (flatPayment: IFlatPayment) => {
+    setFlatPaymentForm(flatPayment);
+    onFlatPaymentModalOpen();
   };
 
-  const handleDeleteClick = (bill: IBill) => {
-    setSelectedBill(bill);
+  const handleDeleteClick = (flatPayment: IFlatPayment) => {
+    setSelectedFlatPayment(flatPayment);
     onDeleteModalOpen();
   };
 
-  const handleSaveBill = () => {
-    if (billForm.id) {
-      // updateBill({ id: billForm.id, data: billForm });
+  const handleSaveFlatPayment = () => {
+    const formData = new FormData();
+    if (flatPaymentForm.id) {
+      // updateFlatPayment({ id: flatPaymentForm.id, data: flatPaymentForm });
       
       // Mock update for demonstration
-      setBills(prevBills => 
-        prevBills.map(bill => bill.id === billForm.id ? billForm : bill)
+      setFlatPayments(prevFlatPayments => 
+        prevFlatPayments.map(flatPayment => flatPayment.id === flatPaymentForm.id ? flatPaymentForm : flatPayment)
       );
     } else {
-      // createBill({ id: flat.id, data: billForm });
+      // createFlatPayment({ id: flat.id, data: flatPaymentForm });
       
       // Mock create for demonstration
-      const newBill = { ...billForm, id: Date.now().toString() };
-      setBills(prevBills => [...prevBills, newBill]);
+      const newFlatPayment = { ...flatPaymentForm, id: Date.now().toString() };
+      setFlatPayments(prevFlatPayments => [...prevFlatPayments, newFlatPayment]);
     }
 
-    onBillModalClose();
+    onFlatPaymentModalClose();
   };
 
-  const handleDeleteBill = () => {
-    if (!selectedBill?.id) return;
+  const handleDeleteFlatPayment = () => {
+    if (!selectedFlatPayment?.id) return;
 
-    // deleteBill(selectedBill.id);
+    // deleteFlatPayment(selectedFlatPayment.id);
     
     // Mock delete for demonstration
-    setBills(prevBills => prevBills.filter(bill => bill.id !== selectedBill.id));
+    setFlatPayments(prevFlatPayments => prevFlatPayments.filter(flatPayment => flatPayment.id !== selectedFlatPayment.id));
     onDeleteModalClose();
-    setSelectedBill(null);
+    setSelectedFlatPayment(null);
   };
 
   // Format date
@@ -105,25 +108,25 @@ export function FlatSettingsPaymentsTab({ flat }: { flat?: IFlatResponse }) {
       <Card>
         <div className="flex justify-between items-center p-4">
           <h2 className="text-xl font-semibold">Квитанции об оплате ЖКХ услуг</h2>
-          <Button color="primary" startContent={<PlusCircle size={20} />} onClick={handleAddBill}>
+          <Button color="primary" startContent={<PlusCircle size={20} />} onPress={handleAddFlatPayment}>
             Добавить квитанцию
           </Button>
         </div>
         <Divider />
         
-        <Table aria-label="Utility Bills Table">
+        <Table aria-label="Utility FlatPayments Table">
           <TableHeader>
             <TableColumn>Название</TableColumn>
             <TableColumn>Сумма</TableColumn>
-            <TableColumn>Срок оплаты</TableColumn>
+            <TableColumn>Период</TableColumn>
             <TableColumn>Действия</TableColumn>
           </TableHeader>
           <TableBody>
-            {bills.map((bill) => (
-              <TableRow key={bill.id} >
-                <TableCell>{bill.name}</TableCell>
-                <TableCell>{bill.amount} ₽</TableCell>
-                <TableCell>{formatDate(bill.dueDate)}</TableCell>
+            {flatPayments.map((flatPayment) => (
+              <TableRow key={flatPayment.id} >
+                <TableCell>{flatPayment.name}</TableCell>
+                <TableCell>{flatPayment.amount} ₽</TableCell>
+                <TableCell>{formatDate(flatPayment.period)}</TableCell>
                 <TableCell>
                   <Dropdown>
                     <DropdownTrigger>
@@ -132,10 +135,10 @@ export function FlatSettingsPaymentsTab({ flat }: { flat?: IFlatResponse }) {
                       </Button>
                     </DropdownTrigger>
                     <DropdownMenu>
-                      <DropdownItem className="text-black" key={`edit-${bill.id}`} startContent={<Edit size={18} />} onPress={() => handleEditBill(bill)}>
+                      <DropdownItem className="text-black" key={`edit-${flatPayment.id}`} startContent={<Edit size={18} />} onPress={() => handleEditFlatPayment(flatPayment)}>
                         Редактировать
                       </DropdownItem>
-                      <DropdownItem key={`delete-${bill.id}`} startContent={<Trash2 size={18} />} className="text-danger" onPress={() => handleDeleteClick(bill)}>
+                      <DropdownItem key={`delete-${flatPayment.id}`} startContent={<Trash2 size={18} />} className="text-danger" onPress={() => handleDeleteClick(flatPayment)}>
                         Удалить
                       </DropdownItem>
                     </DropdownMenu>
@@ -147,66 +150,20 @@ export function FlatSettingsPaymentsTab({ flat }: { flat?: IFlatResponse }) {
         </Table>
       </Card>
 
-      {/* Add/Edit Bill Modal */}
-      <Modal isOpen={isBillModalOpen} onClose={onBillModalClose} className="text-black">
-        <ModalContent>
-          <ModalHeader>{billForm.id ? 'Редактировать квитанцию' : 'Добавить квитанцию'}</ModalHeader>
-          <ModalBody>
-            <Input
-              label="Название"
-              value={billForm.name}
-              onChange={(e) => setBillForm({ ...billForm, name: e.target.value })}
-              className="mb-4"
-            />
-            <Input
-              type="number"
-              label="Сумма"
-              value={billForm.amount.toString()}
-              onChange={(e) => setBillForm({ ...billForm, amount: parseFloat(e.target.value) })}
-              className="mb-4"
-            />
-            <Input
-              type="date"
-              label="Срок оплаты"
-              value={new Date(billForm.dueDate).toISOString().split('T')[0]}
-                            onChange={(e) => setBillForm({ ...billForm, dueDate: new Date(e.target.value) })}
-              className="mb-4"
-            />
-            <Input
-              label="Описание (необязательно)"
-              value={billForm.description}
-              onChange={(e) => setBillForm({ ...billForm, description: e.target.value })}
-              className="mb-4"
-            />
-          </ModalBody>
-          <ModalFooter>
-            <Button color="danger" variant="light" onClick={onBillModalClose}>
-              Отмена
-            </Button>
-            <Button color="primary" onClick={handleSaveBill}>
-              Сохранить
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <FlatPaymentEdit
+        isOpen={isFlatPaymentModalOpen}
+        onClose={onFlatPaymentModalClose}
+        flatPaymentForm={flatPaymentForm}
+        setFlatPaymentForm={setFlatPaymentForm}
+        handleSaveFlatPayment={handleSaveFlatPayment}
+      />
 
-      {/* Delete Confirmation Modal */}
-      <Modal isOpen={isDeleteModalOpen} onClose={onDeleteModalClose}>
-        <ModalContent>
-          <ModalHeader>Подтверждение удаления</ModalHeader>
-          <ModalBody>
-            <p>Вы уверены, что хотите удалить квитанцию "{selectedBill?.name}"?</p>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="default" variant="light" onClick={onDeleteModalClose}>
-              Отмена
-            </Button>
-            <Button color="danger" onClick={handleDeleteBill}>
-              Удалить
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <FlatPaymentDelete
+        isOpen={isDeleteModalOpen}
+        onClose={onDeleteModalClose}
+        selectedFlatPayment={selectedFlatPayment as IFlatPayment}
+        handleDeleteFlatPayment={handleDeleteFlatPayment}
+      />
     </div>
   );
 }

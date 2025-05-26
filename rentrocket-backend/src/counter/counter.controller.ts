@@ -12,6 +12,7 @@ import { JwtGuard } from "src/guards/jwt.guard";
 export class CounterController {
   constructor(private readonly counterService: CounterService) {}
 
+  @HttpCode(200)
   @Get("list/:flatId")
   @Auth()
   @UseGuards(JwtGuard, RolesGuard)

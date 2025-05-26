@@ -11,6 +11,14 @@ export class FileService {
     });
   }
 
+  uploadFlatPaymentDocuments(formData: FormData) {
+    return axiosWithAuth.post(`${this.URL}/flatPayments/files`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  }
+
   uploadFlatImage(formData: FormData) {
     return axiosWithAuth.post(`${this.URL}/flats/images`, formData, {
       headers: {

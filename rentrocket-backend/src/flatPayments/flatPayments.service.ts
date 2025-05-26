@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { FlatPaymentsDto } from './flatPayments.dto';
 import { OmitType } from '@nestjs/mapped-types';
@@ -21,6 +21,24 @@ export class FlatPaymentsService {
 
 async create(dto: FlatPaymentsDto, userId: string) {
   const { flatId, ...restDto } = dto;
+  const flat = await this.prisma.flat.findUnique({
+    where: {
+      id: flatId
+    },
+    select: {
+      id: true,
+      renters: true,
+      managers: true,
+      owners: true
+    }
+  });
+
+  if (!flat) {
+    throw new NotFoundException('Flat not found');
+  }
+  if (!flat.renters.some((renter) => renter.id === userId) && !flat.owners.some((owner) => owner.id === userId) && !flat.managers.some((manager) => manager.id === userId)) {
+    throw new NotFoundException('You are not allowed to create a payment for this flat');
+  }
 
   return this.prisma.flatPayments.create({
     data: {

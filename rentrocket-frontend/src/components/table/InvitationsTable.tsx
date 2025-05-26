@@ -55,7 +55,6 @@ export function InvitationsTable({ invitations, actions, filter }: { invitations
 
   const renderCell = React.useCallback((subject: any, columnKey: any) => {
     const cellValue = subject[columnKey];
-    console.log('subject', subject)
     switch (columnKey) {
       case "actions":
         return subject.status === FlatInvitationStatus.PENDING ? (

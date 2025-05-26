@@ -123,7 +123,8 @@ export function FlatSettingsMenu({
 
       {/* Menu Card - hidden on mobile when closed */}
       <div className={`transition-all duration-300 ${isMobile && !isMenuOpen ? 'max-h-0 overflow-hidden opacity-0' : 'max-h-[2000px] opacity-100'}`}>
-        <Card className="w-full md:w-64 h-fit shadow-md border border-gray-200">
+        {/* <div className="w-full md:w-64 h-fit shadow-md border border-gray-200"> */}
+        <div className="w-full md:w-64 h-fit  ">
           <div className="p-3">
             {menuItems.map((category, index) => (
               <div key={category.id} className="mb-3">
@@ -154,7 +155,7 @@ export function FlatSettingsMenu({
               </div>
             ))}
           </div>
-        </Card>
+        </div>
       </div>
     </>
   );
