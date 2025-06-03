@@ -5,27 +5,24 @@ import { FlatMultiImageUploader } from '@/components/flat/FlatMultiImageUploader
 import { IFlatResponse, IFlatUpdateRequest } from '@/types/flat.types'
 import { useState, FormEvent, useEffect } from 'react'
 import { Button } from "@heroui/button";
-import { useUpdateFlat } from '@/hooks/flats/useUpdateFlat'
+import { useCreateFlat } from '@/hooks/flats/useCreateFlat'
 
-export function FlatSettingsGeneralTab(
-    { flat }:
-        { flat?: IFlatResponse }
+export function FlatSettingsNewFlatTab(
 ) {
-    if (!flat) return <div>Загрузка...</div>
 
     const [formDisabled, setFormDisabled] = useState(true);
-    const { updateFlat, isUpdatePending } = useUpdateFlat()
+    const { createFlat, isPending } = useCreateFlat()
 
     const [formData, setFormData] = useState({
-        name: flat?.name,
-        order: flat?.order,
-        description: flat?.description,
-        iconUrl: flat?.iconUrl,
-        address: flat?.address,
-        entergroup: flat?.entergroup,
-        chambres: flat?.chambres,
-        size: flat?.size,
-        images: flat?.images,
+        name: "",
+        order: 999,
+        description: "",
+        iconUrl: "",
+        address: "",
+        entergroup: "",
+        chambres: undefined,
+        size: undefined,
+        images: undefined
     });
 
     const handleFormChange = (data: any) => {
@@ -33,9 +30,8 @@ export function FlatSettingsGeneralTab(
         setFormDisabled(false);
     };
 
-    async function onUpdateSubmit(event: FormEvent<HTMLFormElement>) {
+    async function onCreateSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        if (!flat) return
 
         const userData: IFlatUpdateRequest = {
             name: formData.name as string,
@@ -44,17 +40,17 @@ export function FlatSettingsGeneralTab(
             iconUrl: formData?.iconUrl,
             address: formData?.address,
             entergroup: formData?.entergroup,
-            chambres: formData?.chambres as number,
-            size: formData?.size as number,
+            chambres: formData?.chambres,
+            size: formData?.size,
             images: formData?.images,
         }
 
-        updateFlat({ id: flat.id, data: userData });
+        createFlat( userData );
         setFormDisabled(true);
     };
 
     return (
-        <form onSubmit={onUpdateSubmit}>
+        <form onSubmit={onCreateSubmit}>
             <div className='flex flex-col'>
                 <Button type='submit' color="primary" className="w-[90%] my-5" isDisabled={formDisabled}>Сохранить квартиру</Button>
                 <div className='flex flex-row justify-start gap-4'>
@@ -101,7 +97,7 @@ export function FlatSettingsGeneralTab(
                         id='chambres'
                         className='w-[50%] xl:w-[200px]'
                         label="Комнаты"
-                        value={formData.chambres?.toString() || ''}
+                        value={formData.chambres || ''}
                         type="number"
                         min="1"
                         onChange={(e) => handleFormChange({ ...formData, chambres: +e.target.value })}
@@ -111,7 +107,7 @@ export function FlatSettingsGeneralTab(
                         id='size'
                         className='w-[50%] xl:w-[200px]'
                         label="Площадь"
-                        value={formData.size?.toString() || ''}
+                        value={formData.size || ''}
                         onChange={(e) => handleFormChange({ ...formData, size: +e.target.value })}
                         type="number"
                         min="1"
