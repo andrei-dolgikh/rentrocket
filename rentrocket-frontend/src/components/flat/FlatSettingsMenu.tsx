@@ -1,11 +1,12 @@
 'use client'
 import { Card, Divider, Button, Navbar } from "@heroui/react";
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronRight, Dna } from "lucide-react";
 
 interface MenuItem {
   id: string;
   label: string;
+  danger?: boolean;
 }
 
 interface MenuCategory {
@@ -62,7 +63,8 @@ const defaultMenuItems = [
             { id: 'documents', label: 'Документы' },
             { id: 'investments', label: 'Инвестиции' },
             { id: 'notes', label: 'Заметки' },
-            { id: 'internet', label: 'Интернет и телефон' }
+            { id: 'internet', label: 'Интернет и телефон' },
+            { id: 'delete', label: 'Удаление квартиры', danger: true }
         ]
     }
 ];
@@ -140,6 +142,7 @@ export function FlatSettingsMenu({
                         ${activeMenu === item.id
                           ? 'bg-gradient-to-r from-blue-50 to-purple-50 text-blue-600 font-medium border-l-4 border-blue-500'
                           : 'text-gray-600 hover:bg-gray-50'}
+                        ${item.danger ? 'text-red-600 hover:bg-red-50' : ''}
                       `}
                       onClick={() => {
                         onMenuItemClick(item.id);

@@ -14,11 +14,6 @@ export function CreateFlat() {
             <>
                 <div className='flex justify-between my-[30px]'>
                     <Breadcrumbs crumbs={crumbs} />
-                    <Button
-                        type='submit'
-                        className='text-[12px]'
-                        color="primary"
-                    >Создать квартиру</Button>
                 </div>
                 <FlatSettingsNewFlatTab />
             </>
