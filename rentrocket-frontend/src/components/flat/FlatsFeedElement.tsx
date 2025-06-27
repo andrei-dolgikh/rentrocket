@@ -45,7 +45,9 @@ export function FlatsFeedElement({
                                 <Image
                                     alt={flat.name || 'flat image'}
                                     src={useImage(flat.iconUrl)}
-                                    className="object-cover opacity-100"
+                                    className=" opacity-100"
+                                    width={300}
+                                    height={300}
                                 />
                             ) : (
                                 <div className="h-full w-full bg-gray-200 flex items-center justify-center">
