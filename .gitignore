@@ -3,4 +3,5 @@ rentrocket-backend/dist
 rentrocket-frontend/node_modules
 rentrocket-frontend/.next
 /rentrocket-backend/uploads
+/rentrocket-backend/src/ssl/certs/*
 .env
